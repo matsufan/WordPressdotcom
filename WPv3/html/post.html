@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>post</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.0.6/css/ui-dark.css" rel="stylesheet">
+    <script src="//Microsoft.WinJS.0.6/js/base.js"></script>
+    <script src="//Microsoft.WinJS.0.6/js/ui.js"></script>
+    
+    <script src="/js/wpcom.js"></script>
+    <link href="/css/default.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <script src="/js/post.js"></script>
+</head>
+<body>
+    <div class="post fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled></button>
+            <div class="titlearea">
+                <h1 class="pageTitle title"></h1>
+                <div class="postActions">
+                	<span class="follow">Follow</span>
+					<span class="reblog">Reblog</span>
+					<span class="like">Like</span>
+
+					<div class="reblogUI">
+						<textarea placeholder="Your comments (optional)"></textarea>
+						<input type="button" value="Publish">
+					</div>
+                </div>
+            </div>
+        </header>
+        <section aria-label="Main content" role="main">
+            <article>
+                <div>
+                    <header>
+                        <div class="meta"></div>
+                    </header>
+                    <div class="content"></div>
+                </div>
+            </article>
+        </section>
+    </div>
+
+</body>
+</html>

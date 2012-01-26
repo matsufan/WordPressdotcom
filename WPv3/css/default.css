@@ -1,0 +1,143 @@
+﻿html {
+    cursor: default;
+	height: 100%;
+	width: 100%;
+}
+
+body {
+    font: 11pt/15pt "Segoe UI Semilight";
+    background-color: #21759B;
+	background-image: url('/images/wpbg.png');
+	background-size: cover;
+    color: rgb(255, 255, 255);
+    height: 100%;
+    width: 100%;
+}
+
+#contenthost {
+    height: 100%;
+    width: 100%;
+}
+
+.fragment {
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 180px 1fr 0px;
+}
+
+progress.win-ring {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+    color: #fff;
+}
+
+header[role=banner] {
+	-ms-grid-row: 1;
+    /* Define a grid with columns for the back button and page title. */
+    display: -ms-grid;
+    -ms-grid-columns: 120px 1fr;
+    -ms-grid-rows: 1fr;
+}
+
+header[role=banner] .win-backbutton {
+    margin-left: 39px;
+    margin-top: 59px;
+}
+
+header[role=banner] .titlearea {
+    -ms-grid-column: 2;
+    margin-top: 37px;
+}
+
+header[role=banner] .titlearea .pagetitle {
+    width: calc(100% - 20px);
+}
+
+header[role=banner] #tabs {
+    font-size: 20pt;
+    line-height: 24pt;
+    margin: 0 0 0 120px;
+    padding: 28px 0 0 0;
+    height: 36pt;
+	-ms-grid-row: 2;
+    width: 100%;
+}
+
+header[role=banner] #tabs li {
+	display: inline-block;
+	list-style: none;
+	padding-right: 12px;
+	font-weight: 200;
+	font-family: "Segoe UI";
+    white-space: nowrap;
+}
+
+.fragment {
+	height: 100%;
+}
+
+section[role=main] {
+    height: 100%;
+    width: 100%;
+	-ms-grid-row: 2;
+}
+
+#signinout.signin .win-commandicon {
+	background: url( '/images/signin.svg' ) center no-repeat;
+	background-size: 32px, 32px;
+}
+
+#signinout.signout .win-commandicon {
+	background: url( '/images/signout.svg' ) center no-repeat;
+	background-size: 32px, 32px;
+}
+
+.win-appbar {
+	background-color: rgb(23, 83, 110);
+}
+
+@media screen and (-ms-view-state: snapped) {
+    header[role=banner] {
+        -ms-grid-columns: 60px 1fr;
+        -ms-grid-rows: 1fr;
+        display: -ms-grid;
+    }
+
+    header[role=banner] .win-backbutton {
+        margin-left: 20px;
+        margin-top: 75px;
+    }
+
+    header[role=banner] .titlearea {
+        margin-top: 69px;
+        max-width: 260px;
+    }
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+    header[role=banner] {
+        -ms-grid-columns: 100px 1fr;
+    }
+
+    header[role=banner] .win-backbutton {
+        margin-left: 29px;
+    }
+}
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+/* Typography */
+
+.pagetitle {
+	letter-spacing: 0;
+}

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>freshly-pressed</title>
+    
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.0.6/css/ui-dark.css" rel="stylesheet">
+    <script src="//Microsoft.WinJS.0.6/js/base.js"></script>
+    <script src="//Microsoft.WinJS.0.6/js/ui.js"></script>
+    
+    <script src="/js/wpcom.js"></script>
+    <link href="/css/default.css" rel="stylesheet">
+    <link href="/css/freshly-pressed.css" rel="stylesheet">
+    <script src="/js/freshly-pressed.js"></script>
+</head>
+<body>
+	<div id="freshTemplate" data-win-control="WinJS.Binding.Template">
+		<div class="post"  data-win-bind="id: local_storage_key">
+				<div class="large-post">
+				    <img data-win-bind="src: post_image" width="250" height="160" onload="WPCom.fadeImage(this)" />
+				    <div class="large-post-data">
+						    <h2 class="post-title" data-win-bind="textContent: post_title"></h2>
+						    <div class="post-meta" data-win-bind="textContent: blog_name"></div>
+				    </div>
+				</div>
+		</div>
+	</div>
+
+    <!-- The content that will be loaded and displayed. -->
+    <div class="fragment freshly-pressed">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">WordPress.com</span>
+            </h1>
+		    <ul id="tabs">
+			    <!-- dynamically populated by WPCom.populateTabs() -->
+		    </ul>
+        </header>
+         <section aria-label="Main content" role="main">
+    		<div id="fp-list"
+			   data-win-control="WinJS.UI.ListView"
+			   data-win-options="{
+				selectionMode: 'none',
+				layout: {type: WinJS.UI.GridLayout },
+				automaticallyLoadItems: true,
+				loadingBehavior: 'incremental',
+				pagesToLoad: 1,
+				pageLoadThreshold: 1,
+                onloadingstatechanged: WPCom.toggleLoader,
+                oniteminvoked: WPCom.showPost
+				}">
+			</div>
+            <progress id="loader" class="show win-ring"></progress>
+        </section>
+    </div>
+</body>
+</html>
