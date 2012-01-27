@@ -16,7 +16,7 @@
 
         setInnerHTMLUnsafe(document.querySelector('.content'), post.post_content);
 
-        document.querySelector("span.like").addEventListener("click", likePostClick, false);
+        document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
 
         document.querySelector('.meta').innerHTML += '<img src="' + post.author_gravatar.replace('s=96', 's=24') + '" height="24" width="24" />';
         document.querySelector('.meta').innerHTML += 'Posted ' + WPCom.timeSince(post.ts) + ' ago on ' + post.blog_name + ' by ' + post.author_name;
@@ -28,26 +28,56 @@
         // TODO: Respond to changes in viewState.
     }
 
-    function likePostClick(mouseEventInfo) {
-        
+    function socialPostClick(m) {
+        var applicationData = Windows.Storage.ApplicationData.current;
+        var localSettings = applicationData.localSettings;
+        var accessKey = localSettings.values["wpcomAccessKey"];
 
-
-        /*WinJS.xhr({
-            type: "POST",
-            url: "https://public-api.wordpress.com/rest/v1",
-            headers: { "Content-type": "application/x-www-form-urlencoded" },
-            data: requestData
-        }).then(function (result) {
-            window.console.log(result);//I can't reach.
-        }, function (result) {
-            window.console.log(result);//I got status 0.
-        });*/
+        var socialType = m.target.className;
+        var url = "";
 
         if (WPCom.isLoggedIn()) {
-            
+            switch (socialType) {
+                case 'like':
+                    if (m.target.innerText == "Like") {
+                        m.target.innerText = "Unlike";
+
+                        url = "https://public-api.wordpress.com/rest/v1/sites/6847832/posts/4861/likes/new";
+                    } else {
+                        m.target.innerText = "Like";
+
+                        url = "https://public-api.wordpress.com/sites/6847832/posts/4861/likes/mine/delete";
+                    }
+
+                    WinJS.xhr({
+                        type: "POST",
+                        url: url,
+                        headers: { "Authorization": "Bearer " + accessKey }
+                    }).then(function (result) {
+                        window.console.log(result); //I can't reach.
+                    }, function (result) {
+                        window.console.log(result); //I got an error.
+                    });
+
+                    break;
+                case 'reblog':
+                    window.console.log('reblog pressed.');
+
+                    break;
+                case 'follow':
+                    if (m.target.innerText == "Follow") {
+                        m.target.innerText = "Unfollow";
+                    } else {
+                        m.target.innerText = "Follow";
+                    }
+
+                    window.console.log('follow pressed.');
+
+                    break;
+            };
         }
         else {
-            //launch oauth signon
+            window.console.log('needs login.');
         }
     }
 
