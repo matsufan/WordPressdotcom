@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-
+    var item;
     // This function is called whenever a user navigates to this page. It
     // populates the page elements with the app's data.
     function ready(element, options) {
@@ -8,7 +8,7 @@
     	WPCom.toggleElement(document.getElementById('refresh'), 'hide');
     	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
 
-    	var item = options.item;
+    	item = options.item;
 
     	document.title = item.post_title;
 
@@ -32,7 +32,7 @@
     function socialPostClick(m) {
         var applicationData = Windows.Storage.ApplicationData.current;
         var localSettings = applicationData.localSettings;
-        var accessKey = localSettings.values["wpcomAccessKey"];
+        var accessToken = localSettings.values["wpcomAccessToken"];
 
         var socialType = m.target.className;
         var url = "";
@@ -43,21 +43,22 @@
                     if (m.target.innerText == "Like") {
                         m.target.innerText = "Unlike";
 
-                        url = "https://public-api.wordpress.com/rest/v1/sites/6847832/posts/4861/likes/new";
+                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
                     } else {
                         m.target.innerText = "Like";
 
-                        url = "https://public-api.wordpress.com/sites/6847832/posts/4861/likes/mine/delete";
+                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
                     }
 
                     WinJS.xhr({
                         type: "POST",
                         url: url,
-                        headers: { "Authorization": "Bearer " + accessKey }
+                        headers: { "Authorization": "Bearer " + accessToken }
                     }).then(function (result) {
-                        window.console.log(result); //I can't reach.
+                        window.console.log(result); 
                     }, function (result) {
-                        window.console.log(result); //I got an error.
+                        //error
+                        window.console.log(result); 
                     });
 
                     break;

@@ -49,7 +49,7 @@
             // logout
             var applicationData = Windows.Storage.ApplicationData.current;
             var localSettings = applicationData.localSettings;
-            localSettings.values["wpcomAccessKey"] = null;
+            localSettings.values["wpcomAccessToken"] = null;
             applicationData.signalDataChanged();
         } else {
             // login
@@ -73,8 +73,8 @@
     isLoggedIn: function () {
         var applicationData = Windows.Storage.ApplicationData.current;
         var localSettings = applicationData.localSettings;
-        var value = localSettings.values["wpcomAccessKey"];
-        if (!value) {
+        var accessToken = localSettings.values["wpcomAccessToken"];
+        if (!accessToken) {
             return false;
         }
         else {
@@ -87,13 +87,32 @@
         var responseString = result.responseData;
         if (responseString) {
             //try to parse out the token
-            var token = responseString.substring(responseString.indexOf("code=") + 5, responseString.indexOf("&state"));
-            if (token.length > 0) {
-                var applicationData = Windows.Storage.ApplicationData.current;
-                var localSettings = applicationData.localSettings;
-                localSettings.values["wpcomAccessKey"] = token;
-                applicationData.signalDataChanged();
-                WPCom.updateSignInOutButton();
+            var code = responseString.substring(responseString.indexOf("code=") + 5, responseString.indexOf("&state"));
+            if (code.length > 0) {
+                //we have the code, let's get the full token
+                var data = new FormData();
+                data.append('client_id', 41);
+                data.append('redirect_uri', 'https://www.wordpress.com');
+                data.append('client_secret', 'BJDAyQqW0HVrZS66cbZ6OWKBe6aqjLvlPmYddYuMPlh2XlZKwDV6dOoIB4f5egNz');
+                data.append('code', code);
+                data.append('grant_type', 'authorization_code');
+
+                WinJS.xhr({
+                    type: "POST",
+                    url: "https://public-api.wordpress.com/oauth2/token",
+                    data: data
+                }).then(function (result) {
+                    var authData = JSON.parse(result.responseText);
+                    var authToken = authData.access_token;
+                    var applicationData = Windows.Storage.ApplicationData.current;
+                    var localSettings = applicationData.localSettings;
+                    localSettings.values["wpcomAccessToken"] = authToken;
+                    applicationData.signalDataChanged();
+                    WPCom.updateSignInOutButton();
+                }, function (result) {
+                    //handle error
+                    window.console.log(result);
+                });
             }
         }
     },
