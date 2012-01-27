@@ -114,9 +114,9 @@
         }
     },
 
-    toggleLoader: function () {
+    toggleLoader: function (status) {
         var loader = document.getElementById('loader');
-        if (WinJS.Utilities.hasClass(loader, 'show')) {
+        if ('hide' == status || (WinJS.Utilities.hasClass(loader, 'show') && 'show' != status)) {
             WinJS.Utilities.removeClass(loader, 'show');
             WinJS.Utilities.addClass(loader, 'hide');
         } else {
@@ -136,7 +136,7 @@
     },
 
     showPost: function (eventObject) {
-        //var item = data.items.getAt(eventObject.detail.itemIndex);
+    	//var item = data.items.getAt(eventObject.detail.itemIndex);
         var store, key;
         var eId = eventObject.target.querySelector('.post').id;
         var split = eId.split('-');
@@ -209,8 +209,10 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		}
 
 		// initialize from localStorage since it's a first load
-		if (0 == this.list.length)
+		if (0 == this.list.length) {
 			this.addItemsToList(localStorageObject.posts, 'end');
+			WPCom.toggleLoader('hide');
+		}
 	}
 
 	WinJS.xhr({ url: ajaxurl }).then(function (r) {
@@ -220,6 +222,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 
 		if (data.meta.post_count > 0) {
 			var updated = false;
+			WPCom.toggleLoader('hide');
 
 			if (0 == self.list.length) {
 				posts = data.posts;
