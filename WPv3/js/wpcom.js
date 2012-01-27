@@ -188,6 +188,17 @@
     		WPCom.dataSources[filter].reset();
     		document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
     	}
+    },
+
+    getDefaultPostCount: function () {
+        // all values dividable by 2, 3 or 4 for nicer rows layout
+        var w = screen.availWidth;
+        if (w > 1980)
+            return 36;
+        else if (w > 1024)
+            return 24;
+        else
+            return 12;
     }
 }
 
@@ -212,10 +223,10 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	if (this.fetching)
 		return;
 	else
-		this.fetching = true;
+	    this.fetching = true;
 
 	var self = this;
-	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php?action=' + 'get_' + escape(this.filter) + '_json';
+	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php?action=' + 'get_' + escape(this.filter) + '_json&count=' + WPCom.getDefaultPostCount();
 
 	if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
@@ -281,7 +292,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 			}
 		}
 		self.fetching = false;
-		if (self.post_count <= 40)
+		if (self.post_count <= WPcom.getDefaultPostCount())
 			self.getData('older');
 	},
         function (r) {
