@@ -136,12 +136,11 @@
     },
 
     showPost: function (eventObject) {
-    	//var item = data.items.getAt(eventObject.detail.itemIndex);
-        var store, key;
         var eId = eventObject.target.querySelector('.post').id;
         var split = eId.split('-');
+        var item = WPCom.dataSources[split[0]].list.getAt(eventObject.detail.itemIndex);
 
-        WinJS.Navigation.navigate("/html/post.html", { filter: split[0], key: split[1] });
+        WinJS.Navigation.navigate("/html/post.html", { item: item });
     },
 
     populateTabs: function () {

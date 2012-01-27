@@ -7,19 +7,18 @@
     // populates the page elements with the app's data.
     function ready(element, options) {
         // TODO: Initialize the fragment here.
-        var data = JSON.parse(localStorage[options.filter]);
-        var post = data.posts[options.key];
+    	var item = options.item;
 
-        document.title = post.post_title;
+    	document.title = item.post_title;
 
-        document.querySelector('.title').innerText = post.post_title;
+        document.querySelector('.title').innerText = item.post_title;
 
-        setInnerHTMLUnsafe(document.querySelector('.content'), post.post_content);
+        setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
 
         document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
 
-        document.querySelector('.meta').innerHTML += '<img src="' + post.author_gravatar.replace('s=96', 's=24') + '" height="24" width="24" />';
-        document.querySelector('.meta').innerHTML += 'Posted ' + WPCom.timeSince(post.ts) + ' ago on ' + post.blog_name + ' by ' + post.author_name;
+        document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar.replace('s=96', 's=24') + '" height="24" width="24" />';
+        document.querySelector('.meta').innerHTML += 'Posted ' + WPCom.timeSince(item.ts) + ' ago on ' + item.blog_name + ' by ' + item.author_name;
 
         return; // convenient to set breakpoint :)
     }
