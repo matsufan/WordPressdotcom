@@ -5,7 +5,11 @@
     // populates the page elements with the app's data.
 	function ready(element, options) {
 		// TODO: Initialize the fragment here.
-        WPCom.populateTabs();
+		var refresh = document.getElementById('refresh');
+		WinJS.Utilities.removeClass(refresh, 'hide');
+		WinJS.Utilities.addClass(refresh, 'show');
+
+		WPCom.populateTabs();
         WPCom.newDataSource('fp');
     	var listview = document.getElementById("fp-list").winControl;
     	listview.itemDataSource = WPCom.dataSources.fp.dataSource;

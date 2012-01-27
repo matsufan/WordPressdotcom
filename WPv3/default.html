@@ -19,6 +19,7 @@
     <div id="contenthost" data-win-control="WPv3.PageControlNavigator" data-win-options="{home: '/html/freshly-pressed.html'}"></div>
 
 	<div id="appbar" data-win-control="WinJS.UI.AppBar">
+		<button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'refresh',label:'Refresh',section:'selection',tooltip:'Refresh the grid',onclick:WPCom.refresh}"></button>
 		<button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'signinout',onclick:WPCom.signInOut}"></button>
 	</div>
 </body>

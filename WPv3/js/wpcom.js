@@ -176,6 +176,15 @@
             return;
         WinJS.Navigation.navigate(e.target.href);
     },
+
+    refresh: function () {
+		// throw it all away for now. Make it smarter later
+    	for (var filter in WPCom.dataSources) {
+    		localStorage.clear();
+    		WPCom.dataSources[filter].reset();
+    		document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
+    	}
+    }
 }
 
 function wpcomDataSource(filter) {
@@ -322,4 +331,14 @@ wpcomDataSource.prototype.setMeta = function (meta) {
 	this.oldest_ts = meta.oldest_ts;
 	this.newest_ts = meta.newest_ts;
 	this.post_count = meta.post_count;
+}
+
+wpcomDataSource.prototype.reset = function () {
+	this.newest_ts = null;
+	this.oldest_ts = null;
+	this.post_count = 0;
+	this.list = new WinJS.Binding.List();
+	this.dataSource;
+	this.fetching = false;
+	this.getData();
 }

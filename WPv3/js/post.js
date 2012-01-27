@@ -6,7 +6,11 @@
     // This function is called whenever a user navigates to this page. It
     // populates the page elements with the app's data.
     function ready(element, options) {
-        // TODO: Initialize the fragment here.
+    	// TODO: Initialize the fragment here.
+    	var refresh = document.getElementById('refresh');
+    	WinJS.Utilities.removeClass(refresh, 'show');
+    	WinJS.Utilities.addClass(refresh, 'hide');
+
     	var item = options.item;
 
     	document.title = item.post_title;
