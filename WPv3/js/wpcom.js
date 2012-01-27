@@ -210,6 +210,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		// initialize from localStorage since it's a first load
 		if (0 == this.list.length) {
 			this.addItemsToList(localStorageObject.posts, 'end');
+			this.setMeta(localStorageObject.meta);
 			WPCom.toggleLoader('hide');
 		}
 	}
@@ -254,9 +255,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 
 			if (updated) {
 				localStorage[self.filter] = JSON.stringify({ 'meta': meta, 'posts': posts });
-				self.oldest_ts = meta.oldest_ts;
-				self.newest_ts = meta.newest_ts;
-				self.post_count = meta.post_count;
+				self.setMeta(meta);
 			}
 		}
 		self.fetching = false;
@@ -302,4 +301,10 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 		else // 'end'
 			this.list.push(arrayItems[i]);
 	}
+}
+
+wpcomDataSource.prototype.setMeta = function (meta) {
+	this.oldest_ts = meta.oldest_ts;
+	this.newest_ts = meta.newest_ts;
+	this.post_count = meta.post_count;
 }
