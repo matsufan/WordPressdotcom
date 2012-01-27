@@ -225,7 +225,6 @@ function wpcomDataSource(filter) {
 	this.filter = filter;
 	this.newest_ts = null;
 	this.oldest_ts = null;
-	this.post_count = 0;
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
 	this.fetching = false;
@@ -251,7 +250,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
 
 		// If we aren't getting older always attempt to get newer posts than we already have as an auto refresh, since we already have posts in localStorage
-		// We only want older or newer since we already have posts in localStorage, otherwise we should always grab current posts
+		// We only want to grab older or newer since we already have posts in localStorage, otherwise we should always grab current posts
 		if ('older' != olderOrNewer || 'newer' == olderOrNewer) {
 			olderOrNewer = 'newer';
 			ajaxurl = ajaxurl + '&after=' + escape(localStorageObject.meta.newest_ts);
@@ -259,10 +258,14 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 			ajaxurl = ajaxurl + '&before=' + escape(localStorageObject.meta.oldest_ts);
 		}
 
-		// initialize from localStorage since it's a first load
+		// initialize from localStorage since the listview is empty
 		if (0 == this.list.length) {
+			this.cleanupLocalStorage();
+			localStorageObject = JSON.parse(localStorage[this.filter]);
+
 			this.addItemsToList(localStorageObject.posts, 'end');
 			this.setMeta(localStorageObject.meta);
+
 			WPCom.toggleLoader('hide');
 		}
 	}
@@ -310,8 +313,9 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 				self.setMeta(meta);
 			}
 		}
+
 		self.fetching = false;
-		if (self.post_count <= WPcom.getDefaultPostCount())
+		if (self.list.length < WPCom.getDefaultPostCount())
 			self.getData('older');
 	},
         function (r) {
@@ -366,15 +370,38 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 wpcomDataSource.prototype.setMeta = function (meta) {
 	this.oldest_ts = meta.oldest_ts;
 	this.newest_ts = meta.newest_ts;
-	this.post_count = meta.post_count;
 }
 
 wpcomDataSource.prototype.reset = function () {
 	this.newest_ts = null;
 	this.oldest_ts = null;
-	this.post_count = 0;
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
 	this.fetching = false;
 	this.getData();
+}
+
+wpcomDataSource.prototype.cleanupLocalStorage = function () {
+	var localStorageObject = JSON.parse(localStorage[this.filter]);
+	var cleanupCount = 2 * WPCom.getDefaultPostCount();
+
+	if (localStorageObject.meta.post_count > cleanupCount) {
+		var i = 0, posts = {}, oldest_ts = null, newest_ts = null;
+
+		for (var key in localStorageObject.posts) {
+			i++;
+			posts[key] = localStorageObject.posts[key];
+
+			if (null == oldest_ts || posts[key].ts < oldest_ts)
+				oldest_ts = posts[key].ts;
+			if (null == newest_ts || posts[key].ts > newest_ts)
+				newest_ts = posts[key].ts;
+
+			if (i >= cleanupCount)
+				break;
+		}
+
+		localStorageObject = { 'meta': { 'oldest_ts': oldest_ts, 'newest_ts': newest_ts, 'post_count': i }, 'posts': posts };
+		localStorage[this.filter] = JSON.stringify(localStorageObject);
+	}
 }

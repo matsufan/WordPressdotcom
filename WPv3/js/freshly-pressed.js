@@ -19,7 +19,7 @@
 
     function getOlderFP(e) {
     	var listview = document.getElementById("fp-list").winControl;
-    	if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 41) >= WPCom.dataSources.fp.post_count && !WPCom.dataSources.fp.fetching)
+    	if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.fp.list.length && !WPCom.dataSources.fp.fetching)
     		WPCom.dataSources.fp.getData('older');
     }
 
