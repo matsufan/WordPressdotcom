@@ -281,6 +281,8 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 			}
 		}
 		self.fetching = false;
+		if (self.post_count <= 40)
+			self.getData('older');
 	},
         function (r) {
             self.fetching = false;
