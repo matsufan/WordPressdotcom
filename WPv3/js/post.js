@@ -77,7 +77,7 @@
             };
         }
         else {
-            window.console.log('needs login.');
+            WPCom.signInOut();
         }
     }
 
