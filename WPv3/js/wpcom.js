@@ -192,7 +192,7 @@
 
     getDefaultPostCount: function () {
         // all values dividable by 2, 3 or 4 for nicer rows layout
-        var w = screen.availWidth;
+        var w = window.innerWidth;
         if (w > 1980)
             return 36;
         else if (w > 1024)
