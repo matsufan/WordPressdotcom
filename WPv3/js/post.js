@@ -1,16 +1,13 @@
-﻿// For an introduction to the HTML Fragment template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
+﻿(function () {
     "use strict";
 
     // This function is called whenever a user navigates to this page. It
     // populates the page elements with the app's data.
     function ready(element, options) {
     	// TODO: Initialize the fragment here.
-    	var refresh = document.getElementById('refresh');
-    	WinJS.Utilities.removeClass(refresh, 'show');
-    	WinJS.Utilities.addClass(refresh, 'hide');
-
+    	WPCom.toggleElement(document.getElementById('refresh'), 'hide');
+    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
+    	
     	var item = options.item;
 
     	document.title = item.post_title;
@@ -87,5 +84,5 @@
     WinJS.UI.Pages.define("/html/post.html", {
         ready: ready,
         updateLayout: updateLayout
-    });
+	});
 })();

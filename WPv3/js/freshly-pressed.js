@@ -5,9 +5,8 @@
     // populates the page elements with the app's data.
 	function ready(element, options) {
 		// TODO: Initialize the fragment here.
-		var refresh = document.getElementById('refresh');
-		WinJS.Utilities.removeClass(refresh, 'hide');
-		WinJS.Utilities.addClass(refresh, 'show');
+		WPCom.toggleElement(document.getElementById('refresh'), 'show');
+		WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
 
 		WPCom.populateTabs();
         WPCom.newDataSource('fp');

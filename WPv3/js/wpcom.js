@@ -5,7 +5,6 @@
 		if (filter && undefined == WPCom.dataSources[filter]) {
 			WPCom.dataSources[filter] = new wpcomDataSource(filter);
 			WPCom.dataSources[filter].init();
-			console.log('newDataSource: ' + filter);
 		} else {
 			WPCom.toggleLoader('hide');
 		}
@@ -121,10 +120,12 @@
         if (null == e)
             return;
         if ('hide' == status || (WinJS.Utilities.hasClass(e, 'show') && 'show' != status)) {
-            WinJS.Utilities.removeClass(e, 'show');
+        	if (WinJS.Utilities.hasClass(e, 'show'))
+	        	WinJS.Utilities.removeClass(e, 'show');
             WinJS.Utilities.addClass(e, 'hide');
         } else {
-            WinJS.Utilities.removeClass(e, 'hide');
+        	if (WinJS.Utilities.hasClass(e, 'hide'))
+        		WinJS.Utilities.removeClass(e, 'hide');
             WinJS.Utilities.addClass(e, 'show');
         }
     },

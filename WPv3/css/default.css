@@ -109,6 +109,11 @@ section[role=main] {
 	background-size: 32px, 32px;
 }
 
+#openinbrowser .win-commandicon {
+	background: url( '/images/openinbrowser.svg' ) center no-repeat;
+	background-size: 32px, 32px;
+}
+
 .win-appbar {
 	background-color: rgb(23, 83, 110);
 }
