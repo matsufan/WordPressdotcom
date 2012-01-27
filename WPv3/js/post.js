@@ -7,7 +7,7 @@
     	// TODO: Initialize the fragment here.
     	WPCom.toggleElement(document.getElementById('refresh'), 'hide');
     	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
-    	
+
     	var item = options.item;
 
     	document.title = item.post_title;
@@ -16,10 +16,11 @@
 
         setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
 
-        document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
-
         document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar.replace('s=96', 's=24') + '" height="24" width="24" />';
         document.querySelector('.meta').innerHTML += ' Posted ' + WPCom.timeSince(item.ts) + ' ago on ' + item.blog_name + ' by ' + item.author_name;
+
+        document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
+        document.getElementById('openinbrowser').addEventListener("click", function () { top.location.href = item.permalink; }, false);
 
         return; // convenient to set breakpoint :)
     }
