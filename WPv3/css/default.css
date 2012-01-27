@@ -34,6 +34,15 @@ progress.win-ring {
     color: #fff;
 }
 
+div.error {
+    width: 100%;
+    position: absolute;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    top: 45%;
+    color: #fff;
+}
+
 header[role=banner] {
 	-ms-grid-row: 1;
     /* Define a grid with columns for the back button and page title. */

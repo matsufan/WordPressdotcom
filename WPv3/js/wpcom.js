@@ -114,15 +114,24 @@
         }
     },
 
-    toggleLoader: function (status) {
-        var loader = document.getElementById('loader');
-        if ('hide' == status || (WinJS.Utilities.hasClass(loader, 'show') && 'show' != status)) {
-            WinJS.Utilities.removeClass(loader, 'show');
-            WinJS.Utilities.addClass(loader, 'hide');
+    toggleElement: function (e, status) {
+        if (null == e)
+            return;
+        if ('hide' == status || (WinJS.Utilities.hasClass(e, 'show') && 'show' != status)) {
+            WinJS.Utilities.removeClass(e, 'show');
+            WinJS.Utilities.addClass(e, 'hide');
         } else {
-            WinJS.Utilities.removeClass(loader, 'hide');
-            WinJS.Utilities.addClass(loader, 'show');
+            WinJS.Utilities.removeClass(e, 'hide');
+            WinJS.Utilities.addClass(e, 'show');
         }
+    },
+
+    toggleLoader: function (status) {
+        WPCom.toggleElement(document.getElementById('loader'), status);
+    },
+
+    toggleError: function (status) {
+        WPCom.toggleElement(document.querySelector('div.error'), status);
     },
 
     fadeImage: function (img) {
@@ -261,8 +270,14 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		self.fetching = false;
 	},
         function (r) {
-        	self.fetching = false;
-        	console.log('fail...');
+            self.fetching = false;
+            var errorDiv =  document.querySelector('div.error');
+            if (null != errorDiv && 0 == self.list.length) {
+                // if we have an error div in this template, and if we had no offline content
+                errorDiv.innerHTML = '<p><strong>Sorry, but we could not connect to WordPress.com.</strong></p><p>Please try again later.</p>';
+                WPCom.toggleError('show');
+            }
+            WPCom.toggleLoader('hide');
         }
 	);
 }
