@@ -2,9 +2,12 @@
 	dataSources: [],
 
 	newDataSource: function (filter) {
-		if (filter) {
-			this.dataSources[filter] = new wpcomDataSource(filter);
-			this.dataSources[filter].init();
+		if (filter && undefined == WPCom.dataSources[filter]) {
+			WPCom.dataSources[filter] = new wpcomDataSource(filter);
+			WPCom.dataSources[filter].init();
+			console.log('newDataSource: ' + filter);
+		} else {
+			WPCom.toggleLoader('hide');
 		}
 	},
 
