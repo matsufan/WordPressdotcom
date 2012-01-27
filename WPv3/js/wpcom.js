@@ -177,6 +177,7 @@ function wpcomDataSource(filter) {
 	this.post_count = 0;
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
+	this.fetching = false;
 }
 
 wpcomDataSource.prototype.init = function () {
@@ -187,13 +188,13 @@ wpcomDataSource.prototype.init = function () {
 
 // olderOrNewer: 'older', 'newer', or empty
 wpcomDataSource.prototype.getData = function (olderOrNewer) {
+	if (this.fetching)
+		return;
+	else
+		this.fetching = true;
+
 	var self = this;
 	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php?action=' + 'get_' + escape(this.filter) + '_json';
-
-	//Keep for testing purposes
-	//localStorage.clear();
-	//olderOrNewer = 'older'; // ajaxurl = ajaxurl + '&before=' + 1326952888;
-	//olderOrNewer = 'older'; ajaxurl = ajaxurl + '&before=' + 1327524303;
 
 	if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
@@ -249,11 +250,17 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 				updated = true;
 			}
 
-			if (updated)
+			if (updated) {
 				localStorage[self.filter] = JSON.stringify({ 'meta': meta, 'posts': posts });
+				self.oldest_ts = meta.oldest_ts;
+				self.newest_ts = meta.newest_ts;
+				self.post_count = meta.post_count;
+			}
 		}
+		self.fetching = false;
 	},
         function (r) {
+        	self.fetching = false;
         	console.log('fail...');
         }
 	);
