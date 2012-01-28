@@ -19,12 +19,14 @@
     	listview.addEventListener('loadingstatechanged', getOlderFP);
 	}
 
-    function getOlderFP(e) {
-    	var listview = document.getElementById("fp-list").winControl;
-    	if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.fp.list.length && !WPCom.dataSources.fp.fetching)
-    		WPCom.dataSources.fp.getData('older');
-    	else if ('complete' == listview.loadingState)
-    		WPCom.dataSources.fp.scrollPosition = listview.scrollPosition;
+	function getOlderFP(e) {
+		if ( document.getElementById('fp-list') ) {
+			var listview = document.getElementById("fp-list").winControl;
+			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.fp.list.length && !WPCom.dataSources.fp.fetching)
+				WPCom.dataSources.fp.getData('older');
+			else if ('complete' == listview.loadingState)
+				WPCom.dataSources.fp.scrollPosition = listview.scrollPosition;
+		}
     }
 
     function scrollToPosition(e) {
