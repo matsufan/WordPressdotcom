@@ -9,18 +9,33 @@
 		WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
 
 		WPCom.populateTabs();
-        WPCom.newDataSource('fp');
-    	var listview = document.getElementById("fp-list").winControl;
-    	listview.itemDataSource = WPCom.dataSources.fp.dataSource;
+		WPCom.newDataSource('fp');
+		var listview = document.getElementById("fp-list").winControl;
+		listview.itemDataSource = WPCom.dataSources.fp.dataSource;
     	listview.itemTemplate = document.getElementById("freshTemplate");
+
+    	if (WPCom.dataSources.fp.scrollPosition > 0)
+    		listview.addEventListener('loadingstatechanged', scrollToPosition);
     	listview.addEventListener('loadingstatechanged', getOlderFP);
-    	//WinJS.Utilities.addClass( document.getElementById("loader"), 'hide');
-    }
+	}
 
     function getOlderFP(e) {
     	var listview = document.getElementById("fp-list").winControl;
     	if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.fp.list.length && !WPCom.dataSources.fp.fetching)
     		WPCom.dataSources.fp.getData('older');
+    	else if ('complete' == listview.loadingState)
+    		WPCom.dataSources.fp.scrollPosition = listview.scrollPosition;
+    }
+
+    function scrollToPosition(e) {
+    	var listview = document.getElementById("fp-list").winControl;
+    	var pos = WPCom.dataSources.fp.scrollPosition;
+
+    	if ('complete' == listview.loadingState) {
+    		if (pos > 0)
+    			listview.scrollPosition = pos;
+    		listview.removeEventListener('loadingstatechanged', scrollToPosition);
+    	}
     }
 
     WinJS.UI.Pages.define("/html/freshly-pressed.html", {

@@ -3,6 +3,7 @@
 
 	newDataSource: function (filter) {
 		if (filter && undefined == WPCom.dataSources[filter]) {
+
 			WPCom.dataSources[filter] = new wpcomDataSource(filter);
 			WPCom.dataSources[filter].init();
 		} else {
@@ -228,6 +229,7 @@ function wpcomDataSource(filter) {
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
 	this.fetching = false;
+	this.scrollPosition = false;
 }
 
 wpcomDataSource.prototype.init = function () {
@@ -272,7 +274,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 
 	WinJS.xhr({ url: ajaxurl }).then(function (r) {
 		var data = JSON.parse(r.responseText);
-		var posts;
+		var posts = {};
 		var meta = {};
 
 		if (data.meta.post_count > 0) {
@@ -378,6 +380,7 @@ wpcomDataSource.prototype.reset = function () {
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
 	this.fetching = false;
+	this.scrollPosition = false;
 	this.getData();
 }
 
