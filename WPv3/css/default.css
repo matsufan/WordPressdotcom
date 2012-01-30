@@ -59,6 +59,14 @@ header[role=banner] .win-backbutton {
 header[role=banner] .titlearea {
     -ms-grid-column: 2;
     margin-top: 37px;
+    overflow: visible;
+}
+
+header[role=banner] .titlearea .titlelogo {
+    width: auto;
+    height: 100%;
+    vertical-align: middle;
+    margin-bottom: 10px;
 }
 
 header[role=banner] .titlearea .pagetitle {
