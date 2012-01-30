@@ -65,6 +65,10 @@
 	-ms-animation-duration: .75s;
 }
 
+#fp-list .post-image {
+    background-color: rgba(4, 64, 91, 0.3);
+}
+
 #fp-list .post img.fadeIn {
 	opacity: 1;
 	-ms-animation-name: imgfadeIn;
