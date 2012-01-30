@@ -84,6 +84,10 @@ header[role=banner] #tabs li {
     white-space: nowrap;
 }
 
+    header[role=banner] #tabs li a {
+        color: #fff;
+    }
+
 .fragment {
 	height: 100%;
 }

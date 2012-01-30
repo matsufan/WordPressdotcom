@@ -1,6 +1,12 @@
-﻿.post header[role=banner] .postActions {
-	-ms-grid-row: 2;
-	-ms-grid-column: 2;
+﻿.post header[role=banner] h1 {
+    margin: 44px 330px 0 0;
+    font-size: 34pt;
+}
+
+.post header[role=banner] .postActions {
+    position: absolute;
+    top: 65px;
+    right: 45px;
 }
 
 .post header[role=banner] .postActions span {
@@ -63,11 +69,13 @@
 .post header[role=banner] .postActions .reblogUI input[type=button] {
 	float: right;
 	margin-top: 13px;
-
 }
 .post section[role=main] {
     display: block;
     overflow-x: auto;
+    margin: -35px 0 0 0;
+    padding-bottom: 35px !important; 
+    overflow-y: hidden;
 }
 
 .post section[role=main] article {
@@ -77,11 +85,28 @@
     height: 100%;
     width: 480px;
     margin-left: 120px;
+
 }
 
 .post section[role=main] article img {
 	max-width: 100%;
 }
+
+.post section[role=main] article div.meta {
+    background: rgba( 255, 255, 255, 0.05 );
+    padding: 10px;        
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.post section[role=main] article div.meta img {
+    vertical-align: middle;
+    float: left;
+}
+
+    .post section[role=main] article div.meta div.meta-txt {
+        margin-left: 50px;
+    }
 
 
 /* Media Styles */
