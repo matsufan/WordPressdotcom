@@ -131,9 +131,9 @@ img.wp-smiley {
     padding: 0;
 }
 
-img.alignleft,
-img.alignright,
-img.aligncenter {
+.alignleft,
+.alignright,
+.aligncenter {
     margin-bottom: 0.9em;
     margin-top: 0.5em;
 }
@@ -157,6 +157,25 @@ img.aligncenter {
     margin-right: auto;
 }
 
+.wp-caption {
+    background: rgba(0,0,0,0.05);
+    padding: 10px;
+    max-width: 100%;
+    break-inside: avoid;
+    max-height: 100%;
+}
+
+.wp-caption img {
+    width: 100%;
+    height: auto;
+}
+
+.wp-caption-text,
+.wp-caption-dd {
+    margin: 0;
+    padding: 0;
+}
+
 object, embed, video, iframe {
     max-width: 100%;
 }
@@ -171,7 +190,6 @@ object, embed, video, iframe {
 .post section[role=main] article .content p {
     font-weight: normal;
 }
-
 
 /* --- */
 
