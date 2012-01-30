@@ -249,7 +249,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php';
 	ajaxurl += '?action=' + 'get_' + escape(this.filter) + '_json';
 	ajaxurl += '&count=' + WPCom.getDefaultPostCount();
-    ajaxurl += '&img_width=250&img_height=160'
+    ajaxurl += '&img_width=252&img_height=160'
 
 	if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
