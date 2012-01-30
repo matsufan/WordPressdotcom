@@ -93,10 +93,10 @@
 }
 
 .post section[role=main] article div.meta {
-    background: rgba( 255, 255, 255, 0.05 );
-    padding: 10px;        
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    line-height: 1.4em;
     overflow: hidden;
-    margin-bottom: 15px;
 }
 
 .post section[role=main] article div.meta img {
