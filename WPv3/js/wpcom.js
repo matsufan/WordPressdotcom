@@ -203,9 +203,9 @@
 
     refresh: function () {
 		// throw it all away for now. Make it smarter later
-    	for (var filter in WPCom.dataSources) {
-    		localStorage.clear();
-    		WPCom.dataSources[filter].reset();
+        localStorage.clear();
+        for (var filter in WPCom.dataSources) {
+            WPCom.dataSources[filter].reset();
     		document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
     	}
     },
@@ -246,7 +246,10 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	    this.fetching = true;
 
 	var self = this;
-	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php?action=' + 'get_' + escape(this.filter) + '_json&count=' + WPCom.getDefaultPostCount();
+	var ajaxurl = 'https://wordpress.com/wp-admin/admin-ajax.php';
+	ajaxurl += '?action=' + 'get_' + escape(this.filter) + '_json';
+	ajaxurl += '&count=' + WPCom.getDefaultPostCount();
+    ajaxurl += '&img_width=250&img_height=160'
 
 	if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
@@ -337,10 +340,11 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 	var arrayItems = [];
 	for (var key in jsonPosts) {
-		arrayItems.push({
+	    arrayItems.push({
 			post_title: WPCom.unescapeHTML(jsonPosts[key].post_title),
 			blog_name: WPCom.unescapeHTML(jsonPosts[key].blog_name),
 			post_image: jsonPosts[key].post_image,
+			post_image_css: "url('" + jsonPosts[key].post_image + "')",
 			ts: jsonPosts[key].ts,
 			post_id: jsonPosts[key].ID,
 			post_content: jsonPosts[key].post_content,
