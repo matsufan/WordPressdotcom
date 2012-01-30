@@ -12,42 +12,44 @@
 .post header[role=banner] .postActions span {
     display: inline-block;
 	padding: 7px 14px 7px 37px;
+    background-position: 14px 50%;
+    background-repeat: no-repeat;
+    background-size: 16px, 16px;
 }
 
 .post header[role=banner] .postActions span:hover {
-	background-color: rgba( 255, 255, 255, 0.05 );
-
+	background-color: rgba( 0, 0, 0, 0.07 );
 }
+
 .post header[role=banner] .postActions .follow {
-	background: url('/images/follow.svg') 14px 50% no-repeat;
-	background-size: 16px, 16px;
+	background-image: url('/images/follow.svg');
 }
 
-.post header[role=banner] .postActions .following, .post header[role=banner] .postActions .following:hover {
-	background-image: url('/images/following.svg');
-	background-color: rgba( 255, 255, 255, 0.1 );
+.post header[role=banner] .postActions .following {
+    background-image: url('/images/following.svg');
 }
 
 .post header[role=banner] .postActions .reblog {
-	background: url('/images/reblog.svg') 14px 50% no-repeat;
-	background-size: 16px, 16px;
+	background-image: url('/images/reblog.svg');
+    background-size: 18px, 18px;
 }
 
 .post header[role=banner] .postActions .like {
-	background: url('/images/like.svg') 14px 50% no-repeat;
-	background-size: 16px, 16px;
-}
-
-.post header[role=banner] .postActions .liked, .post header[role=banner] .postActions .liked:hover {
-	background-color: rgba( 255, 255, 255, 0.1 );
+	background-image: url('/images/like.svg');
 }
 
 .post header[role=banner] .postActions .reblog.active {
 	background-color: rgba( 29, 95, 125, 0.95 );
 }
 
-.post header[role=banner] .postActions .reblogged, .post header[role=banner] .postActions .reblogged:hover {
-	background-color: rgba( 255, 255, 255, 0.1 );
+.post header[role=banner] .postActions .liked,
+.post header[role=banner] .postActions .liked:hover,
+.post header[role=banner] .postActions .reblogged,
+.post header[role=banner] .postActions .reblogged:hover,
+.post header[role=banner] .postActions .following,
+.post header[role=banner] .postActions .following:hover {
+	background-color: #21759b;
+    color: #fff;
 }
 
 .post header[role=banner] .postActions .reblogUI {

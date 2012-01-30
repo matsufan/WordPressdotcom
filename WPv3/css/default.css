@@ -107,23 +107,29 @@ section[role=main] {
 }
 
 #signinout.signin .win-commandicon {
-	background: url( '/images/signin.svg' ) center no-repeat;
-	background-size: 32px, 32px;
+	background-image: url( '/images/signin.svg' );
 }
 
 #signinout.signout .win-commandicon {
-	background: url( '/images/signout.svg' ) center no-repeat;
-	background-size: 32px, 32px;
+	background-image: url( '/images/signout.svg' );
 }
 
 #refresh .win-commandicon {
-	background: url( '/images/refresh.svg' ) center no-repeat;
-	background-size: 32px, 32px;
+	background-image: url( '/images/refresh.svg' );
 }
 
 #openinbrowser .win-commandicon {
-	background: url( '/images/openinbrowser.svg' ) center no-repeat;
-	background-size: 32px, 32px;
+	background-image: url( '/images/openinbrowser.svg' );
+}
+
+.win-commandicon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 32px, 32px;
+}
+
+.win-commandicon:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .win-appbar {
