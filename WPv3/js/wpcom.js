@@ -151,7 +151,12 @@
     },
 
     toggleLoader: function (status) {
-        WPCom.toggleElement(document.getElementById('loader'), status);
+    	var timeout = 0;
+    	if ('hide' == status)
+    		timeout = 1000;
+    	setTimeout(function () {
+    		WPCom.toggleElement(document.getElementById('loader'), status);
+    	}, timeout);
     },
 
     toggleError: function (status) {
@@ -202,11 +207,17 @@
     },
 
     refresh: function () {
-		// throw it all away for now. Make it smarter later
+		// throw it all away for now. Make it smarter when we have more than one dataSource
         localStorage.clear();
         for (var filter in WPCom.dataSources) {
-            WPCom.dataSources[filter].reset();
-    		document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
+        	WPCom.dataSources[filter].reset();
+        	document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
+        	WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
+        	WPCom.toggleLoader('show');
+        	setTimeout(function () {
+        		WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
+        		WPCom.toggleLoader('hide');
+        	}, 1500);
     	}
     },
 
@@ -282,7 +293,6 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 
 		if (data.meta.post_count > 0) {
 			var updated = false;
-			WPCom.toggleLoader('hide');
 
 			if (0 == self.list.length) {
 				posts = data.posts;
@@ -291,6 +301,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 				meta.newest_ts = data.meta.newest_ts;
 				meta.post_count = data.meta.post_count;
 				updated = true;
+				WPCom.toggleLoader('hide');
 			} else if ('older' == olderOrNewer) {
 				posts = localStorageObject.posts;
 				self.addItemsToList(data.posts, 'end');
