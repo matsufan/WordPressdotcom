@@ -16,7 +16,7 @@
 
         setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
 
-        document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar.replace('s=96', 's=40') + '" height="40" width="40" />';
+        document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar + '" height="40" width="40" />';
         document.querySelector('.meta').innerHTML += '<div class="meta-txt"><em>by ' + item.author_name + '</em><br />Posted ' + WPCom.timeSince(item.ts) + ' ago on ' + item.blog_name + '</div>';
 
         document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
