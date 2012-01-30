@@ -114,51 +114,64 @@
 img[class*="align"],
 img[class*="wp-image-"],
 img[class*="attachment-"] {
-	height: auto;
+    height: auto;
 }
 
 img.size-full,
 img.size-large {
-   	max-width: 100%;
-	width: auto;
-	height: auto;
+    max-width: 100%;
+    width: auto;
+    height: auto;
 }
 
-.entry-content img.wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
+img.wp-smiley {
+    border: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
 }
 
 img.alignleft,
 img.alignright,
 img.aligncenter {
-	margin-bottom: 1.625em;
+    margin-bottom: 0.9em;
+    margin-top: 0.5em;
 }
 
 .alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1.625em;
+    display: inline;
+    float: left;
+    margin-right: 1.5em;
 }
 
 .alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.625em;
+    display: inline;
+    float: right;
+    margin-left: 1.5em;
 }
 
 .aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 object, embed, video, iframe {
     max-width: 100%;
 }
+
+/* Typography */
+
+.post section[role=main] article .content {
+    font-family: "Segoe UI";
+    line-height: 1.6em;
+}
+
+.post section[role=main] article .content p {
+    font-weight: normal;
+}
+
 
 /* --- */
 
