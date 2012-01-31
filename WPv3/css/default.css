@@ -128,7 +128,8 @@ section[role=main] {
     background-size: 32px, 32px;
 }
 
-.win-commandicon:hover {
+.win-commandicon:hover,
+button:hover:active .win-commandicon {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
