@@ -1,4 +1,19 @@
-﻿.post header[role=banner] h1 {
+﻿.post .win-backbutton {
+    border-color: #21759b;
+    color: #21759b;
+}
+
+.post .win-backbutton:hover {
+    border-color: #21759b;
+}
+
+.post .win-backbutton:hover:active {
+    border-color: #21759b;
+    background: #21759b;
+    color: #fff;
+}
+
+.post header[role=banner] h1 {
     margin: 44px 330px 0 0;
     font-size: 34pt;
 }
