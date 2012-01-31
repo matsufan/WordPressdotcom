@@ -156,6 +156,10 @@ button:hover:active .win-commandicon {
         margin-top: 69px;
         max-width: 260px;
     }
+
+    header[role=banner] #tabs {
+        margin-left: 60px;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {

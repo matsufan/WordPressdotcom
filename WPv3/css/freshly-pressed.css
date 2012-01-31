@@ -108,3 +108,9 @@
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+@media screen and (-ms-view-state: snapped) {
+    #fp-list .win-surface {
+        margin-left: 60px;
+    }
+}
