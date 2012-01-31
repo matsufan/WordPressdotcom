@@ -168,7 +168,7 @@ img.wp-smiley {
     max-height: 100%;
 }
 
-.wp-caption img {
+.wp-caption img[class*="wp-image-"] {
     width: 100%;
     height: auto;
 }
