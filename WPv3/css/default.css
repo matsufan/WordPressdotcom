@@ -59,6 +59,9 @@ header[role=banner] .win-backbutton {
 header[role=banner] .titlearea {
     -ms-grid-column: 2;
     margin-top: 37px;
+}
+
+.freshly-pressed header[role=banner] .titlearea {
     overflow: visible;
 }
 
