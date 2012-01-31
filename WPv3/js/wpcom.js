@@ -1,5 +1,8 @@
 ﻿var WPCom = {
-	dataSources: [],
+    dataSources: [],
+    userAgent: function () {
+        return "wp-windows8";
+    },
 
 	newDataSource: function (filter) {
 		if (filter && undefined == WPCom.dataSources[filter]) {
@@ -46,6 +49,7 @@
     },
 
     signInOut: function () {
+        
         if (WPCom.isLoggedIn()) {
             // logout
             var applicationData = Windows.Storage.ApplicationData.current;
@@ -65,7 +69,10 @@
                 Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
 			    Windows.Security.Authentication.Web.WebAuthenticationOptions.default, startURI, endURI).then(WPCom.callbackWebAuth, WPCom.callbackWebAuthError);
             }
-            catch (err) {	/*Error launching WebAuth"*/	return; }
+            catch (err) {
+                //error
+                return;
+            }
         }
 
         WPCom.updateSignInOutButton();
@@ -230,6 +237,25 @@
             return 24;
         else
             return 12;
+    },
+
+    displayToastMessage: function (message) {
+        //http://code.msdn.microsoft.com/windowsapps/Basic-Toasts-Sample-18f46c14
+        var notifications = Windows.UI.Notifications; 
+        // Get the toast manager.
+        var notificationManager = notifications.ToastNotificationManager;
+        
+        var toastXml = notificationManager.getTemplateContent(notifications.ToastTemplateType.toastText01);
+  
+        var textNodes = toastXml.getElementsByTagName("text");
+        textNodes.forEach(function (value, index) {
+            value.appendChild(toastXml.createTextNode(message));
+        });
+        
+        // Create a toast from the XML
+        var toast = new notifications.ToastNotification(toastXml);
+
+        notificationManager.createToastNotifier().show(toast); 
     }
 }
 

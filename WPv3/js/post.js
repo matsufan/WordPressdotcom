@@ -19,6 +19,9 @@
         document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar + '" height="40" width="40" />';
         document.querySelector('.meta').innerHTML += '<div class="meta-txt"><em>by ' + item.author_name + '</em><br />Posted ' + WPCom.timeSince(item.ts) + ' ago on ' + item.blog_name + '</div>';
 
+        if (WPCom.isLoggedIn())
+            updateButtons();
+
         document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
         document.getElementById('openinbrowser').addEventListener("click", function () { top.location.href = item.permalink; }, false);
 
@@ -27,6 +30,30 @@
 
     function updateLayout(element, viewState) {
         // TODO: Respond to changes in viewState.
+    }
+
+    function updateButtons() {
+        var applicationData = Windows.Storage.ApplicationData.current;
+        var localSettings = applicationData.localSettings;
+        var accessToken = localSettings.values["wpcomAccessToken"];
+
+        var likeButton = document.getElementsByClassName('like').item(0);
+        var url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/";
+        WinJS.xhr({
+            type: "GET",
+            url: url,
+            headers: { "Authorization": "Bearer " + accessToken, "User-Agent": WPCom.userAgent() }
+        }).then(function (result) {
+            var likeData = JSON.parse(result.responseText);
+            if (likeData.i_like == true)
+                likeButton.innerText = "Unlike";
+            else
+                likeButton.innerText = "Like";
+        }, function (result) {
+            //error
+            window.console.log(result);
+        });
+
     }
 
     function socialPostClick(m) {
@@ -40,12 +67,13 @@
         if (WPCom.isLoggedIn()) {
             switch (socialType) {
                 case 'like':
-                    if (m.target.innerText == "Like") {
-                        m.target.innerText = "Unlike";
+                    var curText = m.target.innerText;
+                    if (curText == "Like") {
+                        m.target.innerText = "Liking...";
 
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
                     } else {
-                        m.target.innerText = "Like";
+                        m.target.innerText = "Unliking...";
 
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
                     }
@@ -55,10 +83,15 @@
                         url: url,
                         headers: { "Authorization": "Bearer " + accessToken }
                     }).then(function (result) {
-                        window.console.log(result); 
+                        var likeData = JSON.parse(result.responseText);
+                        if (likeData.i_like == true)
+                            m.target.innerText = "Unlike";
+                        else
+                            m.target.innerText = "Like";
                     }, function (result) {
-                        //error
-                        window.console.log(result); 
+                        //error, reset the button
+                        m.target.innerText = curText;
+                        WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                     });
 
                     break;
