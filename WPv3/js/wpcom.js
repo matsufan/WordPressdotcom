@@ -1,5 +1,8 @@
 ﻿var WPCom = {
+    localStorageSchemaVersion: '20120131',
+
     dataSources: [],
+
     userAgent: function () {
         return "wp-windows8";
     },
@@ -256,7 +259,16 @@
         var toast = new notifications.ToastNotification(toastXml);
 
         notificationManager.createToastNotifier().show(toast); 
-    }
+    },
+
+    // if localStorage schema drastically changes from one version to the other, we can reset it easily
+    // to comply on app launch by updating WPCom..localStorageSchemaVersion in new releases when needed
+    checkLocalStorageSchemaVersion: function () {
+        if (null == localStorage || null == localStorage.schemaVersion || localStorage.schemaVersion != this.localStorageSchemaVersion) {
+            localStorage.clear();
+            localStorage.schemaVersion = this.localStorageSchemaVersion;
+        }
+    },
 }
 
 function wpcomDataSource(filter) {

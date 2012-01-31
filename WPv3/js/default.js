@@ -6,10 +6,9 @@
     // This function responds to all application activations.
     app.onactivated = function (eventObject) {
         if (eventObject.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.launch) {
-            // TODO: Initialize your application here.
-
-        	WinJS.UI.processAll();
-
+            // Initializing your application here.
+            WPCom.checkLocalStorageSchemaVersion();
+            WinJS.UI.processAll();
         	WPCom.updateSignInOutButton();
         }
     };
