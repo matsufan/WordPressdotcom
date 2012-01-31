@@ -81,12 +81,13 @@
 }
 
 .post section[role=main] article {
-    column-fill: auto;
+    column-fill: balance;
     column-width: 480px;
     column-gap: 80px;
     height: 100%;
     width: 480px;
     margin-left: 120px;
+    margin-right: 60px;
 
 }
 
