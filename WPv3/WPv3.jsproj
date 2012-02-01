@@ -52,6 +52,7 @@
     <Content Include="css\default.css" />
     <Content Include="css\freshly-pressed.css" />
     <Content Include="css\post.css" />
+    <Content Include="css\posts-list.css" />
     <Content Include="default.html" />
     <Content Include="html\freshly-pressed.html" />
     <Content Include="html\post.html" />
