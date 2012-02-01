@@ -391,7 +391,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 	    arrayItems.push({
 			post_title: WPCom.unescapeHTML(jsonPosts[key].post_title),
 			blog_name: WPCom.unescapeHTML(jsonPosts[key].blog_name),
-			post_image: jsonPosts[key].post_image,
+			post_image: jsonPosts[key].post_image.replace('https://s-ssl.wordpress.com', 'http://s.wordpress.com'),
 			post_image_css: "url('" + jsonPosts[key].post_image + "')",
 			ts: jsonPosts[key].ts,
 			post_id: jsonPosts[key].ID,
