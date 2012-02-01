@@ -104,7 +104,7 @@
                 var data = new FormData();
                 data.append('client_id', 41);
                 data.append('redirect_uri', 'https://www.wordpress.com');
-                data.append('client_secret', 'BJDAyQqW0HVrZS66cbZ6OWKBe6aqjLvlPmYddYuMPlh2XlZKwDV6dOoIB4f5egNz');
+                data.append('client_secret', '');
                 data.append('code', code);
                 data.append('grant_type', 'authorization_code');
 
