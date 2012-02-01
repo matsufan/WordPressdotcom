@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
+
     var item;
-    // This function is called whenever a user navigates to this page. It
-    // populates the page elements with the app's data.
+
     function ready(element, options) {
     	WinJS.UI.Animation.enterPage(document.querySelector('.fragment.post'), { top: '0px', left: '200px' });
 
