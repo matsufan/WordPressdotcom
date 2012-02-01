@@ -7,7 +7,7 @@
     app.onactivated = function (eventObject) {
         if (eventObject.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.launch) {
             // Initializing your application here.
-            WPCom.checkLocalStorageSchemaVersion();
+        	WPCom.checkLocalStorageSchemaVersion();
             WinJS.UI.processAll();
         	WPCom.updateSignInOutButton();
         }

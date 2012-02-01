@@ -4,7 +4,8 @@
 	// This function is called whenever a user navigates to this page. It
     // populates the page elements with the app's data.
 	function ready(element, options) {
-		// TODO: Initialize the fragment here.
+		WinJS.UI.Animation.enterPage(document.querySelector('.fragment.freshly-pressed'), { top: '0px', left: '200px' });
+
 		WPCom.toggleElement(document.getElementById('refresh'), 'show');
 		WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
 

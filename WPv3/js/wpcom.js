@@ -300,7 +300,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	ajaxurl += '&count=' + WPCom.getDefaultPostCount();
     ajaxurl += '&img_width=252&img_height=160'
 
-	if (null != localStorage[this.filter]) {
+    if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
 
 		// If we aren't getting older always attempt to get newer posts than we already have as an auto refresh, since we already have posts in localStorage
