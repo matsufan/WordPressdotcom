@@ -7,12 +7,12 @@
 		WinJS.UI.Animation.enterPage(document.querySelector('header'), { top: '0px', left: '200px' });
 
 		WPCom.populateTabs();
-		WPCom.newDataSource('fp');
-		var listview = document.getElementById("fp-list").winControl;
-		listview.itemDataSource = WPCom.dataSources.fp.dataSource;
+		WPCom.newDataSource('freshlypressed');
+		var listview = document.getElementById("freshlypressed-list").winControl;
+		listview.itemDataSource = WPCom.dataSources.freshlypressed.dataSource;
     	listview.itemTemplate = document.getElementById("freshTemplate");
 
-    	if (WPCom.dataSources.fp.scrollPosition > 0) {
+    	if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
     		listview.addEventListener('loadingstatechanged', scrollToPosition);
     		WPCom.toggleLoader('show');
     		WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
@@ -21,18 +21,18 @@
 	}
 
 	function getOlderFP(e) {
-		if ( document.getElementById('fp-list') ) {
-			var listview = document.getElementById('fp-list').winControl;
-			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.fp.list.length && !WPCom.dataSources.fp.fetching)
-				WPCom.dataSources.fp.getData('older');
+		if ( document.getElementById('freshlypressed-list') ) {
+			var listview = document.getElementById('freshlypressed-list').winControl;
+			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.freshlypressed.list.length && !WPCom.dataSources.freshlypressed.fetching)
+				WPCom.dataSources.freshlypressed.getData('older');
 			else if ('complete' == listview.loadingState)
-				WPCom.dataSources.fp.scrollPosition = listview.scrollPosition;
+				WPCom.dataSources.freshlypressed.scrollPosition = listview.scrollPosition;
 		}
     }
 
     function scrollToPosition(e) {
-    	var listview = document.getElementById("fp-list").winControl;
-    	var pos = WPCom.dataSources.fp.scrollPosition;
+    	var listview = document.getElementById("freshlypressed-list").winControl;
+    	var pos = WPCom.dataSources.freshlypressed.scrollPosition;
 
     	if ('complete' == listview.loadingState) {
     		WPCom.toggleElement(document.querySelector('.win-surface'), 'show');

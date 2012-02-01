@@ -1,11 +1,11 @@
-﻿#fp-list {
+﻿#freshlypressed-list {
     width: 100%;
 	min-height: 252px;
     height: 100%;
     margin-bottom: 4px;
 }
 
-#fp-list .win-container {
+#freshlypressed-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	background-color: rgba( 23, 83, 110, 0.4 );
@@ -13,12 +13,12 @@
 	-ms-animation-name: itemfadeOut;
 }
 
-#fp-list .win-item {
+#freshlypressed-list .win-item {
     width: 252px;
     height: 252px;
 }
 
-#fp-list .win-container:hover {
+#freshlypressed-list .win-container:hover {
     background-color: rgba( 11, 39, 52, 0.4 );
 	-ms-animation-name: itemfadeIn;
 }
@@ -40,13 +40,13 @@
 	  }
 	}
 
-#fp-list .win-selected, #fp-list .win-item:focus, #fp-list .win-item:focus {
+#freshlypressed-list .win-selected, #freshlypressed-list .win-item:focus, #freshlypressed-list .win-item:focus {
 	outline: none;
 	border: none;
 	box-shadow: none;
 }
 
-#fp-list .post {
+#freshlypressed-list .post {
     width: 100%;
     height: 100%;
     display: -ms-grid;
@@ -54,22 +54,22 @@
     -ms-grid-rows: 1fr 92px;
 }
 
-#fp-list .win-surface {
+#freshlypressed-list .win-surface {
     margin-left: 120px;
 }
 
-#fp-list .post img {
+#freshlypressed-list .post img {
     width: 100%;
 	-ms-grid-row: 1;
 	opacity: 0;
 	-ms-animation-duration: .75s;
 }
 
-#fp-list .post-image {
+#freshlypressed-list .post-image {
     background-color: rgba(4, 64, 91, 0.3);
 }
 
-#fp-list .post img.fadeIn {
+#freshlypressed-list .post img.fadeIn {
 	opacity: 1;
 	-ms-animation-name: imgfadeIn;
 }
@@ -83,12 +83,12 @@
 	  }
 	}
 
-#fp-list .post .large-post-data {
+#freshlypressed-list .post .large-post-data {
     padding: 8px 12px;
 	-ms-grid-row: 2;
 }
 
-#fp-list .post .post-title {
+#freshlypressed-list .post .post-title {
     font-family: "Segoe UI";
 	font-weight: normal;
 	padding: 0;
@@ -100,7 +100,7 @@
     -ms-text-overflow: ellipsis;
 }
 
-#fp-list .post .post-meta {
+#freshlypressed-list .post .post-meta {
     font-size: 9pt;
     line-height: 15pt;
     color: rgba(255,255,255,0.49);
@@ -110,7 +110,7 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
-    #fp-list .win-surface {
+    #freshlypressed-list .win-surface {
         margin-left: 60px;
     }
 }

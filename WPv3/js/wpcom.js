@@ -1,5 +1,5 @@
 ﻿var WPCom = {
-    localStorageSchemaVersion: '20120131',
+    localStorageSchemaVersion: '20120131-2',
 
     dataSources: [],
 
