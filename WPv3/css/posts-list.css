@@ -58,16 +58,29 @@
     margin-left: 120px;
 }
 
-.posts-list .post img {
+.posts-list .post-image {
+    background-color: rgba(4, 64, 91, 0.3);
+}
+
+.posts-list .post-image img {
     width: 100%;
 	-ms-grid-row: 1;
 	opacity: 0;
 	-ms-animation-duration: .75s;
 }
 
-.posts-list .post-image {
-    background-color: rgba(4, 64, 91, 0.3);
+.posts-list .post-image img.fadeIn {
+	opacity: 1;
+	-ms-animation-name: imgfadeIn;
 }
+	@-ms-keyframes imgfadeIn {
+	  from {
+	    opacity: 0;
+	  }
+	  to {
+	    opacity: 1;
+	  }
+	}
 
 .posts-list .post .large-post-data {
     padding: 8px 12px;
