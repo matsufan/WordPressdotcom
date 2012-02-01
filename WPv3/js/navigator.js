@@ -60,14 +60,15 @@
                     var parented = new WinJS.Promise(function (c) { parentedComplete = c; });
 
                     var that = this;
-                    WinJS.UI.Pages.render(eventObject.detail.location, newElement, eventObject.detail.state, parented).
-                        then(function (control) {
-                            that.element.appendChild(newElement);
-                            that.element.removeChild(that.pageElement);
-                            parentedComplete();
-                            document.body.focus();
-                            that.navigated();
-                        });
+
+                	WinJS.UI.Pages.render(eventObject.detail.location, newElement, eventObject.detail.state, parented).
+                    then(function (control) {
+                        that.element.appendChild(newElement);
+                        that.element.removeChild(that.pageElement);
+                        parentedComplete();
+                        document.body.focus();
+                        that.navigated();
+                    });
                 },
 
                 // This function is called by _viewstatechanged in order to
@@ -94,7 +95,17 @@
                         else {
                             backButton.setAttribute("disabled", "disabled");
                         }
-                    }
+					}
+
+                    if (this.pageElement.querySelector('.fragment.post'))
+						WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
+                    else
+						WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
+
+					if (this.pageElement.querySelector('.fragment.reader-filter'))
+						WPCom.toggleElement(document.getElementById('refresh'), 'show');
+					else
+						WPCom.toggleElement(document.getElementById('refresh'), 'hide');
                 },
 
                 // This is the PageControlNavigator object.

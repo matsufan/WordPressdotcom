@@ -6,9 +6,6 @@
     function ready(element, options) {
     	WinJS.UI.Animation.enterPage(document.querySelector('.fragment.post'), { top: '0px', left: '200px' });
 
-    	WPCom.toggleElement(document.getElementById('refresh'), 'hide');
-    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
-
     	item = options.item;
 
     	document.title = item.post_title;
