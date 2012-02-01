@@ -69,20 +69,6 @@
     background-color: rgba(4, 64, 91, 0.3);
 }
 
-.posts-list .post img.fadeIn {
-	opacity: 1;
-	-ms-animation-name: imgfadeIn;
-}
-
-	@-ms-keyframes imgfadeIn {
-	  from {
-	    opacity: 0;
-	  }
-	  to {
-	    opacity: 1;
-	  }
-	}
-
 .posts-list .post .large-post-data {
     padding: 8px 12px;
 	-ms-grid-row: 2;
