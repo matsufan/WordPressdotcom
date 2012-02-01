@@ -217,30 +217,69 @@ object, embed, video, iframe {
 }
 
 @media screen and (-ms-view-state: snapped) {
-.post .win-contentTitle {
-    font-size: 11pt;
-    line-height: 15pt;
-}
+    .post .win-contentTitle {
+        font-size: 11pt;
+        line-height: 15pt;
+    }
 
-.post header[role=banner] {
-    display: -ms-grid;
-    -ms-grid-columns: 44px 1fr 200px;
-    -ms-grid-rows: 1fr;
-}
+    .post header[role=banner] {
+        display: -ms-grid;
+        -ms-grid-columns: 44px 1fr 200px;
+        -ms-grid-rows: 1fr;
+    }
 
-.post section[role=main] .image {
-    width: 260px;
-    height: 140px;
-}
+    .post section[role=main] .image {
+        width: 260px;
+        height: 140px;
+    }
 
-.post section[role=main] article {
-     display: -ms-grid;
-    -ms-grid-columns: 290px 1fr;
-    -ms-grid-rows: 1fr;
-    -ms-grid-row: 2;
-    width: 290px;
-    margin-left: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+    .post section[role=main] article {
+         display: -ms-grid;
+        -ms-grid-columns: 290px 1fr;
+        -ms-grid-rows: 1fr;
+        -ms-grid-row: 2;
+        width: 290px;
+        margin-left: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+    
+    .post header[role=banner] .postActions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .post header[role=banner] .postActions span {
+        position: absolute;
+        padding: 7px 9px 7px 37px;
+        top: 15px;
+        display: block;
+    }
+    
+    .post header[role=banner] .postActions span.follow {
+        left: 4px;
+    }
+
+    .post header[role=banner] .postActions span.reblog {
+        width: 50px;
+        margin-left: -38px;
+        left: 50%;
+    }
+
+    .post header[role=banner] .postActions span.like {
+        right: 6px;
+    }
+
+    .post header[role=banner] h1 {
+        margin: 30px 0 0 20px;
+        width: 100%;
+        font-size: 20pt;
+        font-weight: 200;
+        line-height: 1.2; /* 32px when font-size is 20pt */
+        overflow: visible;
+        white-space: normal;
+    }
 }
