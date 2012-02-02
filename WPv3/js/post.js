@@ -22,7 +22,6 @@
 
         document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
         document.getElementById('openinbrowser').addEventListener("click", function () { top.location.href = item.permalink; }, false);
-        document.getElementsByClassName('publish-reblog').item(0).addEventListener("click", socialPostClick, false);
 
         return; // convenient to set breakpoint :)
     }
@@ -103,11 +102,9 @@
                     var curText = m.target.innerText;
                     if (curText == "Like") {
                         m.target.innerText = "Liking...";
-
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
                     } else {
                         m.target.innerText = "Unliking...";
-
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
                     }
 
@@ -149,7 +146,7 @@
                     var reblogButton = document.getElementsByClassName('reblog').item(0);
                     var data = new FormData();
                     var note = document.getElementById("note").innerText;
-                    if (note != "") {
+                    if (note != "" && note != "Your comments (optional)") {
                         data.append('note', note);
                     }
                     WinJS.xhr({
@@ -168,6 +165,7 @@
                         }
                         else {
                             reblogButton.innerText = "Reblog";
+                            WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                         }
                     }, function (result) {
                         //error, reset the button
@@ -180,11 +178,9 @@
                     var curText = m.target.innerText;
                     if (curText == "Follow") {
                         m.target.innerText = "Following...";
-
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/follows/new";
                     } else {
                         m.target.innerText = "Unfollowing...";
-
                         url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/follows/mine/delete";
                     }
 
@@ -205,6 +201,9 @@
                     });
 
                     break;
+                case 'note-text':
+                    if (m.target.innerText == "Your comments (optional)")
+                        m.target.innerText = "";
             };
         }
         else {
