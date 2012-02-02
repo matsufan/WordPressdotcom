@@ -54,7 +54,12 @@
 }
 
 .post header[role=banner] .postActions .reblog.active {
-	background-color: rgba( 29, 95, 125, 0.95 );
+	background-image: url('/images/reblog-dark.svg');
+}
+
+.post header[role=banner] .postActions span.active {
+    background-color: #21759b;
+    color: #fff;
 }
 
 .post header[role=banner] .postActions .liked,
@@ -69,23 +74,28 @@
 
 .post header[role=banner] .postActions .reblogUI {
 	position: absolute;
-	top: 32px;
-	left: 0;
-	width: 300px;
+	top: 35px;
+	right: 82px;
+	width: 320px;
 	height: 190px;
     display: none;
-	background-color: rgba( 29, 95, 125, 0.95 );
-	padding: 15px;
+	background-color: #21759b;
+	padding: 12px 15px 10px;
 }
 
 .post header[role=banner] .postActions .reblogUI textarea {
 	height: 125px;
-	width: 280px;
+	width: 307px;
+    padding: 4px 6px;
+    border: none;
 }
 
 .post header[role=banner] .postActions .reblogUI input[type=button] {
 	float: right;
-	margin-top: 13px;
+	margin: 10px 1px 0 0;
+    background: none;
+    border: 3px solid #fff;
+    color: #fff;
 }
 .post section[role=main] {
     display: block;

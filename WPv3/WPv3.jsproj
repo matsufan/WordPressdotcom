@@ -59,8 +59,11 @@
     <Content Include="images\addcircle.svg" />
     <Content Include="images\addtopic.svg" />
     <Content Include="images\facebook.svg" />
+    <Content Include="images\follow-dark.svg" />
     <Content Include="images\follow.svg" />
+    <Content Include="images\following-dark.svg" />
     <Content Include="images\following.svg" />
+    <Content Include="images\like-dark.svg" />
     <Content Include="images\like.svg" />
     <Content Include="images\link.svg" />
     <Content Include="images\logo.png" />
@@ -71,6 +74,7 @@
     <Content Include="images\openinbrowser.svg" />
     <Content Include="images\photo.svg" />
     <Content Include="images\quote.svg" />
+    <Content Include="images\reblog-dark.svg" />
     <Content Include="images\reblog.svg" />
     <Content Include="images\refresh.svg" />
     <Content Include="images\signin.svg" />
@@ -92,6 +96,7 @@
     <Content Include="images\topic-tech.svg" />
     <Content Include="images\topic-travel.svg" />
     <Content Include="images\twitter.svg" />
+    <Content Include="images\unfollow-dark.svg" />
     <Content Include="images\unfollow.svg" />
     <Content Include="images\video.svg" />
     <Content Include="images\widelogo.png" />
