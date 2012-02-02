@@ -73,8 +73,8 @@
 	left: 0;
 	width: 300px;
 	height: 190px;
+    display: none;
 	background-color: rgba( 29, 95, 125, 0.95 );
-	display: none;
 	padding: 15px;
 }
 
