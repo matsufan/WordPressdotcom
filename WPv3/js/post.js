@@ -81,7 +81,7 @@
             if (reblogData.is_reblogged == true)
                 reblogButton.innerText = "Reblogged";
             else
-                followButton.innerText = "Reblog";
+                reblogButton.innerText = "Reblog";
         }, function (result) {
             //error
             window.console.log(result);
