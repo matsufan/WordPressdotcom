@@ -8,9 +8,9 @@
 		WPCom.newDataSource('freshlypressed');
 		var listview = document.getElementById("freshlypressed-list").winControl;
 		listview.itemDataSource = WPCom.dataSources.freshlypressed.dataSource;
-    	listview.itemTemplate = document.getElementById("freshTemplate");
+		listview.itemTemplate = document.getElementById("freshTemplate");
 
-    	if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
+      	if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
     		listview.addEventListener('loadingstatechanged', scrollToPosition);
     		WPCom.toggleLoader('show');
     		WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
