@@ -324,18 +324,20 @@
     },
 
     setCurrentUser: function () {
-        if (!WPCom.isLoggedIn())
+        if (!WPCom.isLoggedIn()) {
             localStorage.currentUser = null;
-        WinJS.xhr({
-            type: "GET",
-            url: WPCom.apiURL + '/me',
-            headers: { "Authorization": "Bearer " + WPCom.getCurrentAccessToken() }
-        }).then(function (result) {
-            localStorage.currentUser = JSON.parse(result.responseText);
-        }, function (result) {
-            localStorage.currentUser = null;
-            console.log('Failed to ajax-get user info.');
-        });
+        } else {
+            WinJS.xhr({
+                type: "GET",
+                url: WPCom.apiURL + '/me',
+                headers: { "Authorization": "Bearer " + WPCom.getCurrentAccessToken() }
+            }).then(function (result) {
+                localStorage.currentUser = JSON.parse(result.responseText);
+            }, function (result) {
+                localStorage.currentUser = null;
+                console.log('Failed to ajax-get user info.');
+            });
+        }
     }
 }
 
