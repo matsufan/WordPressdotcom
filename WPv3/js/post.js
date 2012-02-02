@@ -31,12 +31,10 @@
     }
 
     function updateButtons() {
-        var applicationData = Windows.Storage.ApplicationData.current;
-        var localSettings = applicationData.localSettings;
-        var accessToken = localSettings.values["wpcomAccessToken"];
+        var accessToken = WPCom.getCurrentAccessToken();
 
         var likeButton = document.getElementsByClassName('like').item(0);
-        var likeUrl = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/";
+        var likeUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/";
         WinJS.xhr({
             type: "GET",
             url: likeUrl,
@@ -53,7 +51,7 @@
         });
 
         var followButton = document.getElementsByClassName('follow').item(0);
-        var followUrl = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/follows/mine/";
+        var followUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/mine/";
         WinJS.xhr({
             type: "GET",
             url: followUrl,
@@ -70,7 +68,7 @@
         });
 
         var reblogButton = document.getElementsByClassName('reblog').item(0);
-        var reblogUrl = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/mine/";
+        var reblogUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/mine/";
         WinJS.xhr({
             type: "GET",
             url: reblogUrl,
@@ -89,9 +87,7 @@
     }
 
     function socialPostClick(m) {
-        var applicationData = Windows.Storage.ApplicationData.current;
-        var localSettings = applicationData.localSettings;
-        var accessToken = localSettings.values["wpcomAccessToken"];
+        var accessToken = WPCom.getCurrentAccessToken();
 
         var socialType = m.target.className;
         var url = "";
@@ -102,10 +98,10 @@
                     var curText = m.target.innerText;
                     if (curText == "Like") {
                         m.target.innerText = "Liking...";
-                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
+                        url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
                     } else {
                         m.target.innerText = "Unliking...";
-                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
+                        url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
                     }
 
                     WinJS.xhr({
@@ -142,7 +138,7 @@
                     break;
                 case 'publish-reblog':
                     m.target.innerText = "Reblogging...";
-                    url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/new";
+                    url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/new";
                     var reblogButton = document.getElementsByClassName('reblog').item(0);
                     var data = new FormData();
                     var note = document.getElementById("note").innerText;
@@ -178,10 +174,10 @@
                     var curText = m.target.innerText;
                     if (curText == "Follow") {
                         m.target.innerText = "Following...";
-                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/follows/new";
+                        url = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/new";
                     } else {
                         m.target.innerText = "Unfollowing...";
-                        url = "https://public-api.wordpress.com/rest/v1/sites/" + item.blog_id + "/follows/mine/delete";
+                        url = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/mine/delete";
                     }
 
                     WinJS.xhr({

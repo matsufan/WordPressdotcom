@@ -3,6 +3,8 @@
 
     dataSources: [],
 
+    apiURL: 'https://public-api.wordpress.com/rest/v1',
+
     userAgent: function () {
         return "wp-windows8";
     },
@@ -52,13 +54,13 @@
     },
 
     signInOut: function () {
-        
         if (WPCom.isLoggedIn()) {
             // logout
             var applicationData = Windows.Storage.ApplicationData.current;
             var localSettings = applicationData.localSettings;
             localSettings.values["wpcomAccessToken"] = null;
             applicationData.signalDataChanged();
+            //WPCom.updateDataSources();
         } else {
             // login
             var wpcomURL = "https://public-api.wordpress.com/oauth2/authorize?client_id=";
@@ -118,6 +120,7 @@
                     var localSettings = applicationData.localSettings;
                     localSettings.values["wpcomAccessToken"] = authToken;
                     applicationData.signalDataChanged();
+                    //WPCom.updateDataSources();
                     WPCom.updateSignInOutButton();
                 }, function (result) {
                     //handle error
@@ -217,7 +220,7 @@
 
     refresh: function () {
 		// throw it all away for now. Make it smarter when we have more than one dataSource
-        localStorage.clear();
+    	WPCom.clearLocalStorage();
         for (var filter in WPCom.dataSources) {
         	WPCom.dataSources[filter].reset();
         	document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
@@ -263,11 +266,77 @@
     // if localStorage schema drastically changes from one version to the other, we can reset it easily
     // to comply on app launch by updating WPCom..localStorageSchemaVersion in new releases when needed
     checkLocalStorageSchemaVersion: function () {
-        if (null == localStorage || null == localStorage.schemaVersion || localStorage.schemaVersion != this.localStorageSchemaVersion) {
-            localStorage.clear();
-            localStorage.schemaVersion = this.localStorageSchemaVersion;
-        }
+    	if (null == localStorage || null == localStorage.schemaVersion || localStorage.schemaVersion != this.localStorageSchemaVersion)
+    		WPCom.clearLocalStorage();
     },
+
+    clearLocalStorage: function () {
+    	localStorage.clear();
+    	localStorage.schemaVersion = this.localStorageSchemaVersion;
+    	localStorage.tokenHash = WPCom.getCurrentAccessToken();
+    	WPCom.setCurrentUser();
+    },
+
+    updateDataSources: function () {
+    	console.log('updateDataSources');
+		// TODO: In order for this to be worthwhile, we need to move json fetching to the REST API so we can use the access token to make requests as a logged in user, but we'll also want things such as the freshly pressed json to work without an access token
+    	if (WPCom.isLoggedIn()) {
+    		console.log('updateDataSources: logged in');
+    		WPCom.clearLocalStorage();
+    		var metas = {};
+    		for (var filter in WPCom.dataSources) {
+    			if (undefined == metas[filter])
+    				metas[filter] = {};
+    			console.log('updateDataSources: resetting the ' + filter + ' dataSource');
+    			console.log('WPCom.dataSources[' + filter + '].oldest_ts was ' + WPCom.dataSources[filter].oldest_ts);
+    			metas[filter].oldest_ts = WPCom.dataSources[filter].oldest_ts;
+    			metas[filter].scrollPosition = WPCom.dataSources[filter].scrollPosition;
+    			WPCom.dataSources[filter].reset();
+    			console.log('after dataSource reset - WPCom.dataSources[' + filter + '].oldest_ts is ' + WPCom.dataSources[filter].oldest_ts);
+    			console.log('after dataSource reset - metas[' + filter + '].oldest_ts is ' + metas[filter].oldest_ts);
+    			while (WPCom.dataSources[filter].oldest_ts > metas[filter].oldest_ts || null == WPCom.dataSources[filter].oldest_ts) {
+    				console.log('running while loop');
+    				setTimeout(function () {
+    					WPCom.dataSources[filter].getData('older');
+					}, 250);
+				}
+    			WPCom.dataSources[filter].scrollPositionn = metas[filter].scrollPosition;
+
+    			// TODO: If the user is on a post screen, we need to refresh that view and item
+				// TODO: If the user is on a listview, refresh the view and reset the listview's datasource?
+			}
+		} else {
+			// The user just logged out, so we don't care about saving state. Give them a fresh start.
+			console.log('updateDataSources: logged out');
+    		WPCom.clearLocalStorage();
+    		for (var filter in WPCom.dataSources) {
+    			WPCom.dataSources[filter].reset(true);
+			}
+    		console.log('updateDataSources: heading to a fresh freshly pressed');
+    		WinJS.Navigation.navigate("/html/freshly-pressed.html");
+    	}
+    },
+
+    getCurrentAccessToken: function () {
+        if (!WPCom.isLoggedIn())
+            return;
+        return Windows.Storage.ApplicationData.current.localSettings.values["wpcomAccessToken"];
+    },
+
+    setCurrentUser: function () {
+        if (!WPCom.isLoggedIn())
+            localStorage.currentUser = null;
+        WinJS.xhr({
+            type: "GET",
+            url: WPCom.apiURL + '/me',
+            headers: { "Authorization": "Bearer " + WPCom.getCurrentAccessToken() }
+        }).then(function (result) {
+            localStorage.currentUser = JSON.parse(result.responseText);
+        }, function (result) {
+            localStorage.currentUser = null;
+            console.log('Failed to ajax-get user info.');
+        });
+    }
 }
 
 function wpcomDataSource(filter) {
@@ -426,14 +495,15 @@ wpcomDataSource.prototype.setMeta = function (meta) {
 	this.newest_ts = meta.newest_ts;
 }
 
-wpcomDataSource.prototype.reset = function () {
+wpcomDataSource.prototype.reset = function (skipData) {
 	this.newest_ts = null;
 	this.oldest_ts = null;
 	this.list = new WinJS.Binding.List();
 	this.dataSource;
 	this.fetching = false;
 	this.scrollPosition = false;
-	this.getData();
+	if (true != skipData)
+		this.getData();
 }
 
 wpcomDataSource.prototype.cleanupLocalStorage = function () {
