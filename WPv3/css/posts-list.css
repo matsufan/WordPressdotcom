@@ -128,14 +128,6 @@
     .posts-list .win-surface {
         margin-left: 55px;
     }
-<<<<<<< .mine
-}
-
-@media screen and (-ms-view-state: fullscreen-portrait) {
-    .posts-list .win-surface {
-        margin-left: 98px;
-    }
-=======
     
     /* This is a hack for vertical win-container. Does the API support vertical gridlayout yet? */
 
@@ -150,5 +142,10 @@
         overflow-y: scroll;
         overflow-x: hidden;
     } 
->>>>>>> .r69
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+    .posts-list .win-surface {
+        margin-left: 98px;
+    }
 }
