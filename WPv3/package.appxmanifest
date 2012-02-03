@@ -16,9 +16,9 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="WordPress.com" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="WordPress.com" ForegroundText="light" BackgroundColor="#21759b" ToastCapable="true">
+      <VisualElements DisplayName="WordPress.com" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="WordPress.com" ForegroundText="light" BackgroundColor="#1E8CBE" ToastCapable="true">
         <DefaultTile WideLogo="images\widelogo.png" ShowName="noLogos" />
-        <SplashScreen Image="images\splashscreen.png" BackgroundColor="#21759b" />
+        <SplashScreen Image="images\splashscreen.png" BackgroundColor="#1E8CBE" />
         <InitialRotationPreference>
           <Rotation Preference="portrait" />
           <Rotation Preference="landscape" />

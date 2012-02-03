@@ -8,9 +8,13 @@
 .posts-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 23, 83, 110, 0.4 );
+	background-color: rgba( 0, 86, 132, 0.4 );
 	-ms-animation-duration: .25s;
 	-ms-animation-name: itemfadeOut;
+}
+
+.posts-list .win-container:hover {
+    border-color: #78C8E6;
 }
 
 .posts-list .win-item {
@@ -19,24 +23,24 @@
 }
 
 .posts-list .win-container:hover {
-    background-color: rgba( 11, 39, 52, 0.4 );
+    background-color: rgba( 0, 86, 132, 0.7 );
 	-ms-animation-name: itemfadeIn;
 }
 	@-ms-keyframes itemfadeOut {
 	  from {
-	    background-color: rgba( 11, 39, 52, 0.4 );
+	    background-color: rgba( 0, 86, 132, 0.4 );
 	  }
 	  to {
-	    background-color: rgba( 23, 83, 110, 0.4 );
+	    background-color: rgba( 0, 86, 132, 0.7 );
 	  }
 	}
 
 	@-ms-keyframes itemfadeIn {
 	  from {
-	    background-color: rgba( 23, 83, 110, 0.4 );
+	    background-color: rgba( 0, 86, 132, 0.7 );
 	  }
 	  to {
-	    background-color: rgba( 11, 39, 52, 0.4 );
+	    background-color: rgba( 0, 86, 132, 0.4 );
 	  }
 	}
 
@@ -59,7 +63,7 @@
 }
 
 .posts-list .post-image {
-    background-color: rgba(4, 64, 91, 0.3);
+    background-color: rgba(0, 86, 132, 0.5);
 }
 
 .posts-list .post-image img {
@@ -88,13 +92,12 @@
 }
 
 .posts-list .post .post-title {
-    font-family: "Segoe UI";
-	font-weight: normal;
+	font-weight: 400;
 	padding: 0;
 	margin: 0;
     font-size: 11pt;
     line-height: 15pt;
-	color: rgba(255,255,255,1);
+	color: #fff;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
 }
@@ -102,7 +105,7 @@
 .posts-list .post .post-meta {
     font-size: 9pt;
     line-height: 15pt;
-    color: rgba(255,255,255,0.49);
+    color: #78C8E6;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
@@ -125,6 +128,14 @@
     .posts-list .win-surface {
         margin-left: 55px;
     }
+<<<<<<< .mine
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+    .posts-list .win-surface {
+        margin-left: 98px;
+    }
+=======
     
     /* This is a hack for vertical win-container. Does the API support vertical gridlayout yet? */
 
@@ -139,10 +150,5 @@
         overflow-y: scroll;
         overflow-x: hidden;
     } 
-}
-
-@media screen and (-ms-view-state: fullscreen-portrait) {
-    .posts-list .win-surface {
-        margin-left: 98px;
-    }
+>>>>>>> .r69
 }

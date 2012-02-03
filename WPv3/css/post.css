@@ -1,15 +1,15 @@
 ﻿.post .win-backbutton {
-    border-color: #21759b;
-    color: #21759b;
+    border-color: #1E8CBE;
+    color: #1E8CBE;
 }
 
 .post .win-backbutton:hover {
-    border-color: #21759b;
+    border-color: #1E8CBE;
 }
 
 .post .win-backbutton:hover:active {
-    border-color: #21759b;
-    background: #21759b;
+    border-color: #1E8CBE;
+    background: #1E8CBE;
     color: #fff;
 }
 
@@ -20,8 +20,8 @@
 
 .post header[role=banner] .postActions {
     position: absolute;
-    top: 65px;
-    right: 45px;
+    top: 62px;
+    right: 30px;
 }
 
 .post header[role=banner] .postActions span {
@@ -58,7 +58,7 @@
 }
 
 .post header[role=banner] .postActions span.active {
-    background-color: #21759b;
+    background-color: #1E8CBE;
     color: #fff;
 }
 
@@ -68,7 +68,7 @@
 .post header[role=banner] .postActions .reblogged:hover,
 .post header[role=banner] .postActions .following,
 .post header[role=banner] .postActions .following:hover {
-	background-color: #21759b;
+	background-color: #1E8CBE;
     color: #fff;
 }
 
@@ -79,7 +79,7 @@
 	width: 320px;
 	height: 190px;
     display: none;
-	background-color: #21759b;
+	background-color: #1E8CBE;
 	padding: 12px 15px 10px;
 }
 
@@ -189,6 +189,8 @@ img.wp-smiley {
     max-width: 97%;
     break-inside: avoid;
     max-height: 100%;
+    font-size: 9pt;
+    line-height: 1.4;
 }
 
 .wp-caption img[class*="wp-image-"] {
@@ -209,12 +211,11 @@ object, embed, video, iframe {
 /* Typography */
 
 .post section[role=main] article .content {
-    font-family: "Segoe UI";
     line-height: 1.6em;
 }
 
 .post section[role=main] article .content p {
-    font-weight: normal;
+    font-weight: 400;
 }
 
 /* --- */
@@ -295,7 +296,6 @@ object, embed, video, iframe {
     .post header[role=banner] h1 {
         margin: 60px 0 30px 14px;
         font-size: 20pt;
-        font-weight: 200;
         line-height: 1.2; /* 32px when font-size is 20pt */
         white-space: normal;
         overflow: visible;
@@ -334,7 +334,7 @@ object, embed, video, iframe {
 	    width: 290px;
 	    height: 190px;
         display: none;
-	    background-color: #21759b;
+	    background-color: #1E8CBE;
 	    padding: 12px 15px 10px;
     }
 

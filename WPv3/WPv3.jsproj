@@ -50,7 +50,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="css\default.css" />
-    <Content Include="css\freshly-pressed.css" />
     <Content Include="css\post.css" />
     <Content Include="css\posts-list.css" />
     <Content Include="default.html" />

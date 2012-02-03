@@ -5,11 +5,11 @@
 }
 
 body {
-    font: 11pt/15pt "Segoe UI Semilight";
-    background-color: #21759B;
+    font: 11pt/15pt "Segoe UI";
+    background-color: #1E8CBE;
 	background-image: url('/images/wpbg.png');
 	background-size: cover;
-    color: rgb(255, 255, 255);
+    color: #fff;
     height: 100%;
     width: 100%;
 }
@@ -74,6 +74,7 @@ header[role=banner] .titlearea .titlelogo {
 
 header[role=banner] .titlearea .pagetitle {
     width: calc(100% - 20px);
+    letter-spacing: 0;
 }
 
 header[role=banner] #tabs {
@@ -91,7 +92,6 @@ header[role=banner] #tabs li {
 	list-style: none;
 	padding-right: 12px;
 	font-weight: 200;
-	font-family: "Segoe UI";
     white-space: nowrap;
 }
 
@@ -137,7 +137,15 @@ button:hover:active .win-commandicon {
 }
 
 .win-appbar {
-	background-color: rgb(23, 83, 110);
+	background-color: #005684;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 @media screen and (-ms-view-state: snapped) {
@@ -174,18 +182,4 @@ button:hover:active .win-commandicon {
     header[role=banner] #tabs {
         margin-left: 100px;
     }
-}
-
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
-/* Typography */
-
-.pagetitle {
-	letter-spacing: 0;
 }
