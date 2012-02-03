@@ -8,13 +8,7 @@
 .posts-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 0, 86, 132, 0.4 );
-	-ms-animation-duration: .25s;
-	-ms-animation-name: itemfadeOut;
-}
-
-.posts-list .win-container:hover {
-    border-color: #78C8E6;
+	background-color: rgba( 0, 116, 162, 0.6 );
 }
 
 .posts-list .win-item {
@@ -23,26 +17,9 @@
 }
 
 .posts-list .win-container:hover {
-    background-color: rgba( 0, 86, 132, 0.7 );
-	-ms-animation-name: itemfadeIn;
+    background-color: rgba( 0, 86, 132, 0.6 );
+    outline-color: rgba( 120, 200, 230, 0.6 );
 }
-	@-ms-keyframes itemfadeOut {
-	  from {
-	    background-color: rgba( 0, 86, 132, 0.4 );
-	  }
-	  to {
-	    background-color: rgba( 0, 86, 132, 0.7 );
-	  }
-	}
-
-	@-ms-keyframes itemfadeIn {
-	  from {
-	    background-color: rgba( 0, 86, 132, 0.7 );
-	  }
-	  to {
-	    background-color: rgba( 0, 86, 132, 0.4 );
-	  }
-	}
 
 .posts-list .win-selected, .posts-list .win-item:focus, .posts-list .win-item:focus {
 	outline: none;
