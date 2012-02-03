@@ -60,7 +60,7 @@
             var localSettings = applicationData.localSettings;
             localSettings.values["wpcomAccessToken"] = null;
             applicationData.signalDataChanged();
-            //WPCom.updateDataSources();
+            WPCom.resetDataSources();
         } else {
             // login
             var wpcomURL = "https://public-api.wordpress.com/oauth2/authorize?client_id=";
@@ -120,7 +120,7 @@
                     var localSettings = applicationData.localSettings;
                     localSettings.values["wpcomAccessToken"] = authToken;
                     applicationData.signalDataChanged();
-                    //WPCom.updateDataSources();
+                    WPCom.resetDataSources();
                     WPCom.updateSignInOutButton();
                 }, function (result) {
                     //handle error
@@ -277,44 +277,17 @@
     	WPCom.setCurrentUser();
     },
 
-    updateDataSources: function () {
-    	console.log('updateDataSources');
-		// TODO: In order for this to be worthwhile, we need to move json fetching to the REST API so we can use the access token to make requests as a logged in user, but we'll also want things such as the freshly pressed json to work without an access token
-    	if (WPCom.isLoggedIn()) {
-    		console.log('updateDataSources: logged in');
-    		WPCom.clearLocalStorage();
-    		var metas = {};
-    		for (var filter in WPCom.dataSources) {
-    			if (undefined == metas[filter])
-    				metas[filter] = {};
-    			console.log('updateDataSources: resetting the ' + filter + ' dataSource');
-    			console.log('WPCom.dataSources[' + filter + '].oldest_ts was ' + WPCom.dataSources[filter].oldest_ts);
-    			metas[filter].oldest_ts = WPCom.dataSources[filter].oldest_ts;
-    			metas[filter].scrollPosition = WPCom.dataSources[filter].scrollPosition;
-    			WPCom.dataSources[filter].reset();
-    			console.log('after dataSource reset - WPCom.dataSources[' + filter + '].oldest_ts is ' + WPCom.dataSources[filter].oldest_ts);
-    			console.log('after dataSource reset - metas[' + filter + '].oldest_ts is ' + metas[filter].oldest_ts);
-    			while (WPCom.dataSources[filter].oldest_ts > metas[filter].oldest_ts || null == WPCom.dataSources[filter].oldest_ts) {
-    				console.log('running while loop');
-    				setTimeout(function () {
-    					WPCom.dataSources[filter].getData('older');
-					}, 250);
-				}
-    			WPCom.dataSources[filter].scrollPositionn = metas[filter].scrollPosition;
+    resetDataSources: function () {
+    	for (var filter in WPCom.dataSources) {
+    		// No need to reset freshlypressed because none of the data is specific to a user
+    		if ('freshlypressed' == filter)
+    			continue;
 
-    			// TODO: If the user is on a post screen, we need to refresh that view and item
-				// TODO: If the user is on a listview, refresh the view and reset the listview's datasource?
-			}
-		} else {
-			// The user just logged out, so we don't care about saving state. Give them a fresh start.
-			console.log('updateDataSources: logged out');
-    		WPCom.clearLocalStorage();
-    		for (var filter in WPCom.dataSources) {
-    			WPCom.dataSources[filter].reset(true);
-			}
-    		console.log('updateDataSources: heading to a fresh freshly pressed');
-    		WinJS.Navigation.navigate("/html/freshly-pressed.html");
-    	}
+    		WPCom.dataSources[filter].reset(true);
+		}
+
+    	if (!WPCom.isLoggedIn() && !document.querySelector('.fragment.reader-filter.freshlypressed'))
+	    	WinJS.Navigation.navigate("/html/freshly-pressed.html");
     },
 
     getCurrentAccessToken: function () {
