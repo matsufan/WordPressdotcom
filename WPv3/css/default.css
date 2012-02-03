@@ -170,8 +170,11 @@ button:hover:active .win-commandicon {
     header[role=banner] .win-backbutton {
         margin-left: 29px;
     }
-}
 
+    header[role=banner] #tabs {
+        margin-left: 100px;
+    }
+}
 
 .hide {
     display: none;
