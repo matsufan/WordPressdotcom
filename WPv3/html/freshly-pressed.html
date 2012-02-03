@@ -18,9 +18,7 @@
 	<div id="freshTemplate" data-win-control="WinJS.Binding.Template">
 		<div class="post"  data-win-bind="id: local_storage_key">
 				<div class="large-post">
-                    <div class="post-image" style="width:252px; height:160px; overflow: hidden;">
-                        <img data-win-bind="src: post_image" width="252" onload="WPCom.fadeImage(this)" />
-                    </div>
+                    <img data-win-bind="src: post_image" width="252" height="160" onload="WPCom.fadeImage(this)" />
 				    <div class="large-post-data">
 						    <h2 class="post-title" data-win-bind="textContent: post_title"></h2>
 						    <div class="post-meta" data-win-bind="textContent: blog_name"></div>

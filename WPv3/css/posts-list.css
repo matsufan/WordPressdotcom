@@ -62,11 +62,8 @@
     margin-left: 118px;
 }
 
-.posts-list .post-image {
-    background-color: rgba(0, 86, 132, 0.5);
-}
-
 .posts-list .post-image img {
+    background-color: rgba(0, 86, 132, 0.5);
     width: 100%;
 	-ms-grid-row: 1;
 	opacity: 0;
