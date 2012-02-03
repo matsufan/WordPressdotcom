@@ -97,16 +97,20 @@
                         }
 					}
 
-                    if (this.pageElement.querySelector('.fragment.post'))
-						WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
-                    else
-						WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
+                    if (this.pageElement.querySelector('.fragment.post')) {
+                    	WPCom.toggleElement(document.getElementById('goback'), 'show');
+                    	document.getElementById('goback').onclick = function () { nav.back(); };
+                    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
+					} else {
+						WPCom.toggleElement(document.getElementById('goback'), 'hide');
+                    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
+					}
 
-					if (this.pageElement.querySelector('.fragment.reader-filter'))
-						WPCom.toggleElement(document.getElementById('refresh'), 'show');
-					else
-						WPCom.toggleElement(document.getElementById('refresh'), 'hide');
-                },
+                    if (this.pageElement.querySelector('.fragment.reader-filter'))
+                    	WPCom.toggleElement(document.getElementById('refresh'), 'show');
+                    else
+                    	WPCom.toggleElement(document.getElementById('refresh'), 'hide');
+                    },
 
                 // This is the PageControlNavigator object.
                 pageControl: {
