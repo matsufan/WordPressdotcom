@@ -148,28 +148,6 @@ button:hover:active .win-commandicon {
     display: block;
 }
 
-@media screen and (-ms-view-state: snapped) {
-    header[role=banner] {
-        -ms-grid-columns: 60px 1fr;
-        -ms-grid-rows: 1fr;
-        display: -ms-grid;
-    }
-
-    header[role=banner] .win-backbutton {
-        margin-left: 20px;
-        margin-top: 75px;
-    }
-
-    header[role=banner] .titlearea {
-        margin-top: 69px;
-        max-width: 260px;
-    }
-
-    header[role=banner] #tabs {
-        margin-left: 60px;
-    }
-}
-
 @media screen and (-ms-view-state: fullscreen-portrait) {
     header[role=banner] {
         -ms-grid-columns: 100px 1fr;

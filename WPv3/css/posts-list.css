@@ -87,7 +87,9 @@
 
 @media screen and (-ms-view-state: snapped) {
     .fragment.freshlypressed {
-        margin: -50px 0 0 -30px;
+        margin: 0;
+        display: block;
+        overflow-x: hidden;
     }
 
     header[role=banner] ul#tabs {
@@ -100,7 +102,7 @@
     }
     
     .posts-list .win-surface {
-        margin-left: 55px;
+        margin-left: 30px;
     }
     
     /* This is a hack for vertical win-container. Does the API support vertical gridlayout yet? */
@@ -109,13 +111,45 @@
         position: relative !important;
         top: 0 !important;
         left: 0 !important;
-        margin-bottom: 15px !important;
     }
 
     .win-listview > .win-horizontal.win-viewport {
         overflow-y: scroll;
         overflow-x: hidden;
+        margin-top: 140px;
+        height: calc(100% - 140px);
     } 
+
+    .freshlypressed header[role=banner] {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .freshlypressed header[role=banner] .win-backbutton {
+        display: none;
+    }
+
+    .freshlypressed header[role=banner] .titlearea {
+        max-width: 260px;
+        display: block;
+        -ms-grid-column: 0;
+        height: 35px;
+        margin: 30px 0 0 32px;
+    }
+
+    .freshlypressed section[role=main] .posts-list {
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow-x: hidden;
+    }
+
+    .freshlypressed header[role=banner] #tabs {
+        margin: 0 0 0 32px;
+        padding: 34px 0 0 0;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
