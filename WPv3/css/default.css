@@ -109,14 +109,6 @@ section[role=main] {
 	-ms-grid-row: 2;
 }
 
-#signinout.signin .win-commandicon {
-	background-image: url( '/images/signin.svg' );
-}
-
-#signinout.signout .win-commandicon {
-	background-image: url( '/images/signout.svg' );
-}
-
 #refresh .win-commandicon {
 	background-image: url( '/images/refresh.svg' );
 }

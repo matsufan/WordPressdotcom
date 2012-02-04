@@ -55,32 +55,28 @@
 
     signInOut: function () {
         if (WPCom.isLoggedIn()) {
-            // logout
             var applicationData = Windows.Storage.ApplicationData.current;
             var localSettings = applicationData.localSettings;
             localSettings.values["wpcomAccessToken"] = null;
             applicationData.signalDataChanged();
             WPCom.resetDataSources();
-        } else {
-            // login
-            var wpcomURL = "https://public-api.wordpress.com/oauth2/authorize?client_id=";
-            var clientID = "41";
-            var callbackURL = "https://www.wordpress.com";
-            wpcomURL += clientID + "&redirect_uri=" + encodeURIComponent(callbackURL) + "&response_type=code";
+		}
 
-            try {
-                var startURI = new Windows.Foundation.Uri(wpcomURL);
-                var endURI = new Windows.Foundation.Uri(callbackURL);
-                Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
-			    Windows.Security.Authentication.Web.WebAuthenticationOptions.default, startURI, endURI).then(WPCom.callbackWebAuth, WPCom.callbackWebAuthError);
-            }
-            catch (err) {
-                //error
-                return;
-            }
+        var wpcomURL = "https://public-api.wordpress.com/oauth2/authorize?client_id=";
+        var clientID = "41";
+        var callbackURL = "https://www.wordpress.com";
+        wpcomURL += clientID + "&redirect_uri=" + encodeURIComponent(callbackURL) + "&response_type=code";
+
+        try {
+            var startURI = new Windows.Foundation.Uri(wpcomURL);
+            var endURI = new Windows.Foundation.Uri(callbackURL);
+            Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
+			Windows.Security.Authentication.Web.WebAuthenticationOptions.default, startURI, endURI).then(WPCom.callbackWebAuth, WPCom.callbackWebAuthError);
         }
-
-        WPCom.updateSignInOutButton();
+        catch (err) {
+            //error
+            return;
+        }
     },
 
     isLoggedIn: function () {
@@ -121,7 +117,6 @@
                     localSettings.values["wpcomAccessToken"] = authToken;
                     applicationData.signalDataChanged();
                     WPCom.resetDataSources();
-                    WPCom.updateSignInOutButton();
                 }, function (result) {
                     //handle error
                     window.console.log(result);
@@ -132,20 +127,6 @@
 
     callbackWebAuthError: function (err) {
         //handle error here
-    },
-
-    updateSignInOutButton: function () {
-        var signinout = document.getElementById('signinout');
-
-        if (WPCom.isLoggedIn()) {
-            WinJS.Utilities.removeClass(signinout, 'signin');
-            WinJS.Utilities.addClass(signinout, 'signout');
-            document.querySelector('#signinout .win-label').textContent = 'Sign Out';
-        } else {
-            WinJS.Utilities.removeClass(signinout, 'signout');
-            WinJS.Utilities.addClass(signinout, 'signin');
-            document.querySelector('#signinout .win-label').textContent = 'Sign In';
-        }
     },
 
     toggleElement: function (e, status) {
