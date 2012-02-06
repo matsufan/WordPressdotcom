@@ -52,6 +52,7 @@
     <Content Include="css\default.css" />
     <Content Include="css\post.css" />
     <Content Include="css\posts-list.css" />
+    <Content Include="css\share-target.css" />
     <Content Include="default.html" />
     <Content Include="html\freshly-pressed.html" />
     <Content Include="html\post.html" />
@@ -107,7 +108,9 @@
     <Content Include="js\freshly-pressed.js" />
     <Content Include="js\navigator.js" />
     <Content Include="js\post.js" />
+    <Content Include="js\share-target.js" />
     <Content Include="js\wpcom.js" />
+    <Content Include="share-target.html" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS, Version=0.6" />

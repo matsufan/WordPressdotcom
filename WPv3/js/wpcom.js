@@ -58,6 +58,8 @@
             var applicationData = Windows.Storage.ApplicationData.current;
             var localSettings = applicationData.localSettings;
             localSettings.values["wpcomAccessToken"] = null;
+            localSettings.values["wpcomBlogID"] = null;
+            localSettings.values["wpcomBlogURL"] = null;
             applicationData.signalDataChanged();
             WPCom.resetDataSources();
 		}
@@ -112,9 +114,13 @@
                 }).then(function (result) {
                     var authData = JSON.parse(result.responseText);
                     var authToken = authData.access_token;
+                    var blog_id = authData.blog_id;
+                    var blog_url = authData.blog_url;
                     var applicationData = Windows.Storage.ApplicationData.current;
                     var localSettings = applicationData.localSettings;
                     localSettings.values["wpcomAccessToken"] = authToken;
+                    localSettings.values["wpcomBlogID"] = blog_id;
+                    localSettings.values["wpcomBlogURL"] = blog_url;
                     applicationData.signalDataChanged();
                     WPCom.resetDataSources();
                 }, function (result) {
@@ -275,6 +281,18 @@
         if (!WPCom.isLoggedIn())
             return;
         return Windows.Storage.ApplicationData.current.localSettings.values["wpcomAccessToken"];
+    },
+
+    getCurrentBlogID: function () {
+        if (!WPCom.isLoggedIn())
+            return;
+        return Windows.Storage.ApplicationData.current.localSettings.values["wpcomBlogID"];
+    },
+
+    getCurrentBlogURL: function () {
+        if (!WPCom.isLoggedIn())
+            return;
+        return Windows.Storage.ApplicationData.current.localSettings.values["wpcomBlogURL"];
     },
 
     setCurrentUser: function () {

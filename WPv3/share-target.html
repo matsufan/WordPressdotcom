@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Share to WordPress.com</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/share-target.css" />
+    <script src="//Microsoft.WinJS.0.6/js/base.js"></script>
+    <script src="//Microsoft.WinJS.0.6/js/ui.js"></script>
+    <script type="text/javascript" src="/js/wpcom.js"></script>
+    <script type="text/javascript" src="js/share-target.js"></script>
+  
+</head>
+<body id="appBody"> 
+<div class="targetContent">
+    <div id="shareImage" style="display: none">
+        <h3>Share a Photo</h3>
+        <div id="thumbnailArea" class="hidden"><img class="thumbnail" alt="(Thumbnail)" id="thumbnailImage" /><br /></div>
+        <input type="text" placeholder="Title (optional)" /><br />
+        <input type="text" placeholder="Click-Through Link URL (optional)" /><br />
+        <textarea placeholder="Caption (optional)" ></textarea>
+        <span>Posting to {BLOG TITLE}</span>
+        <input id="publish-photo" type="button" value="Publish" />
+    </div>
+    
+    <div id="shareLink" style="display: none">
+        <h3>Share a Link</h3>
+        <input id="shareLinkURL" type="text" placeholder="Link URL)" /><br />
+        <input id="shareLinkDescription" type="text" placeholder="Link Description (optional)" /><br />
+        <textarea id="shareLinkComment" placeholder="Comments (optional)" ></textarea>
+        <span id="linkBlogName"></span>
+        <input id="publish-link" type="button" value="Publish" />
+    </div>
+
+    <div id="shareQuote" style="display: none">
+        <h3>Share a Quote</h3>
+        <textarea id="shareQuoteText" placeholder="Quote Text" ></textarea><br /><br />
+        <textarea id="shareQuoteURL" placeholder="Quote Source URL" ></textarea>
+        <span id="quoteBlogName"></span>
+        <input id="publish-quote" type="button" value="Publish" />
+    </div>
+    <progress id="publish-progress" style="display: none"></progress>
+</div>
+
+</body>
+</html>
