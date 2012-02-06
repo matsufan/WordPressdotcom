@@ -1,0 +1,13 @@
+﻿.targetContent {
+    padding: 0 50px 0 36px;
+}
+
+.targetContent textarea {
+    width: 100%;
+    height: 260px;
+}
+
+.targetContent input[type=text] {
+    width: 100%;
+    margin-bottom: 8px;
+}
