@@ -91,13 +91,14 @@ header[role=banner] #tabs li {
 	display: inline-block;
 	list-style: none;
 	padding-right: 12px;
-	font-weight: 200;
+	font-weight: 300;
     white-space: nowrap;
+    color: #78c8e6;
 }
 
-    header[role=banner] #tabs li a {
-        color: #fff;
-    }
+header[role=banner] #tabs li a {
+    color: #fff;
+}
 
 .fragment {
 	height: 100%;

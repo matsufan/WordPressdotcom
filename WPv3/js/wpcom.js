@@ -193,7 +193,7 @@
         var selected = '';
         for (var tab in tabs) {
             selected = (WinJS.Navigation.location == tabs[tab]) ? 'selected' : '';
-            ul.innerHTML += '<li class="' + selected + '"><a href="' + tabs[tab] + '">' + tab + '</li>';
+            ul.innerHTML += '<li class="' + selected + '"><!--<a href="' + tabs[tab] + '">-->' + tab + '</li>';
         }
         document.querySelector('#tabs li').addEventListener("click", WPCom.tabClick, false);
     },
