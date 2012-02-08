@@ -110,8 +110,8 @@ section[role=main] {
 	-ms-grid-row: 2;
 }
 
-#refresh .win-commandicon {
-	background-image: url( '/images/refresh.svg' );
+#refresh .win-commandimage::before {
+    content: "\e149";
 }
 
 #openinbrowser .win-commandicon {
@@ -122,6 +122,7 @@ section[role=main] {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 32px, 32px;
+    font-family: "Segoe UI Symbol";
 }
 
 .win-commandicon:hover,
