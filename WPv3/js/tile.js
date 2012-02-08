@@ -15,13 +15,17 @@
         WPCom.newDataSource('freshlypressed');
         WPComTile.data = WPCom.dataSources.freshlypressed.dataSource;
 
+        if (!WPComTile.data.list.length)
+            return;
+
         var tileUpdateManager = Windows.UI.Notifications.TileUpdateManager.createTileUpdaterForApplication();
         tileUpdateManager.enableNotificationQueue(true);
 
         // Loop the newest 5 freshly pressed posts.
         for (var i = 0; i < 5; i++) {
-            var post = WPComTile.data.list.getAt(i)
-
+            var post = WPComTile.data.list.getAt(i);
+            if (!post)
+                continue;
             // Long Tile
             var template = Windows.UI.Notifications.TileTemplateType.tileWideImageAndText01;
             var tileXml = Windows.UI.Notifications.TileUpdateManager.getTemplateContent(template);
