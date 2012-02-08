@@ -13,9 +13,6 @@
 
         	WPCom.checkLocalStorageSchemaVersion();
         	WinJS.UI.processAll();
-
-            // Update the tile
-        	WPComTile.init();
         }
     };
 

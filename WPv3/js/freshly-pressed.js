@@ -16,6 +16,10 @@
     		WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
 		}
     	listview.addEventListener('loadingstatechanged', getOlderFP);
+
+	    // Update the tile if needed.
+    	if ( null == WPComTile.data )
+    	    WPComTile.init();
 	}
 
 	function getOlderFP(e) {
