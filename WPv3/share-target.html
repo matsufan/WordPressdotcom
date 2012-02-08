@@ -13,14 +13,15 @@
 </head>
 <body id="appBody"> 
 <div class="targetContent">
+    <div id="errorMessage"></div>
     <div id="shareImage" style="display: none">
         <h3>Share a Photo</h3>
-        <div id="thumbnailArea" class="hidden"><img class="thumbnail" alt="(Thumbnail)" id="thumbnailImage" /><br /></div>
-        <input type="text" placeholder="Title (optional)" /><br />
-        <input type="text" placeholder="Click-Through Link URL (optional)" /><br />
-        <textarea placeholder="Caption (optional)" ></textarea>
-        <span>Posting to {BLOG TITLE}</span>
-        <input id="publish-photo" type="button" value="Publish" />
+        <div id="thumbnailArea" class="hidden"><img class="thumbnail" alt="(Thumbnail)" id="thumbnailImage" /></div><br />
+        <input id="shareImageTitle" type="text" placeholder="Title (optional)" /><br />
+        <input id="shareImageURL" type="text" placeholder="Click-Through Link URL (optional)" /><br />
+        <textarea id="shareImageCaption" placeholder="Caption (optional)" ></textarea>
+        <span id="imageBlogName"></span>
+        <input id="publish-image" type="button" value="Publish" />
     </div>
     
     <div id="shareLink" style="display: none">
