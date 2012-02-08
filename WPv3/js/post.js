@@ -15,7 +15,7 @@
         setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
 
         document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar + '" height="40" width="40" />';
-        document.querySelector('.meta').innerHTML += '<div class="meta-txt"><em>by ' + item.author_name + '</em><br />Posted ' + WPCom.timeSince(item.ts) + ' ago on ' + item.blog_name + '</div>';
+        document.querySelector('.meta').innerHTML += '<div class="meta-txt"><em>by ' + item.author_name + '</em><br />Posted ' + WPCom.timeSince(item.post_date) + ' ago on ' + item.blog_name + '</div>';
 
         if (WPCom.isLoggedIn())
             updateButtons();
