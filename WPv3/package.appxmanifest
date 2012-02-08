@@ -29,11 +29,6 @@
       <Extensions>
         <Extension Category="windows.shareTarget" StartPage="share-target.html">
           <ShareTarget>
-            <SupportedFileTypes>
-              <FileType>.jpg</FileType>
-              <FileType>.gif</FileType>
-              <FileType>.png</FileType>
-            </SupportedFileTypes>
             <DataFormat>text</DataFormat>
             <DataFormat>uri</DataFormat>
             <DataFormat>bitmap</DataFormat>
