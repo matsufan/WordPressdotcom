@@ -114,8 +114,12 @@ section[role=main] {
     content: "\e149";
 }
 
-#openinbrowser .win-commandicon {
-	background-image: url( '/images/openinbrowser.svg' );
+#openinbrowser {
+    float: right;
+}
+
+#openinbrowser .win-commandimage::before {
+	content: "\e12a";
 }
 
 .win-commandicon {

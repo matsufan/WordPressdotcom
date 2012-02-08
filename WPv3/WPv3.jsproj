@@ -69,7 +69,6 @@
     <Content Include="images\openinbrowser.svg" />
     <Content Include="images\reblog-dark.svg" />
     <Content Include="images\reblog.svg" />
-    <Content Include="images\refresh.svg" />
     <Content Include="images\signin.svg" />
     <Content Include="images\signout.svg" />
     <Content Include="images\smalllogo.png" />
