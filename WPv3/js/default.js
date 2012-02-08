@@ -12,7 +12,10 @@
         	settingsPane.addEventListener('commandsrequested', settingsCommandsRequested);
 
         	WPCom.checkLocalStorageSchemaVersion();
-            WinJS.UI.processAll();
+        	WinJS.UI.processAll();
+
+            // Update the tile
+        	WPComTile.init();
         }
     };
 

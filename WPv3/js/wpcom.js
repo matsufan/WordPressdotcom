@@ -310,7 +310,8 @@
                 console.log('Failed to ajax-get user info.');
             });
         }
-    }
+    },
+
 }
 
 function wpcomDataSource(filter) {
