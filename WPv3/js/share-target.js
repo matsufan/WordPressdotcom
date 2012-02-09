@@ -36,6 +36,7 @@ function activatedHandler(eventArgs) {
 
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.bitmap)) {
             //Let's share an image!
+            shareType = TYPE_IMAGE;
             document.getElementById("imageBlogName").innerHTML = "Publishing to " + WPCom.getCurrentBlogURL();
             document.getElementById("shareImage").style.display = "block";
             if (shareOperation.data.properties.title)
