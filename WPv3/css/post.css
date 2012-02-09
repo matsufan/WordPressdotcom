@@ -191,7 +191,6 @@
     padding: 10px;
     max-width: 97%;
     break-inside: avoid;
-    break-before: always;
     max-height: 100%;
     font-size: 9pt;
 }
