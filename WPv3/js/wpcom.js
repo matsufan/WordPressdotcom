@@ -1,5 +1,5 @@
 ﻿var WPCom = {
-    localStorageSchemaVersion: '20120208',
+    localStorageSchemaVersion: '20120209',
 
     dataSources: [],
 
@@ -366,7 +366,11 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		}
     }
 
-	WinJS.xhr({ url: ajaxurl }).then(function (r) {
+    var headers = { "User-Agent": WPCom.userAgent() };
+    if (WPCom.isLoggedIn())
+        headers['Authorization'] = 'Bearer ' + WPCom.getCurrentAccessToken();
+
+	WinJS.xhr({ type: 'GET', url: ajaxurl, headers: headers }).then(function (r) {
 		var data = JSON.parse(r.responseText);
 		var posts = {};
 		var date_range = {};
@@ -386,8 +390,8 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 			} else if ('older' == olderOrNewer) {
 				posts = localStorageObject.posts;
 				self.addItemsToList(data.posts, 'end');
-				for (var attrname in data.posts) {
-					posts[attrname] = data.posts[attrname];
+				for (var i=0; i<data.posts.length; i++) {
+				    posts[data.posts[i].editorial.blog_id + '_' + data.posts[i].ID] = data.posts[i];
 				}
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = localStorageObject.date_range.newest;
@@ -433,7 +437,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 	var arrayItems = [];
 	for (var key in jsonPosts) {
 	    arrayItems.push({
-			post_title: WPCom.unescapeHTML(jsonPosts[key].title),
+	        post_title: (jsonPosts[key].editorial.custom_headline.length) ? WPCom.unescapeHTML(jsonPosts[key].editorial.custom_headline) : WPCom.unescapeHTML(jsonPosts[key].title),
 			blog_name: WPCom.unescapeHTML(jsonPosts[key].editorial.blog_name),
 			post_image: jsonPosts[key].editorial.image.replace(/https:\/\/([^\.]+).wordpress.com/, 'http://s.wordpress.com'),
 			post_id: jsonPosts[key].ID,
@@ -461,7 +465,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 }
 
 wpcomDataSource.prototype.setDateRange = function (date_range) {
-	this.oldest_in_date_range = date_range.oldest;
+    this.oldest_in_date_range = date_range.oldest;
 	this.newest_in_date_range = date_range.newest;
 }
 
@@ -487,16 +491,16 @@ wpcomDataSource.prototype.cleanupLocalStorage = function () {
 			i++;
 			posts[key] = localStorageObject.posts[key];
 
-			if (null == oldest_in_date_range || new Date(posts[key].post_date) < new Date(oldest_in_date_range))
-			    oldest_in_date_range = posts[key].post_date;
-			if (null == newest_in_date_range || new Date(posts[key].post_date) > new Date(newest_in_date_range))
-			    newest_in_date_range = posts[key].post_date;
+			if (null == oldest_in_date_range || new Date(posts[key].editorial.picked_on) < new Date(oldest_in_date_range))
+			    oldest_in_date_range = posts[key].editorial.picked_on;
+			if (null == newest_in_date_range || new Date(posts[key].editorial.picked_on) > new Date(newest_in_date_range))
+			    newest_in_date_range = posts[key].editorial.picked_on;
 
 			if (i >= cleanupCount)
 				break;
 		}
 
-		localStorageObject = { 'date_range': { 'oldest': oldest_in_date_range, 'newest': newest_in_date_range, 'post_count': i }, 'posts': posts };
+		localStorageObject = { 'date_range': { 'oldest': oldest_in_date_range, 'newest': newest_in_date_range }, 'post_count': i, 'posts': posts };
 		localStorage[this.filter] = JSON.stringify(localStorageObject);
 	}
 }
