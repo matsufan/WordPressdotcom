@@ -1,5 +1,5 @@
 ﻿.win-semanticzoom {
-   height: 100%;
+	height: 100%;
 }
 
 .posts-list {
@@ -39,9 +39,14 @@
     -ms-grid-rows: 1fr 92px;
 }
 
-.posts-list .win-surface {
-    margin-left: 118px;
+.win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
+   margin-left: 50px;
 }
+
+.win-semanticzoom .win-listview > .win-horizontal .win-surface {
+   margin-left: 118px;
+}
+
 
 .posts-list .post-image img {
     background-color: rgba(0, 86, 132, 0.5);
