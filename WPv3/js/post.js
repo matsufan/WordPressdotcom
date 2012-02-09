@@ -10,6 +10,8 @@
 
     	document.title = item.post_title;
 
+    	document.querySelector('.post').setAttribute('id', item.blog_id + '_' + item.post_id);
+
         document.querySelector('.title').innerText = item.post_title;
 
         setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
