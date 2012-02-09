@@ -544,11 +544,13 @@ wpcomDataSource.prototype.getGroupKey = function (dataItem) {
 }
 
 wpcomDataSource.prototype.getGroupData = function (dataItem) {
+	var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+	var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	var date = new Date(dataItem.ts);
 	return {
-		day_of_month: 'Day of month: ' + date.getDate(),
-		day_of_week: 'Day of week: ' + (1 + date.getDay()),
-		month: 'Month: ' + (1 + date.getMonth()),
-		group_title: 'Month ' + (1 + date.getMonth()) + ' Day ' + date.getDate()
+		day_of_month: date.getDate(),
+		day_name: days[date.getDay()],
+		month_name: months[date.getMonth()],
+		group_title: months[date.getMonth()] + ' ' + date.getDate()
 	}
 }
