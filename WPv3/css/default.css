@@ -74,7 +74,7 @@ header[role=banner] .titlearea .titlelogo {
 
 header[role=banner] .titlearea .pagetitle {
     width: calc(100% - 20px);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 header[role=banner] #tabs {
@@ -144,6 +144,15 @@ button:hover:active .win-commandicon {
 
 .show {
     display: block;
+}
+
+.win-contentcaption {
+    font-size: 9pt;
+}
+
+.win-body {
+    font-size: 11pt;
+    font-weight: 300;
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {

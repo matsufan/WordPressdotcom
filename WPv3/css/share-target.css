@@ -4,13 +4,14 @@
 
 body {
     overflow: hidden;
+    background-image: none;
 }
 
 .targetContent textarea, .targetContent input[type=text] {
-    font-family: "Segoe UI";
+    font-family: "Calibri";
     color: #000;
     border: 2px solid #78c8e6;
-    font-size: 11pt;
+    font-size: 13pt;
     padding: 6px;
     width: calc(100% - 16px);
 }
@@ -43,7 +44,7 @@ body {
 }
 
 .targetContent textarea {
-    height: 160px;
+    height: 120px;
 }
 
 .targetContent span {
@@ -68,6 +69,7 @@ body {
 }
 
 #thumbnailImage {
-    max-height: 200px;
+    border: 2px solid #78c8e6;
+    max-height: 260px;
     max-width: 100%;
 }

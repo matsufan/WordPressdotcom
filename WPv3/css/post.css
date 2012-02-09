@@ -14,8 +14,7 @@
 }
 
 .post header[role=banner] h1 {
-    margin: 44px 330px 0 0;
-    font-size: 34pt;
+    margin-right: 330px; /* remove when postActions are moved to app bar */
 }
 
 .post header[role=banner] .postActions {
@@ -119,9 +118,8 @@
 }
 
 .post section[role=main] article div.meta {
-    margin-bottom: 20px;
-    font-size: 0.9em;
-    line-height: 1.4em;
+    margin-bottom: 10px;
+    line-height: 1.5em;
     overflow: hidden;
 }
 
@@ -137,70 +135,83 @@
 
 /* Media Styles */
 
-img[class*="align"],
-img[class*="wp-image-"],
-img[class*="attachment-"] {
+.content img {
+    display: block;
+}
+
+.content img[class*="align"],
+.content img[class*="wp-image-"],
+.content img[class*="attachment-"] {
     height: auto;
 }
 
-img.size-full,
-img.size-large {
+.content img.size-full,
+.content img.size-large {
     max-width: 100%;
     width: auto;
     height: auto;
 }
 
-img.wp-smiley {
+.content img.wp-smiley {
     border: none;
     margin-bottom: 0;
     margin-top: 0;
     padding: 0;
+    display: inline;
 }
 
-.alignleft,
-.alignright,
-.aligncenter {
-    margin-bottom: 0.9em;
-    margin-top: 0.5em;
+.content .alignleft,
+.content .alignright,
+.content .aligncenter {
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
-.alignleft {
+.content .alignleft {
     display: inline;
     float: left;
-    margin-right: 1.5em;
+    margin-right: 20px;
 }
 
-.alignright {
+.content .alignright {
     display: inline;
     float: right;
-    margin-left: 1.5em;
+    margin-left: 20px;
 }
 
-.aligncenter {
+.content .aligncenter {
     clear: both;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.wp-caption {
+.content .wp-caption {
     background: rgba(0,0,0,0.05);
     padding: 10px;
     max-width: 97%;
     break-inside: avoid;
+    break-before: always;
     max-height: 100%;
     font-size: 9pt;
-    line-height: 1.4;
 }
 
-.wp-caption img[class*="wp-image-"] {
+.content .wp-caption p {
+    line-height: 14pt;
+}
+
+.content .wp-caption br {
+    display: none;
+}
+
+.content .wp-caption img {
     width: 100%;
     height: auto;
 }
 
-.wp-caption-text,
-.wp-caption-dd {
-    margin: 0;
+.content .wp-caption .wp-caption-text,
+.content .wp-caption .wp-caption-dd {
+    margin: 4px 0 0;
     padding: 0;
 }
 
@@ -210,12 +221,10 @@ object, embed, video, iframe {
 
 /* Typography */
 
-.post section[role=main] article .content {
-    line-height: 1.6em;
-}
-
-.post section[role=main] article .content p {
-    font-weight: 400;
+.win-body p {
+    margin-bottom: 20pt;
+    line-height: 20pt;
+    text-align: left !important;
 }
 
 /* --- */
@@ -294,7 +303,7 @@ object, embed, video, iframe {
     }
 
     .post header[role=banner] h1 {
-        margin: 60px 0 30px 14px;
+        margin: 60px 0 30px 12px;
         font-size: 20pt;
         line-height: 1.2; /* 32px when font-size is 20pt */
         white-space: normal;
