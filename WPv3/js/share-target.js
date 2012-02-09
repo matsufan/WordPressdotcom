@@ -30,7 +30,7 @@ function activatedHandler(eventArgs) {
                 var thumbnailBlob = MSApp.createBlobFromRandomAccessStream(thumbnailStream.contentType, thumbnailStream);
                 var thumbnailUrl = URL.createObjectURL(thumbnailBlob, false);
                 document.getElementById("thumbnailImage").src = thumbnailUrl;
-                document.getElementById("thumbnailArea").className = "unhidden";
+                document.getElementById("thumbnailArea").style.display = "block";
             });
         }
 
