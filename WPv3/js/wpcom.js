@@ -13,7 +13,7 @@
 		if (filter && undefined == WPCom.dataSources[filter]) {
 
 			WPCom.dataSources[filter] = new wpcomDataSource(filter);
-			WPCom.dataSources[filter].init();
+			WPCom.dataSources[filter].getData();
 		} else {
 			WPCom.toggleLoader('hide');
 		}
@@ -208,9 +208,11 @@
     refresh: function () {
 		// throw it all away for now. Make it smarter when we have more than one dataSource
     	WPCom.clearLocalStorage();
-        for (var filter in WPCom.dataSources) {
+    	for (var filter in WPCom.dataSources) {
         	WPCom.dataSources[filter].reset();
-        	document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].dataSource;
+        	document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
+        	document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
+        	document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
         	WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
         	WPCom.toggleLoader('show');
         	setTimeout(function () {
@@ -319,15 +321,9 @@ function wpcomDataSource(filter) {
 	this.newest_in_date_range = null;
 	this.oldest_in_date_range = null;
 	this.list = new WinJS.Binding.List();
-	this.dataSource;
+	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
 	this.fetching = false;
 	this.scrollPosition = false;
-}
-
-wpcomDataSource.prototype.init = function () {
-	this.getData();
-
-	this.dataSource = this.list.dataSource;
 }
 
 // olderOrNewer: 'older', 'newer', or empty
@@ -365,7 +361,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
         }
 
 		// initialize from localStorage since the listview is empty
-		if (0 == this.list.length) {
+		if (0 == this.groupedList.length) {
 			this.cleanupLocalStorage();
 			localStorageObject = JSON.parse(localStorage[this.filter]);
 
@@ -403,7 +399,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		        keyed_posts[post_key] = data.posts[p];
 		    }
 
-			if (0 == self.list.length) {
+			if (0 == self.groupedList.length) {
 			    posts = keyed_posts;
 			    self.addItemsToList(keyed_posts, 'end');
 				date_range.oldest = data.date_range.oldest;
@@ -440,13 +436,13 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		}
 
 		self.fetching = false;
-		if (self.list.length < WPCom.getDefaultPostCount())
+		if (self.groupedList.length < WPCom.getDefaultPostCount())
 			self.getData('older');
 	},
         function (r) {
             self.fetching = false;
             var errorDiv =  document.querySelector('div.error');
-            if (null != errorDiv && 0 == self.list.length) {
+            if (null != errorDiv && 0 == self.groupedList.length) {
                 // if we have an error div in this template, and if we had no offline content
                 errorDiv.innerHTML = '<p><strong>Sorry, but we could not connect to WordPress.com.</strong></p><p>Please try again later.</p>';
                 WPCom.toggleError('show');
@@ -467,13 +463,14 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 			post_id: jsonPosts[key].ID,
 			blog_id: jsonPosts[key].editorial.blog_id,
 			site_id: jsonPosts[key].editorial.site_id,
+			ts: jsonPosts[key].editorial.picked_on,
             post_content: jsonPosts[key].content,
             permalink: jsonPosts[key].URL,
             post_date: jsonPosts[key].date,
 			post_author: jsonPosts[key].author.ID,
 			author_name: jsonPosts[key].author.name,
 			author_gravatar: jsonPosts[key].author.avatar_URL.replace(/s=\d+/, 's=40'),
-			local_storage_key: (this.filter + '-' + key),
+			local_storage_key: (this.filter + '-' + key)
         });
 	}
 
@@ -497,7 +494,7 @@ wpcomDataSource.prototype.reset = function (skipData) {
 	this.newest_in_date_range = null;
 	this.oldest_in_date_range = null;
 	this.list = new WinJS.Binding.List();
-	this.dataSource;
+	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
 	this.fetching = false;
 	this.scrollPosition = false;
 	if (true != skipData)
@@ -526,5 +523,32 @@ wpcomDataSource.prototype.cleanupLocalStorage = function () {
 
 		localStorageObject = { 'date_range': { 'oldest': oldest_in_date_range, 'newest': newest_in_date_range }, 'post_count': i, 'posts': posts };
 		localStorage[this.filter] = JSON.stringify(localStorageObject);
+	}
+}
+
+wpcomDataSource.prototype.compareGroups = function (a, b) {
+	var aDate = new Date(a), bDate = new Date(b);
+	if (aDate == bDate)
+		return 0;
+	else if (aDate < bDate)
+		return 1;
+	else
+		return -1;
+}
+
+wpcomDataSource.prototype.getGroupKey = function (dataItem) {
+	var date = new Date(dataItem.ts);
+	var day = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+	return day.toString();
+}
+
+wpcomDataSource.prototype.getGroupData = function (dataItem) {
+	var date = new Date(dataItem.ts);
+	return {
+		day_of_month: 'Day of month: ' + date.getDate(),
+		day_of_week: 'Day of week: ' + (1 + date.getDay()),
+		month: 'Month: ' + (1 + date.getMonth()),
+		group_title: 'Month ' + (1 + date.getMonth()) + ' Day ' + date.getDate()
 	}
 }

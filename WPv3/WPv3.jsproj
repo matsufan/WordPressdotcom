@@ -85,6 +85,7 @@
     <Content Include="js\freshly-pressed.js" />
     <Content Include="js\navigator.js" />
     <Content Include="js\post.js" />
+    <Content Include="js\share-source.js" />
     <Content Include="js\share-target.js" />
     <Content Include="js\tile.js" />
     <Content Include="js\wpcom.js" />

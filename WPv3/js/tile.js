@@ -13,7 +13,7 @@
     create: function () {
         // Make sure we have data
         WPCom.newDataSource('freshlypressed');
-        WPComTile.data = WPCom.dataSources.freshlypressed.dataSource;
+        WPComTile.data = WPCom.dataSources.freshlypressed.groupedList.dataSource;
 
         if (!WPComTile.data.list.length)
             return;

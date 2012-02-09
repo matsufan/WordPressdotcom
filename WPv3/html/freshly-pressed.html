@@ -15,8 +15,12 @@
     <script src="/js/freshly-pressed.js"></script>
 </head>
 <body>
-	<div id="freshTemplate" data-win-control="WinJS.Binding.Template">
-		<div class="post"  data-win-bind="id: local_storage_key">
+    <div id="headerTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="headerTemplateText" data-win-bind="textContent: group_title"></div>
+    </div>
+
+	<div id="freshlypressedTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+		<div class="post" data-win-bind="id: local_storage_key">
 				<div class="large-post">
                     <img data-win-bind="src: post_image" width="252" height="160" onload="WPCom.fadeImage(this)" />
 				    <div class="large-post-data">
@@ -27,7 +31,14 @@
 		</div>
 	</div>
 
-    <!-- The content that will be loaded and displayed. -->
+	<div id="freshlypressedZoomoutTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+		<div class="freshlypressedZoomoutItem">
+			<div class="freshlypressedZoomoutItem-dayOfWeek" data-win-bind="textContent: day_of_week"></div>
+			<div class="freshlypressedZoomoutItem-Month" data-win-bind="textContent: month"></div>
+			<div class="freshlypressedZoomoutItem-dayOfMonth" data-win-bind="textContent: day_of_month"></div>
+		</div>
+	</div>
+
     <div class="fragment freshlypressed reader-filter">
         <header aria-label="Header content" role="banner">
             <button class="win-backbutton" aria-label="Back" disabled></button>
@@ -41,15 +52,27 @@
 		    </ul>
         </header>
          <section aria-label="Main content" role="main">
-    		<div id="freshlypressed-list" class="posts-list"
-			   data-win-control="WinJS.UI.ListView"
-			   data-win-options="{
-				selectionMode: 'none',
-				swipeBehavior: 'none',
-				crossSlide: 'none',
-				layout: {type: WinJS.UI.GridLayout },
-                oniteminvoked: WPCom.showPost
-				}">
+            <div id="semanticZoomDiv" data-win-control="WinJS.UI.SemanticZoom" data-win-options="{ zoomedOut: false, zoomFactor: 0.8 }">
+    			<div id="freshlypressed-list" class="posts-list"
+				   data-win-control="WinJS.UI.ListView"
+				   data-win-options="{
+					selectionMode: 'none',
+					swipeBehavior: 'none',
+					crossSlide: 'none',
+					layout: {type: WinJS.UI.GridLayout },
+					oniteminvoked: WPCom.showPost
+					}">
+				</div>
+    			<div id="freshlypressed-zoomout-list"
+				   data-win-control="WinJS.UI.ListView"
+				   data-win-options="{
+					selectionMode: 'none',
+					swipeBehavior: 'none',
+					tapBehavior: 'invoke',
+					crossSlide: 'none',
+					layout: {type: WinJS.UI.GridLayout, maxRows: 1 }
+					}">
+				</div>
 			</div>
             <progress id="loader" class="show win-ring"></progress>
             <div class="error hide"></div>
