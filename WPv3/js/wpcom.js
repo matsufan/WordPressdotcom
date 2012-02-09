@@ -338,9 +338,19 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	    this.fetching = true;
 
 	var self = this;
-	var ajaxurl = WPCom.apiURL + '/freshly-pressed/';
-	ajaxurl += '?number=' + WPCom.getDefaultPostCount();
-	ajaxurl += '&content_width=480&thumb_width=252&thumb_height=160'
+	var url = WPCom.apiURL;
+	var query_string = '?content_width=480&number=' + WPCom.getDefaultPostCount();
+
+	switch (this.filter) {
+        /*
+	    case 'following':
+	        // build endpoint-specific path and query string, see defaults
+	        break;
+	    */
+        default:
+	        url += '/freshly-pressed/';
+	        query_string += '&thumb_width=252&thumb_height=160';
+    }
 
     if (null != localStorage[this.filter]) {
 		var localStorageObject = JSON.parse(localStorage[this.filter]);
@@ -349,9 +359,9 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		// We only want to grab older or newer since we already have posts in localStorage, otherwise we should always grab current posts
 		if ('older' != olderOrNewer || 'newer' == olderOrNewer) {
 			olderOrNewer = 'newer';
-			ajaxurl = ajaxurl + '&after=' + escape(new Date(localStorageObject.date_range.newest).toUTCString());
+			query_string += '&after=' + escape(new Date(localStorageObject.date_range.newest).toUTCString());
 		} else if ('older' == olderOrNewer) {
-		    ajaxurl = ajaxurl + '&before=' + escape(new Date(localStorageObject.date_range.oldest).toUTCString());
+		    query_string += '&before=' + escape(new Date(localStorageObject.date_range.oldest).toUTCString());
         }
 
 		// initialize from localStorage since the listview is empty
@@ -366,11 +376,13 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		}
     }
 
+    var full_url = url + query_string;
+
     var headers = { "User-Agent": WPCom.userAgent() };
     if (WPCom.isLoggedIn())
         headers['Authorization'] = 'Bearer ' + WPCom.getCurrentAccessToken();
 
-	WinJS.xhr({ type: 'GET', url: ajaxurl, headers: headers }).then(function (r) {
+    WinJS.xhr({ type: 'GET', url: full_url, headers: headers }).then(function (r) {
 		var data = JSON.parse(r.responseText);
 		var posts = {};
 		var date_range = {};
