@@ -111,13 +111,14 @@
         position: relative !important;
         top: 0 !important;
         left: 0 !important;
+        margin-bottom: 10px !important;
     }
 
     .win-listview > .win-horizontal.win-viewport {
         overflow-y: scroll;
         overflow-x: hidden;
-        margin-top: 140px;
-        height: calc(100% - 140px);
+        margin-top: 120px;
+        height: calc(100% - 120px);
     } 
 
     .freshlypressed header[role=banner] {
@@ -151,7 +152,7 @@
         padding: 34px 0 0 0;
     }
 }
-
+    
 @media screen and (-ms-view-state: fullscreen-portrait) {
     .posts-list .win-surface {
         margin-left: 98px;
