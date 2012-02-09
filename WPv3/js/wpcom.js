@@ -1,5 +1,5 @@
 ﻿var WPCom = {
-    localStorageSchemaVersion: '20120209',
+    localStorageSchemaVersion: '20120209-3',
 
     dataSources: [],
 
@@ -304,7 +304,7 @@
                 url: WPCom.apiURL + '/me',
                 headers: { "Authorization": "Bearer " + WPCom.getCurrentAccessToken() }
             }).then(function (result) {
-                localStorage.currentUser = JSON.parse(result.responseText);
+                localStorage.currentUser = result.responseText;
             }, function (result) {
                 localStorage.currentUser = null;
                 console.log('Failed to ajax-get user info.');
@@ -389,11 +389,23 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		var post_count = 0;
 
 		if (data.number > 0) {
-			var updated = false;
+		    var updated = false;
+
+		    var keyed_posts = {};
+		    var post_key = null;
+
+		    for (var p = 0; p < data.posts.length; p++) {
+		        if (data.posts[p].editorial.blog_id) {
+		            post_key = data.posts[p].editorial.blog_id + '_' + data.posts[p].ID;
+		        }  else {
+		            post_key = data.posts[p].ID;
+		        }
+		        keyed_posts[post_key] = data.posts[p];
+		    }
 
 			if (0 == self.list.length) {
-				posts = data.posts;
-				self.addItemsToList(data.posts, 'end');
+			    posts = keyed_posts;
+			    self.addItemsToList(keyed_posts, 'end');
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = data.date_range.newest;
 				post_count = data.number;
@@ -401,17 +413,17 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 				WPCom.toggleLoader('hide');
 			} else if ('older' == olderOrNewer) {
 				posts = localStorageObject.posts;
-				self.addItemsToList(data.posts, 'end');
-				for (var i=0; i<data.posts.length; i++) {
-				    posts[data.posts[i].editorial.blog_id + '_' + data.posts[i].ID] = data.posts[i];
+				self.addItemsToList(keyed_posts, 'end');
+				for (var attrname in keyed_posts) {
+				    posts[attrname] = keyed_posts[attrname];
 				}
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = localStorageObject.date_range.newest;
 				post_count = localStorageObject.post_count + data.number;
 				updated = true;
 			} else if ('newer' == olderOrNewer) {
-				posts = data.posts;
-				self.addItemsToList(data.posts, 'start');
+			    posts = keyed_posts;
+			    self.addItemsToList(keyed_posts, 'start');
 				for (var attrname in localStorageObject.posts) {
 					posts[attrname] = localStorageObject.posts[attrname];
 				}
@@ -462,7 +474,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 			author_name: jsonPosts[key].author.name,
 			author_gravatar: jsonPosts[key].author.avatar_URL.replace(/s=\d+/, 's=40'),
 			local_storage_key: (this.filter + '-' + key),
-		});
+        });
 	}
 
 	if ('start' == startOrEnd)
