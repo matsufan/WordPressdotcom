@@ -21,16 +21,6 @@
             <h1 class="titlearea win-type-ellipsis">
 				<span class="pagetitle title"></span>
             </h1>
-            <div class="postActions">
-                <span class="follow">Follow</span>
-				<span class="reblog">Reblog</span>
-				<span class="like">Like</span>
-
-				<div class="reblogUI">
-					<textarea class="note-text" id="note" placeholder="Your comments (optional)"></textarea>
-					<input class="publish-reblog" type="button" value="Publish">
-				</div>
-            </div>
         </header>
         <section aria-label="Main content" role="main">
             <article>
@@ -42,6 +32,10 @@
                 </div>
             </article>
         </section>
+        <div id="reblogUI" data-win-control="WinJS.UI.Flyout">
+			<textarea class="note-text" id="note" placeholder="Your comments (optional)"></textarea>
+			<input id="publish-reblog" type="button" value="Publish">
+		</div>
     </div>
 
 </body>

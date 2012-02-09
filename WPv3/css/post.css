@@ -13,83 +13,22 @@
     color: #fff;
 }
 
-.post header[role=banner] h1 {
-    margin-right: 330px; /* remove when postActions are moved to app bar */
-}
 
-.post header[role=banner] .postActions {
-    position: absolute;
-    top: 62px;
-    right: 30px;
-}
-
-.post header[role=banner] .postActions span {
-    display: inline-block;
-	padding: 7px 14px 7px 37px;
-    background-position: 14px 50%;
-    background-repeat: no-repeat;
-    background-size: 16px, 16px;
-}
-
-.post header[role=banner] .postActions span:hover {
-	background-color: rgba( 0, 0, 0, 0.07 );
-}
-
-.post header[role=banner] .postActions .follow {
-	background-image: url('/images/follow.svg');
-}
-
-.post header[role=banner] .postActions .following {
-    background-image: url('/images/following.svg');
-}
-
-.post header[role=banner] .postActions .reblog {
-	background-image: url('/images/reblog.svg');
-    background-size: 18px, 18px;
-}
-
-.post header[role=banner] .postActions .like {
-	background-image: url('/images/like.svg');
-}
-
-.post header[role=banner] .postActions .reblog.active {
-	background-image: url('/images/reblog-dark.svg');
-}
-
-.post header[role=banner] .postActions span.active {
-    background-color: #1E8CBE;
-    color: #fff;
-}
-
-.post header[role=banner] .postActions .liked,
-.post header[role=banner] .postActions .liked:hover,
-.post header[role=banner] .postActions .reblogged,
-.post header[role=banner] .postActions .reblogged:hover,
-.post header[role=banner] .postActions .following,
-.post header[role=banner] .postActions .following:hover {
-	background-color: #1E8CBE;
-    color: #fff;
-}
-
-.post header[role=banner] .postActions .reblogUI {
-	position: absolute;
-	top: 100%;
-	right: 0;
+#reblogUI {
 	width: 320px;
 	height: 190px;
-    display: none;
 	background-color: #1E8CBE;
 	padding: 12px 15px 10px;
 }
 
-.post header[role=banner] .postActions .reblogUI textarea {
+#reblogUI textarea {
 	height: 125px;
 	width: 307px;
     padding: 4px 6px;
     border: none;
 }
 
-.post header[role=banner] .postActions .reblogUI input[type=button] {
+#reblogUI input[type=button] {
 	float: right;
 	margin: 10px 1px 0 0;
     background: none;

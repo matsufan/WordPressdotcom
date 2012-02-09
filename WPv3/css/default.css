@@ -114,6 +114,19 @@ section[role=main] {
     content: "\e149";
 }
 
+#follow .win-commandimage::before {
+    content: url('/images/follow.svg');
+}
+
+#reblog .win-commandimage::before {
+    content: "\e201";
+}
+
+#like .win-commandimage::before {
+    content: "\e0b4";
+}
+
+
 #openinbrowser {
     float: right;
 }

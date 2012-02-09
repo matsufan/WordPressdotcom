@@ -98,9 +98,16 @@
 					}
 
                     if (this.pageElement.querySelector('.fragment.post')) {
-                    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
+                        WPCom.toggleElement(document.getElementById('openinbrowser'), 'show');
+                        WPCom.toggleElement(document.getElementById('follow'), 'show');
+                        WPCom.toggleElement(document.getElementById('reblog'), 'show');
+                        WPCom.toggleElement(document.getElementById('like'), 'show');
+
 					} else {
-                    	WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
+					    WPCom.toggleElement(document.getElementById('openinbrowser'), 'hide');
+					    WPCom.toggleElement(document.getElementById('follow'), 'hide');
+					    WPCom.toggleElement(document.getElementById('reblog'), 'hide');
+					    WPCom.toggleElement(document.getElementById('like'), 'hide');
 					}
 
                     if (this.pageElement.querySelector('.fragment.reader-filter'))

@@ -20,7 +20,11 @@
         if (WPCom.isLoggedIn())
             updateButtons();
 
-        document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
+        //document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
+        document.getElementById("follow").addEventListener("click", socialPostClick, false);
+        document.getElementById("like").addEventListener("click", socialPostClick, false);
+        document.getElementById("reblog").addEventListener("click", socialPostClick, false);
+        document.getElementById("publish-reblog").addEventListener("click", socialPostClick, false);
         document.getElementById('openinbrowser').addEventListener("click", function () { top.location.href = item.permalink; }, false);
 
         return; // convenient to set breakpoint :)
@@ -33,7 +37,7 @@
     function updateButtons() {
         var accessToken = WPCom.getCurrentAccessToken();
 
-        var likeButton = document.getElementsByClassName('like').item(0);
+        var likeButton = document.getElementById('like');
         var likeUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/";
         WinJS.xhr({
             type: "GET",
@@ -42,15 +46,15 @@
         }).then(function (result) {
             var likeData = JSON.parse(result.responseText);
             if (likeData.i_like == true)
-                likeButton.innerText = "Unlike";
+                likeButton.getElementsByClassName('win-label').item(0).innerText = "Unlike";
             else
-                likeButton.innerText = "Like";
+                likeButton.getElementsByClassName('win-label').item(0).innerText = "Like";
         }, function (result) {
             //error
             window.console.log(result);
         });
 
-        var followButton = document.getElementsByClassName('follow').item(0);
+        var followButton = document.getElementById('follow');
         var followUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/mine/";
         WinJS.xhr({
             type: "GET",
@@ -59,15 +63,15 @@
         }).then(function (result) {
             var followData = JSON.parse(result.responseText);
             if (followData.is_following == true)
-                followButton.innerText = "Unfollow";
+                followButton.getElementsByClassName('win-label').item(0).innerText = "Unfollow";
             else
-                followButton.innerText = "Follow";
+                followButton.getElementsByClassName('win-label').item(0).innerText = "Follow";
         }, function (result) {
             //error
             window.console.log(result);
         });
 
-        var reblogButton = document.getElementsByClassName('reblog').item(0);
+        var reblogButton = document.getElementById('reblog');
         var reblogUrl = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/mine/";
         WinJS.xhr({
             type: "GET",
@@ -76,9 +80,9 @@
         }).then(function (result) {
             var reblogData = JSON.parse(result.responseText);
             if (reblogData.is_reblogged == true)
-                reblogButton.innerText = "Reblogged";
+                reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblogged";
             else
-                reblogButton.innerText = "Reblog";
+                reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblog";
         }, function (result) {
             //error
             window.console.log(result);
@@ -89,7 +93,8 @@
     function socialPostClick(m) {
         var accessToken = WPCom.getCurrentAccessToken();
 
-        var socialType = m.target.className;
+        var socialType = m.target.id;
+        var label = m.target.getElementsByClassName('win-label').item(0);
         var url = "";
 
         if (WPCom.isLoggedIn()) {
@@ -97,10 +102,10 @@
                 case 'like':
                     var curText = m.target.innerText;
                     if (curText == "Like") {
-                        m.target.innerText = "Liking...";
+                        label.innerText = "Liking...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
                     } else {
-                        m.target.innerText = "Unliking...";
+                        label.innerText = "Unliking...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/mine/delete";
                     }
 
@@ -111,35 +116,31 @@
                     }).then(function (result) {
                         var likeData = JSON.parse(result.responseText);
                         if (likeData.i_like == true)
-                            m.target.innerText = "Unlike";
+                            label.innerText = "Unlike";
                         else
-                            m.target.innerText = "Like";
+                            label.innerText = "Like";
                     }, function (result) {
                         //error, reset the button
-                        m.target.innerText = curText;
+                        label.innerText = curText;
                         WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                     });
 
                     break;
                 case 'reblog':
-                    var reblogUI = document.getElementsByClassName('reblogUI').item(0);
-                    if (m.target.innerText != "Reblogged") {
-                        if (reblogUI.style.display == "none" || reblogUI.style.display == "") {
-                            reblogUI.style.display = "block";
-                            WinJS.UI.Animation.fadeIn(reblogUI);
-                        } else {
-                            WinJS.UI.Animation.fadeOut(reblogUI);
-                            reblogUI.style.display = "none";
-                        }
+                    var reblogUI = document.getElementById('reblogUI');
+                    if (label.innerText != "Reblogged") {
+                        var reblogFlyOut = reblogUI.winControl;
+                        reblogFlyOut.show(m.target, "top");
                     } else {
                         WPCom.displayToastMessage("You have already reblogged this post.");
                     }
 
                     break;
                 case 'publish-reblog':
-                    m.target.innerText = "Reblogging...";
+                    m.target.innerText = "Publishing...";
                     url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/reblogs/new";
-                    var reblogButton = document.getElementsByClassName('reblog').item(0);
+                    var reblogButton = document.getElementById('reblog');
+                    label = reblogButton.getElementsByClassName('win-label').item(0);
                     var data = new FormData();
                     var note = document.getElementById("note").innerText;
                     if (note != "" && note != "Your comments (optional)") {
@@ -154,18 +155,19 @@
                         var reblogData = JSON.parse(result.responseText);
                         if (reblogData.is_reblogged == true) {
                             //mission accomplished
-                            reblogButton.innerText = "Reblogged";
-                            var reblogUI = document.getElementsByClassName('reblogUI').item(0);
-                            WinJS.UI.Animation.fadeOut(reblogUI);
-                            reblogUI.style.display = "none";
+                            label.innerText = "Reblogged";
+                            var reblogFlyOut = document.getElementById('reblogUI').winControl;
+                            reblogFlyOut.hide();
                         }
                         else {
-                            reblogButton.innerText = "Reblog";
+                            label.innerText = "Reblog";
+                            m.target.innerText = "Publish";
                             WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                         }
                     }, function (result) {
                         //error, reset the button
-                        reblogButton.innerText = "Reblog";
+                        label.innerText = "Reblog";
+                        m.target.innerText = "Publish";
                         WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                     });
 
@@ -173,10 +175,10 @@
                 case 'follow':
                     var curText = m.target.innerText;
                     if (curText == "Follow") {
-                        m.target.innerText = "Following...";
+                        label.innerText = "Following...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/new";
                     } else {
-                        m.target.innerText = "Unfollowing...";
+                        label.innerText = "Unfollowing...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/mine/delete";
                     }
 
@@ -187,12 +189,12 @@
                     }).then(function (result) {
                         var followData = JSON.parse(result.responseText);
                         if (followData.is_following == true)
-                            m.target.innerText = "Unfollow";
+                            label.innerText = "Unfollow";
                         else
-                            m.target.innerText = "Follow";
+                            label.innerText = "Follow";
                     }, function (result) {
                         //error, reset the button
-                        m.target.innerText = curText;
+                        label.innerText = curText;
                         WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
                     });
 
