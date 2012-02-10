@@ -16,7 +16,6 @@
 #reblogUI {
 	width: 320px;
 	height: 190px;
-	background-color: #1E8CBE;
 	padding: 12px 15px 10px;
 }
 
@@ -24,16 +23,22 @@
 	height: 125px;
 	width: 307px;
     padding: 4px 6px;
-    border: none;
 }
 
 #reblogUI input[type=button] {
 	float: right;
-	margin: 10px 1px 0 0;
-    background: none;
-    border: 3px solid #fff;
+	margin: 8px 0 0 0;
+    background-color: #1e8cbe;
     color: #fff;
+    border: none;
+    outline: 2px solid #1e8cbe;
 }
+
+#reblogUI input[type=button]:hover:active {
+    background-color: #f1831e;
+    outline: none;
+}
+
 .post section[role=main] {
     display: block;
     overflow-x: auto;

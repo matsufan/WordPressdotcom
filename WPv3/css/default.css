@@ -114,8 +114,12 @@ section[role=main] {
     content: "\e149";
 }
 
-#follow .win-commandimage::before {
-    content: url('/images/follow.svg');
+#follow .win-commandicon {
+    background-image: url('/images/follow.svg');
+}
+
+#follow:hover:active .win-commandicon {
+    background-image: url('/images/follow-dark.svg');
 }
 
 #reblog .win-commandimage::before {
@@ -142,13 +146,20 @@ section[role=main] {
     font-family: "Segoe UI Symbol";
 }
 
-.win-commandicon:hover,
-button:hover:active .win-commandicon {
-    background-color: rgba(255, 255, 255, 0.5);
+.win-command:hover:active .win-commandicon {
+    background-color: #fff;
+}
+
+.win-command:hover:active .win-commandimage::before {
+    color: #005684;
 }
 
 .win-appbar {
 	background-color: #005684;
+}
+
+.win-appbar .win-commandimage {
+    margin-top: -3px;
 }
 
 .hide {
