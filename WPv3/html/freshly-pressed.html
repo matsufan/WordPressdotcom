@@ -32,10 +32,13 @@
 	</div>
 
 	<div id="freshlypressedZoomoutTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
-		<div class="freshlypressedZoomoutItem">
-			<div class="freshlypressedZoomoutItem-dayOfWeek" data-win-bind="textContent: day_name"></div>
-			<div class="freshlypressedZoomoutItem-Month" data-win-bind="textContent: month_name"></div>
-			<div class="freshlypressedZoomoutItem-dayOfMonth" data-win-bind="textContent: day_of_month"></div>
+		<div class="zoomoutItem">
+			<div class="thumbnails" data-win-bind="innerHTML: thumbnails"></div>
+			<div class="group-date">
+				<div class="day-name" data-win-bind="textContent: day_name"></div>
+				<div class="month-name" data-win-bind="textContent: month_name"></div>
+				<div class="day-number" data-win-bind="textContent: day_of_month"></div>
+			</div>
 		</div>
 	</div>
 
@@ -63,7 +66,7 @@
 					oniteminvoked: WPCom.showPost
 					}">
 				</div>
-    			<div id="freshlypressed-zoomout-list"
+    			<div id="freshlypressed-zoomout-list" class="zoomout-list"
 				   data-win-control="WinJS.UI.ListView"
 				   data-win-options="{
 					selectionMode: 'none',

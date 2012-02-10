@@ -538,16 +538,37 @@ wpcomDataSource.prototype.compareGroups = function (a, b) {
 
 wpcomDataSource.prototype.getGroupKey = function (dataItem) {
 	var date = new Date(dataItem.ts);
-	var day = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-	return day.toString();
+	return new Date(date.getFullYear(), date.getMonth(), date.getDate()).toString();
 }
 
 wpcomDataSource.prototype.getGroupData = function (dataItem) {
 	var days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 	var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	var date = new Date(dataItem.ts);
+	var groupKey = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toString();
+	var filter = document.querySelector('.fragment.reader-filter').className.replace('fragment', '').replace('reader-filter', '').replace(/^\s+|\s+$/g, "");
+	var thumbnails = '';
+	if (filter) {
+		var index = WPCom.dataSources[filter].groupedList.indexOf(dataItem);
+		var i = index;
+		while (i < (index + 3)) {
+			var item = WPCom.dataSources[filter].groupedList.getAt(i);
+			var itemDate = new Date(item.ts);
+			var itemGroupKey = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate()).toString();
+
+			if (itemGroupKey.toString() != groupKey)
+				break;
+
+			var image = item.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
+			image = image.replace(/resize=\d+\,\d+/, 'resize=56,56');
+			thumbnails += '<img width="56px" height="56px" src="' + image + '" />';
+			i++;
+		}
+	}
+
 	return {
+		thumbnails: thumbnails,
 		day_of_month: date.getDate(),
 		day_name: days[date.getDay()],
 		month_name: months[date.getMonth()],

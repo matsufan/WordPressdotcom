@@ -39,6 +39,62 @@
     -ms-grid-rows: 1fr 92px;
 }
 
+.zoomout-list .win-container {
+	margin-right: 8px;
+	margin-bottom: 8px;
+	background-color: rgba( 0, 86, 132, 1.0 );
+}
+
+.zoomout-list .win-item {
+    width: 176px;
+    height: 200px;
+}
+
+.zoomout-list .win-container:hover {
+    background-color: rgba( 0, 116, 162, 1.0 );
+    outline-color: rgba( 120, 200, 230, 0.6 );
+}
+
+.zoomout-list .win-selected, .zoomout-list .win-item:focus, .zoomout-list .win-item:focus {
+	outline: none;
+	border: none;
+	box-shadow: none;
+}
+
+.zoomout-list .zoomoutItem {
+    width: 100%;
+    height: 100%;
+    display: -ms-grid;
+	padding: 2px 0 0 2px;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 56px 10px 1fr;
+}
+
+.zoomoutItem .thumbnails {
+	-ms-grid-row: 1;
+}
+
+.zoomoutItem .thumbnails img {
+	padding-right: 2px;
+}
+
+.zoomoutItem .group-date {
+	-ms-grid-row: 3;
+	margin-left: 8px;
+}
+
+.zoomoutItem .group-date .day-name, .zoomoutItem .group-date .month-name {
+	font-size: 18pt;
+	line-height: 22pt;
+    color: #78C8E6;
+}
+
+.zoomoutItem .group-date .day-number {
+	font-size: 34pt;
+	line-height: 38pt;
+	color: #fff;
+}
+
 .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
    margin-left: 50px;
 }
