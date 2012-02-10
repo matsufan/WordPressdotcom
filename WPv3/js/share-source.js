@@ -1,6 +1,7 @@
 ﻿(function () {
     function initializeShareSource() {
         setupShare();
+        // we'd bind a share button's click to showShareUI() here
     }
 
     function setupShare() {
@@ -21,12 +22,18 @@
         if (null != postEl && WinJS.Utilities.hasClass(postEl, 'fragment')) {
             // we're in single post view
             var post_key = postEl.getAttribute('id');
-            if (null == post_key || !WinJS.Utilities.hasClass(postEl, 'fragment'))
-                return;
-            // TODO: make this filter aware so not FP specific
-            var lsPost = JSON.parse(localStorage['freshlypressed']).posts[post_key];
+            if (null == post_key)
+                return; // can't find a post key
+            var split = post_key.split('-');
+            if (2 !== split.length)
+                return; // won't be able to define the filter and actual post key
+            var filter = split[0];
+            post_key = split[1];
+            if (null == filter || null == post_key)
+                return; // can't figure out the filter or post_key
+            var lsPost = JSON.parse(localStorage[filter]).posts[post_key];
             if (null == lsPost)
-                return;
+                return; // can't find the matching localStorage post for extra props
             request.data.setUri(new Windows.Foundation.Uri(lsPost.short_URL));
             request.data.properties.title = postEl.querySelector('.title').innerText;
             request.data.properties.description = postEl.querySelector('.content').innerText.substring(0, 50);

@@ -10,7 +10,7 @@
 
     	document.title = item.post_title;
 
-    	document.querySelector('.post').setAttribute('id', item.blog_id + '_' + item.post_id);
+    	document.querySelector('.post').setAttribute('id', item.local_storage_key);
 
         document.querySelector('.title').innerText = item.post_title;
 
