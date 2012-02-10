@@ -275,7 +275,7 @@
     		WPCom.dataSources[filter].reset(true);
 		}
 
-    	if (!WPCom.isLoggedIn() && !document.querySelector('.fragment.reader-filter.freshlypressed'))
+    	if (!WPCom.isLoggedIn() && 'freshlypressed' != WPCom.getCurrentFilter())
 	    	WinJS.Navigation.navigate("/html/freshly-pressed.html");
     },
 
@@ -314,6 +314,18 @@
         }
     },
 
+    getCurrentFilter: function () {
+    	var filter = document.querySelector('.fragment.reader-filter').className;
+    	if (filter) {
+    		filter = filter.replace('fragment', '');
+    		filter = filter.replace('reader-filter', '');
+    		filter = filter.replace(/^\s+|\s+$/g, "");
+    	} else {
+    		filter = '';
+		}
+
+    	return filter;
+    }
 }
 
 function wpcomDataSource(filter) {
@@ -481,7 +493,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 		if ('start' == startOrEnd)
 			this.list.unshift(arrayItems[i]);
 		else // 'end'
-			this.list.push(arrayItems[i]);
+			this.list.push(arrayItems[i]);;
 	}
 }
 
@@ -547,20 +559,20 @@ wpcomDataSource.prototype.getGroupData = function (dataItem) {
 	var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	var date = new Date(dataItem.ts);
 	var groupKey = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toString();
-	var filter = document.querySelector('.fragment.reader-filter').className.replace('fragment', '').replace('reader-filter', '').replace(/^\s+|\s+$/g, "");
+	var filter = WPCom.getCurrentFilter();
 	var thumbnails = '';
 	if (filter) {
-		var index = WPCom.dataSources[filter].groupedList.indexOf(dataItem);
+		var index = WPCom.dataSources[filter].list.indexOf(dataItem);
 		var i = index;
-		while (i < (index + 3)) {
-			var item = WPCom.dataSources[filter].groupedList.getAt(i);
-			var itemDate = new Date(dataItem.ts);
+		while (i < (index + 3) && i < WPCom.dataSources[filter].list.length) {
+			var item = WPCom.dataSources[filter].list.getAt(i);
+			var itemDate = new Date(item.ts);
 			var itemGroupKey = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate()).toString();
 
 			if (itemGroupKey.toString() != groupKey)
 				break;
 
-			var image = dataItem.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
+			var image = item.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
 			image = image.replace(/resize=\d+\,\d+/, 'resize=56,56');
 			thumbnails += '<img width="56px" height="56px" src="' + image + '" />';
 			i++;
