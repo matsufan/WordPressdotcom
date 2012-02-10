@@ -206,20 +206,21 @@
     },
 
     refresh: function () {
-		// throw it all away for now. Make it smarter when we have more than one dataSource
-    	WPCom.clearLocalStorage();
-    	for (var filter in WPCom.dataSources) {
-        	WPCom.dataSources[filter].reset();
-        	document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
-        	document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
-        	document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
-        	WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
-        	WPCom.toggleLoader('show');
-        	setTimeout(function () {
-        		WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
-        		WPCom.toggleLoader('hide');
-        	}, 1500);
-    	}
+    	WPCom.toggleError('hide');
+    	filter = WPCom.getCurrentFilter();
+    	delete localStorage[filter];
+
+    	WPCom.dataSources[filter].reset();
+        document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
+        document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
+        document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
+        WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
+        WPCom.toggleLoader('show');
+        setTimeout(function () {
+        	document.getElementById(filter + "-list").winControl.scrollPosition = 0;
+        	WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
+        	WPCom.toggleLoader('hide');
+        }, 1500);
     },
 
     getDefaultPostCount: function () {
@@ -363,7 +364,7 @@ function wpcomDataSource(filter) {
 	this.list = new WinJS.Binding.List();
 	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
 	this.fetching = false;
-	this.scrollPosition = false;
+	this.scrollPosition = 0;
 }
 
 // olderOrNewer: 'older', 'newer', or empty
@@ -548,7 +549,7 @@ wpcomDataSource.prototype.reset = function (skipData) {
 	this.list = new WinJS.Binding.List();
 	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
 	this.fetching = false;
-	this.scrollPosition = false;
+	this.scrollPosition = 0;
 	if (true != skipData)
 		this.getData();
 }
