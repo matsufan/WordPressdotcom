@@ -493,7 +493,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 		if ('start' == startOrEnd)
 			this.list.unshift(arrayItems[i]);
 		else // 'end'
-			this.list.push(arrayItems[i]);;
+			this.list.push(arrayItems[i]);
 	}
 }
 
@@ -572,8 +572,8 @@ wpcomDataSource.prototype.getGroupData = function (dataItem) {
 			if (itemGroupKey.toString() != groupKey)
 				break;
 
-			var image = item.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
-			image = image.replace(/resize=\d+\,\d+/, 'resize=56,56');
+			var image = item.post_image.replace(/resize=\d+\,\d+/, 'resize=56px,56px');
+			image = image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'resize=56px,56px')
 			thumbnails += '<img width="56px" height="56px" src="' + image + '" />';
 			i++;
 		}
