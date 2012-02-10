@@ -13,7 +13,6 @@
     color: #fff;
 }
 
-
 #reblogUI {
 	width: 320px;
 	height: 190px;
@@ -163,6 +162,27 @@ object, embed, video, iframe {
     margin-bottom: 20pt;
     line-height: 20pt;
     text-align: left !important;
+}
+
+/* External Iframe for Links */
+
+iframe#external-link {
+    position: absolute;
+    top: 0;
+    left: 110px;
+    height: 100%;
+    width: calc(100% - 20px);
+    border: none;
+    background: #fff;
+}
+
+div#backbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 110px;
+    background: #fff;
 }
 
 /* --- */

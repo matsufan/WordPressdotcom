@@ -29,6 +29,33 @@
         document.getElementById("publish-reblog").addEventListener("click", socialPostClick, false);
         document.getElementById('openinbrowser').addEventListener("click", function () { top.location.href = item.permalink; }, false);
 
+        // Catch link clicks and iframe them.
+        var links = document.querySelectorAll('.content a');
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            links[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                var iframe = document.createElement("iframe");
+                var backbar = document.createElement("div");
+
+                document.body.appendChild(iframe);
+                iframe.setAttribute( 'src', href );
+                iframe.setAttribute('id', 'external-link');
+
+                document.body.appendChild(backbar);
+                backbar.setAttribute('id', 'backbar');
+                var backlink = document.createElement("a");
+                backbar.appendChild(backlink);
+                backlink.innerHTML = 'Back';
+
+                backlink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    iframe.removeNode();
+                    backbar.removeNode();
+                });
+            });
+        }
+
         return; // convenient to set breakpoint :)
     }
 
