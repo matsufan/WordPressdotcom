@@ -6,7 +6,8 @@
     function ready(element, options) {
     	WinJS.UI.Animation.enterPage(document.querySelector('.fragment.post'), { top: '0px', left: '200px' });
 
-    	item = options.item;
+    	item = options.item; // needs to be a global
+    	var lsPost = WPCom.getLSPost(item.local_storage_key);
 
     	document.title = item.post_title;
 
@@ -14,13 +15,13 @@
 
         document.querySelector('.title').innerText = item.post_title;
 
-        setInnerHTMLUnsafe(document.querySelector('.content'), item.post_content);
+        setInnerHTMLUnsafe(document.querySelector('.content'), lsPost.content);
 
         document.querySelector('.meta').innerHTML += '<img src="' + item.author_gravatar + '" height="40" width="40" />';
         document.querySelector('.meta').innerHTML += '<div class="meta-txt"><em>by ' + item.author_name + '</em><br />Posted ' + WPCom.timeSince(item.post_date) + ' ago on ' + item.blog_name + '</div>';
 
         if (WPCom.isLoggedIn())
-            updateButtons();
+            updateButtons(item);
 
         //document.querySelector("div.postActions").addEventListener("click", socialPostClick, false);
         document.getElementById("follow").addEventListener("click", socialPostClick, false);
@@ -63,7 +64,7 @@
         // TODO: Respond to changes in viewState.
     }
 
-    function updateButtons() {
+    function updateButtons(item) {
         var accessToken = WPCom.getCurrentAccessToken();
 
         var likeButton = document.getElementById('like');

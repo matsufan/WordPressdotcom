@@ -315,16 +315,44 @@
     },
 
     getCurrentFilter: function () {
-    	var filter = document.querySelector('.fragment.reader-filter').className;
-    	if (filter) {
-    		filter = filter.replace('fragment', '');
-    		filter = filter.replace('reader-filter', '');
-    		filter = filter.replace(/^\s+|\s+$/g, "");
-    	} else {
-    		filter = '';
-		}
-
+        var filter = null;
+        var filterEl = document.querySelector('.fragment.reader-filter');
+        if (null != filterEl) {
+            // list view
+            filter = filterEl.className;
+            if (null != filter) {
+                filter = filter.replace('fragment', '');
+                filter = filter.replace('reader-filter', '');
+                filter = filter.replace(/^\s+|\s+$/g, "");
+            }
+        } else {
+            filterEl = document.querySelector('.post');
+            if (null != filterEl && WinJS.Utilities.hasClass(filterEl, 'fragment')) {
+                // single post view
+                var post_key = filterEl.getAttribute('id');
+                if (null != post_key) {
+                    filter = post_key.split('-')[0];
+                }
+            }
+        }
     	return filter;
+    },
+
+    getLSPost: function (local_storage_key) {
+        var split = local_storage_key.split('-');
+        if (2 !== split.length)
+            return; // won't be able to define the filter and actual post key
+        var filter = split[0];
+        var post_key = split[1];
+        if (null == filter || null == post_key)
+            return; // can't figure out the filter or post_key
+        filterData = JSON.parse(localStorage[filter]);
+        if (null == filterData)
+            return; // couldn't find any data
+        post = filterData['posts'][post_key];
+        if (null == post || null == post.ID)
+            return; // couldn't find the post
+        return post;
     }
 }
 
@@ -476,7 +504,6 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 			blog_id: jsonPosts[key].editorial.blog_id,
 			site_id: jsonPosts[key].editorial.site_id,
 			ts: jsonPosts[key].editorial.picked_on,
-            post_content: jsonPosts[key].content,
             permalink: jsonPosts[key].URL,
             post_date: jsonPosts[key].date,
 			post_author: jsonPosts[key].author.ID,

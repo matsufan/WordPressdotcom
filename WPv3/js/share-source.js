@@ -25,13 +25,7 @@
             if (null == post_key)
                 return; // can't find a post key
             var split = post_key.split('-');
-            if (2 !== split.length)
-                return; // won't be able to define the filter and actual post key
-            var filter = split[0];
-            post_key = split[1];
-            if (null == filter || null == post_key)
-                return; // can't figure out the filter or post_key
-            var lsPost = JSON.parse(localStorage[filter]).posts[post_key];
+            var lsPost = WPCom.getLSPost(post_key);
             if (null == lsPost)
                 return; // can't find the matching localStorage post for extra props
             request.data.setUri(new Windows.Foundation.Uri(lsPost.short_URL));
