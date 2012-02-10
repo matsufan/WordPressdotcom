@@ -554,13 +554,13 @@ wpcomDataSource.prototype.getGroupData = function (dataItem) {
 		var i = index;
 		while (i < (index + 3)) {
 			var item = WPCom.dataSources[filter].groupedList.getAt(i);
-			var itemDate = new Date(item.ts);
+			var itemDate = new Date(dataItem.ts);
 			var itemGroupKey = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate()).toString();
 
 			if (itemGroupKey.toString() != groupKey)
 				break;
 
-			var image = item.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
+			var image = dataItem.post_image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'crop=0,0,56,56')
 			image = image.replace(/resize=\d+\,\d+/, 'resize=56,56');
 			thumbnails += '<img width="56px" height="56px" src="' + image + '" />';
 			i++;
