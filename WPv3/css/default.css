@@ -122,21 +122,28 @@ section[role=main] {
     background-image: url('/images/follow-dark.svg');
 }
 
-#reblog .win-commandimage::before {
-    content: "\e201";
+#reblog .win-commandicon {
+    background-image: url('/images/reblog.svg');
+}
+
+#reblog:hover:active .win-commandicon {
+    background-image: url('/images/reblog-dark.svg');
 }
 
 #like .win-commandimage::before {
     content: "\e0b4";
 }
 
-
-#openinbrowser {
+#viewblog {
     float: right;
 }
 
-#openinbrowser .win-commandimage::before {
-	content: "\e12a";
+#viewblog .win-commandicon {
+    background-image: url('/images/viewblog.svg');
+}
+
+#viewblog:hover:active .win-commandicon {
+    background-image: url('/images/viewblog-dark.svg');
 }
 
 .win-commandicon {
