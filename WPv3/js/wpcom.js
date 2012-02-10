@@ -516,11 +516,24 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 	if ('start' == startOrEnd)
 		arrayItems.reverse();
 
+	var groupItemIndex, groupItem, date, matches;
 	for (var i = 0; i < arrayItems.length; i++) {
 		if ('start' == startOrEnd)
 			this.list.unshift(arrayItems[i]);
 		else // 'end'
 			this.list.push(arrayItems[i]);
+
+		// check to see if we need to update the group item
+		date = new Date(arrayItems[i].ts);
+		groupItemIndex = WPCom.dataSources['freshlypressed'].groupedList.groups.indexOfKey(new Date(date.getFullYear(), date.getMonth(), date.getDate()).toString());
+		if ( groupItemIndex >= 0 ) {
+			groupItem = WPCom.dataSources['freshlypressed'].groupedList.groups.getAt(groupItemIndex);
+			var image = arrayItems[i].post_image.replace(/resize=\d+\,\d+/, 'resize=56px,56px');
+			image = image.replace(/crop=\d+px\,\d+px\,\d+px\,\d+px/, 'resize=56px,56px');
+			matches = groupItem.thumbnails.match(/\<img/g)
+			if (matches.length > 0 && matches.length < 3 && -1 == groupItem.thumbnails.indexOf(image))
+				groupItem.thumbnails += '<img width="56px" height="56px" src="' + image + '" />';
+		}
 	}
 }
 
