@@ -624,6 +624,7 @@ wpcomDataSource.prototype.getGroupData = function (dataItem) {
 		day_of_month: date.getDate(),
 		day_name: days[date.getDay()],
 		month_name: months[date.getMonth()],
+		month_short: months[date.getMonth()].substr(0, 3),
 		group_title: months[date.getMonth()] + ' ' + date.getDate()
 	}
 }

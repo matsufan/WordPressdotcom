@@ -9,10 +9,47 @@
     margin-bottom: 4px;
 }
 
+.posts-list .win-surface {
+	top: -78px;
+}
+
+.posts-list.win-listview .win-groupheader {
+	top: 80px;
+}
+
+.posts-list.win-listview .win-groupheader .headerTemplateText {
+	background-color: rgba( 0, 86, 132, 1.0 );
+	height: 50px;
+	width: 50px;
+	border-radius: 25px;
+	font-size: 12pt;
+	line-height: 14pt;
+	margin-left: 14px;
+}
+
+.posts-list.win-listview .win-template.win-groupheader, .posts-list.win-listview .win-template.win-groupheader .headerTemplateText {
+	z-index: 10;
+}
+
+.posts-list.win-listview .win-groupheader .headerTemplateText .group-month-short {
+	padding-top: 4px;
+    color: #78C8E6;
+	text-align: center;
+}
+
+.posts-list.win-listview .win-groupheader .headerTemplateText .group-day-number {
+	color: #fff;
+	text-align: center;
+}
+
 .posts-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	background-color: rgba( 0, 116, 162, 0.6 );
+	z-index: -1;
+}
+.posts-list.win-listview .win-item {
+   z-index: -1;
 }
 
 .posts-list .win-item {

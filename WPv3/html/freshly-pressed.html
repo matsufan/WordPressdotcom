@@ -16,7 +16,10 @@
 </head>
 <body>
     <div id="headerTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
-        <div class="headerTemplateText" data-win-bind="textContent: group_title"></div>
+        <div class="headerTemplateText">
+			<div class="group-month-short" data-win-bind="textContent: month_short"></div>
+			<div class="group-day-number" data-win-bind="textContent: day_of_month"></div>
+		</div>
     </div>
 
 	<div id="freshlypressedTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
