@@ -80,9 +80,9 @@ header[role=banner] .titlearea .pagetitle {
 header[role=banner] #tabs {
     font-size: 20pt;
     line-height: 24pt;
-    margin: 0 0 0 120px;
+    margin: 0 0 0 118px;
     padding: 28px 0 0 0;
-    height: 36pt;
+    height: 35pt;
 	-ms-grid-row: 2;
     width: 100%;
 }
@@ -122,10 +122,19 @@ section[role=main] {
     background-image: url('/images/follow-dark.svg');
 }
 
+#follow.selected .win-commandicon {
+    background-image: url('/images/following-dark.svg');
+}
+
+#follow.selected:hover .win-commandicon {
+    background-image: url('/images/unfollow-dark.svg');
+}
+
 #reblog .win-commandicon {
     background-image: url('/images/reblog.svg');
 }
 
+#reblog.selected .win-commandicon,
 #reblog:hover:active .win-commandicon {
     background-image: url('/images/reblog-dark.svg');
 }
@@ -153,10 +162,12 @@ section[role=main] {
     font-family: "Segoe UI Symbol";
 }
 
+.win-command.selected .win-commandicon,
 .win-command:hover:active .win-commandicon {
     background-color: #fff;
 }
 
+.win-command.selected .win-commandimage::before,
 .win-command:hover:active .win-commandimage::before {
     color: #005684;
 }
@@ -166,7 +177,7 @@ section[role=main] {
 }
 
 .win-appbar .win-commandimage {
-    margin-top: -3px;
+    margin-top: -4px;
 }
 
 .hide {

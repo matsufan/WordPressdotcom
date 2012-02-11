@@ -386,7 +386,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	    */
         default:
 	        url += '/freshly-pressed/';
-	        query_string += '&thumb_width=252&thumb_height=160';
+	        query_string += '&thumb_width=252&thumb_height=148';
     }
 
     if (null != localStorage[this.filter]) {

@@ -59,6 +59,7 @@
     <Content Include="images\facebook.svg" />
     <Content Include="images\follow-dark.svg" />
     <Content Include="images\follow.svg" />
+    <Content Include="images\following-dark.svg" />
     <Content Include="images\logo.png" />
     <Content Include="images\reblog-dark.svg" />
     <Content Include="images\reblog.svg" />
@@ -66,7 +67,7 @@
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
     <Content Include="images\twitter.svg" />
-    <Content Include="images\unfollow.svg" />
+    <Content Include="images\unfollow-dark.svg" />
     <Content Include="images\viewblog-dark.svg" />
     <Content Include="images\viewblog.svg" />
     <Content Include="images\widelogo.png" />

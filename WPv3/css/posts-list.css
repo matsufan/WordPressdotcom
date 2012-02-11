@@ -10,22 +10,23 @@
 }
 
 .posts-list .win-surface {
-	margin-top: -70px;
+	margin-top: -72px;
 	height: 100%;
 }
 
 .posts-list.win-listview .win-groupheader {
-	top: 80px;
+	top: 78px;
 }
 
 .posts-list.win-listview .win-groupheader .headerTemplateText {
-	background-color: rgba( 0, 86, 132, 1.0 );
-	height: 50px;
-	width: 50px;
+	background-color: #005684;
+	height: 52px;
+	width: 52px;
 	border-radius: 25px;
 	font-size: 12pt;
-	line-height: 14pt;
+	line-height: 12pt;
 	margin-left: 14px;
+    font-weight: 300;
 }
 
 .posts-list.win-listview .win-template.win-groupheader, .posts-list.win-listview .win-template.win-groupheader .headerTemplateText {
@@ -33,7 +34,7 @@
 }
 
 .posts-list.win-listview .win-groupheader .headerTemplateText .group-month-short {
-	padding-top: 4px;
+	padding-top: 9px;
     color: #78C8E6;
 	text-align: center;
 }
@@ -55,7 +56,7 @@
 
 .posts-list .win-item {
     width: 252px;
-    height: 252px;
+    height: 244px;
 }
 
 .posts-list .win-container:hover {
@@ -75,12 +76,13 @@
     display: -ms-grid;
     -ms-grid-columns: 1fr;
     -ms-grid-rows: 1fr 92px;
-}
+}  
 
 .zoomout-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	background-color: rgba( 0, 86, 132, 1.0 );
+    margin-top: 15% !important;
 }
 
 .zoomout-list .win-item {
@@ -118,27 +120,29 @@
 
 .zoomoutItem .group-date {
 	-ms-grid-row: 3;
-	margin-left: 8px;
+    margin: 7px 0 0 12px;
+    font-weight: 300;
 }
 
 .zoomoutItem .group-date .day-name, .zoomoutItem .group-date .month-name {
-	font-size: 18pt;
-	line-height: 22pt;
+	font-size: 20pt;
+	line-height: 28px;
     color: #78C8E6;
 }
 
 .zoomoutItem .group-date .day-number {
-	font-size: 34pt;
-	line-height: 38pt;
+	font-size: 42pt;
+	line-height: 52px;
 	color: #fff;
+    font-weight: 200;
 }
 
 .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
-   margin-left: 50px;
+   margin-left: 46px;
 }
 
 .win-semanticzoom .win-listview > .win-horizontal .win-surface {
-   margin-left: 118px;
+   margin-left: 116px;
 }
 
 
@@ -164,7 +168,7 @@
 	}
 
 .posts-list .post .large-post-data {
-    padding: 8px 12px;
+    padding: 4px 12px 8px;
 	-ms-grid-row: 2;
 }
 
@@ -181,7 +185,7 @@
 
 .posts-list .post .post-meta {
     font-size: 9pt;
-    line-height: 15pt;
+    line-height: 16pt;
     color: #78C8E6;
     overflow: hidden;
     -ms-text-overflow: ellipsis;

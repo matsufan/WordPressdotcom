@@ -32,7 +32,7 @@
             var template = Windows.UI.Notifications.TileTemplateType.tileWideImageAndText01;
             var tileXml = Windows.UI.Notifications.TileUpdateManager.getTemplateContent(template);
             var tileImageElements = tileXml.getElementsByTagName("image");
-            tileImageElements[0].setAttribute("src", post.post_image.replace( '252px,160px', '300px,300px' ) );
+            tileImageElements[0].setAttribute("src", post.post_image.replace( '252px,148px', '300px,300px' ) );
             tileImageElements[0].setAttribute("alt", "Post Image");
 
             var tileTextElements = tileXml.getElementsByTagName("text");

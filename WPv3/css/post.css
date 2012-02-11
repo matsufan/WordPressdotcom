@@ -35,7 +35,7 @@
 }
 
 #reblogUI input[type=button]:hover:active {
-    background-color: #f1831e;
+    background-color: #2EA2CC;
     outline: none;
 }
 
@@ -233,36 +233,6 @@ div#backbar {
         overflow-y: visible;
         overflow-x: visible;
         height: auto;
-    }
-    
-    .post header[role=banner] .postActions {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        height: 60px;
-    }
-
-    .post header[role=banner] .postActions span {
-        position: absolute;
-        padding: 7px 9px 7px 37px;
-        top: 12px;
-        display: block;
-    }
-    
-    .post header[role=banner] .postActions span.follow {
-        left: 4px;
-    }
-
-    .post header[role=banner] .postActions span.reblog {
-        width: 50px;
-        margin-left: -40px;
-        left: 50%;
-    }
-
-    .post header[role=banner] .postActions span.like {
-        right: 6px;
     }
 
     .post header[role=banner] h1 {
