@@ -10,7 +10,8 @@
 }
 
 .posts-list .win-surface {
-	top: -70px;
+	margin-top: -70px;
+	height: 100%;
 }
 
 .posts-list.win-listview .win-groupheader {
