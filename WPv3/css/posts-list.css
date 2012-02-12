@@ -78,11 +78,15 @@
     -ms-grid-rows: 1fr 92px;
 }  
 
+.zoomout-list .win-surface {
+	margin-top: 10%;
+	height: 90%;
+}
+
 .zoomout-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
 	background-color: rgba( 0, 86, 132, 1.0 );
-    margin-top: 15% !important;
 }
 
 .zoomout-list .win-item {
