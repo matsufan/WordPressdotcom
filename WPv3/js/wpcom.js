@@ -354,6 +354,44 @@
         if (null == post || null == post.ID)
             return; // couldn't find the post
         return post;
+    },
+
+    iframePostLinks: function () {
+        var links = document.querySelectorAll('.content a');
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            links[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                var iframe = document.createElement("iframe");
+                var backbar = document.createElement("div");
+                var loader = document.createElement('progress');
+
+                document.body.appendChild(iframe);
+                iframe.setAttribute('src', href);
+                iframe.setAttribute('id', 'external-link');
+
+                loader.setAttribute('id', 'iframe-loader');
+
+                document.body.appendChild(loader);
+                document.body.appendChild(backbar);
+
+                backbar.setAttribute('id', 'backbar');
+                var backlink = document.createElement("button");
+                backbar.appendChild(backlink);
+                backlink.setAttribute('class', 'win-backbutton');
+
+                backlink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    iframe.removeNode();
+                    backbar.removeNode();
+                });
+
+                iframe.addEventListener('load', function () {
+                    loader.setAttribute('class', 'hide');
+                    iframe.setAttribute('class', 'loaded');
+                });
+            });
+        }
     }
 }
 

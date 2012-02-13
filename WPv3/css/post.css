@@ -174,22 +174,39 @@ object, embed, video, iframe {
 iframe#external-link {
     position: absolute;
     top: 0;
-    left: 110px;
-    height: 100%;
-    width: calc(100% - 20px);
+    left: 120px;
+    height: calc(100% - 50px);
+    width: calc(100% - 120px);
     border: none;
-    background: #fff;
+    background: #eee;
 }
-
+iframe#external-link.loaded {
+    height: 100%;
+}
 div#backbar {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
-    width: 110px;
+    width: 120px;
     background: #fff;
 }
 
+div#backbar button.win-backbutton {
+    border-color: rgb(30, 140, 190);
+    color: rgb(30, 140, 190);
+    margin: 59px 0 0 39px;
+}
+
+#iframe-loader {
+    color: rgb(30, 140, 190);
+    width: calc(50% - 120px);
+    height: 25px;
+    position: absolute;
+    bottom: 10px;
+    left: calc(40% - 120px);
+    z-index: 999;
+}
 /* --- */
 
 
