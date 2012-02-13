@@ -68,10 +68,19 @@
             headers: { "Authorization": "Bearer " + accessToken, "User-Agent": WPCom.userAgent() }
         }).then(function (result) {
             var followData = JSON.parse(result.responseText);
-            if (followData.is_following == true)
-                followButton.getElementsByClassName('win-label').item(0).innerText = "Unfollow";
-            else
+            if (followData.is_following == true) {
+                followButton.getElementsByClassName('win-label').item(0).innerText = "Following";
+                WinJS.Utilities.addClass(followButton, "selected");
+
+                followButton.onmouseover = function () {
+                    followButton.getElementsByClassName('win-label').item(0).innerText = "Unfollow";
+                }
+                followButton.onmouseout = function () {
+                    followButton.getElementsByClassName('win-label').item(0).innerText = "Following";
+                }
+            } else {
                 followButton.getElementsByClassName('win-label').item(0).innerText = "Follow";
+            }
         }, function (result) {
             //error
             window.console.log(result);
@@ -179,7 +188,9 @@
 
                     break;
                 case 'follow':
-                    var curText = m.target.innerText;
+                    var curText = m.target.innerText,
+                        followButton = document.getElementById('follow');
+
                     if (curText == "Follow") {
                         label.innerText = "Following...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/follows/new";
@@ -194,10 +205,23 @@
                         headers: { "Authorization": "Bearer " + accessToken }
                     }).then(function (result) {
                         var followData = JSON.parse(result.responseText);
-                        if (followData.is_following == true)
-                            label.innerText = "Unfollow";
-                        else
+                        if (followData.is_following == true) {
+                            followButton.getElementsByClassName('win-label').item(0).innerText = "Following";
+                            WinJS.Utilities.addClass(followButton, "selected");
+
+                            followButton.onmouseover = function () {
+                                followButton.getElementsByClassName('win-label').item(0).innerText = "Unfollow";
+                            }
+                            followButton.onmouseout = function () {
+                                followButton.getElementsByClassName('win-label').item(0).innerText = "Following";
+                            }
+                        } else {
+                            WinJS.Utilities.removeClass(followButton, "selected");
+                            followButton.onmouseover = "";
+                            followButton.onmouseout = "";
+
                             label.innerText = "Follow";
+                        }
                     }, function (result) {
                         //error, reset the button
                         label.innerText = curText;
