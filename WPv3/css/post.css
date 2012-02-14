@@ -49,11 +49,15 @@
 
 .post section[role=main] article {
     column-fill: auto;
-    column-width: 500px;
-    column-gap: 80px;
+    column-width: 560px;
+    column-gap: 0;
     height: 95%;
-    width: 500px;
+    width: 560px;
     margin-left: 120px;
+}
+
+.post section[role=main] article .win-body {
+    margin-right:  80px;
 }
 
 .post section[role=main] article img {
@@ -264,6 +268,10 @@ div#backbar button.win-backbutton {
         overflow-y: visible;
         overflow-x: visible;
         height: auto;
+    }
+    
+    .post section[role=main] article .win-body {
+        margin-right:  0;
     }
 
     .post header[role=banner] h1 {
