@@ -48,10 +48,6 @@
 	margin-right: 8px;
 	margin-bottom: 8px;
 	background-color: rgba( 0, 116, 162, 0.6 );
-	z-index: -1;
-}
-.posts-list.win-listview .win-item {
-   z-index: -1;
 }
 
 .posts-list .win-item {
