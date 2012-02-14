@@ -225,8 +225,8 @@
 }
     
 @media screen and (-ms-view-state: fullscreen-portrait) {
-    .posts-list .win-surface {
-        margin-left: 98px;
+    .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
+       margin-left: 28px;
     }
 }
 

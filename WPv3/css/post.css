@@ -166,10 +166,21 @@
 
 /* Typography */
 
-.win-body p {
-    margin-bottom: 20pt;
+.win-body p,
+.win-body li {
     line-height: 20pt;
     text-align: left !important;
+}
+
+.win-body p,
+.win-body ul,
+.win-body ol {
+    margin-bottom: 20pt;
+}
+
+.win-body ul, 
+.win-body ol {
+    padding-left:  16px;
 }
 
 /* External Iframe for Links */
@@ -309,11 +320,10 @@ div#backbar button.win-backbutton {
 
     .post header[role=banner] h1 {
         margin-right: 20px;
-        margin-top: 80px;
     }
 
     .post header[role=banner] .win-backbutton {
-        margin-top: 94px;
+        margin-top: 59px;
     }
 
     .post section[role=main] article {
