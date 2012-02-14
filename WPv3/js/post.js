@@ -51,11 +51,23 @@
             headers: { "Authorization": "Bearer " + accessToken, "User-Agent": WPCom.userAgent() }
         }).then(function (result) {
             var likeData = JSON.parse(result.responseText);
-            if (likeData.i_like == true)
-                likeButton.getElementsByClassName('win-label').item(0).innerText = "Unlike";
-            else
+            if (likeData.i_like == true) {
+                likeButton.getElementsByClassName('win-label').item(0).innerText = "Liked";
+                WinJS.Utilities.addClass(likeButton, "selected");
+
+                likeButton.onmouseover = function () {
+                    likeButton.getElementsByClassName('win-label').item(0).innerText = "Unlike";
+                }
+                likeButton.onmouseout = function () {
+                    likeButton.getElementsByClassName('win-label').item(0).innerText = "Liked";
+                }
+            } else {
+                WinJS.Utilities.removeClass(likeButton, "selected");
+                likeButton.onmouseover = "";
+                likeButton.onmouseout = "";
                 likeButton.getElementsByClassName('win-label').item(0).innerText = "Like";
-        }, function (result) {
+            }
+            }, function (result) {
             //error
             window.console.log(result);
         });
@@ -79,6 +91,9 @@
                     followButton.getElementsByClassName('win-label').item(0).innerText = "Following";
                 }
             } else {
+                WinJS.Utilities.removeClass(followButton, "selected");
+                followButton.onmouseover = "";
+                followButton.onmouseout = "";
                 followButton.getElementsByClassName('win-label').item(0).innerText = "Follow";
             }
         }, function (result) {
@@ -94,9 +109,12 @@
             headers: { "Authorization": "Bearer " + accessToken, "User-Agent": WPCom.userAgent() }
         }).then(function (result) {
             var reblogData = JSON.parse(result.responseText);
-            if (reblogData.is_reblogged == true)
+            if (reblogData.is_reblogged == true) {
                 reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblogged";
+                WinJS.Utilities.addClass(reblogButton, "selected");
+            }
             else
+                WinJS.Utilities.removeClass(reblogButton, "selected");
                 reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblog";
         }, function (result) {
             //error
@@ -115,7 +133,9 @@
         if (WPCom.isLoggedIn()) {
             switch (socialType) {
                 case 'like':
-                    var curText = m.target.innerText;
+                    var curText = m.target.innerText,
+                        likeButton = document.getElementById('like');
+
                     if (curText == "Like") {
                         label.innerText = "Liking...";
                         url = WPCom.apiURL + "/sites/" + item.blog_id + "/posts/" + item.post_id + "/likes/new";
@@ -130,10 +150,23 @@
                         headers: { "Authorization": "Bearer " + accessToken }
                     }).then(function (result) {
                         var likeData = JSON.parse(result.responseText);
-                        if (likeData.i_like == true)
-                            label.innerText = "Unlike";
-                        else
+                        if (likeData.i_like == true) {
+                            likeButton.getElementsByClassName('win-label').item(0).innerText = "Liked";
+                            WinJS.Utilities.addClass(likeButton, "selected");
+
+                            likeButton.onmouseover = function () {
+                                likeButton.getElementsByClassName('win-label').item(0).innerText = "Unlike";
+                            }
+                            likeButton.onmouseout = function () {
+                                likeButton.getElementsByClassName('win-label').item(0).innerText = "Liked";
+                            }
+                        } else {
+                            WinJS.Utilities.removeClass(likeButton, "selected");
+                            likeButton.onmouseover = "";
+                            likeButton.onmouseout = "";
+
                             label.innerText = "Like";
+                        }
                     }, function (result) {
                         //error, reset the button
                         label.innerText = curText;
@@ -175,6 +208,7 @@
                             reblogFlyOut.hide();
                         }
                         else {
+                            WinJS.Utilities.removeClass(reblogButton, "selected");
                             label.innerText = "Reblog";
                             m.target.innerText = "Publish";
                             WPCom.displayToastMessage("Sorry, a network error occurred. Please try again later.");
