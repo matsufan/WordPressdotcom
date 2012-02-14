@@ -9,9 +9,10 @@
     margin-bottom: 4px;
 }
 
-.posts-list .win-surface {
+.posts-list .win-horizontal.win-viewport .win-surface {
 	margin-top: -72px;
 	height: 100%;
+    margin-bottom: 60px;
 }
 
 .posts-list.win-listview .win-groupheader {
