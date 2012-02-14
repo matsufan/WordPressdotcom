@@ -143,6 +143,10 @@ section[role=main] {
     content: "\e0b4";
 }
 
+#openinbrowser .win-commandimage::before {
+    content:  "\e128";
+}
+
 #viewblog {
     float: right;
 }
