@@ -229,3 +229,9 @@
         margin-left: 98px;
     }
 }
+
+@media (-ms-high-contrast) {
+    .posts-list.win-listview .win-groupheader .headerTemplateText {
+        background-color: ButtonFace;
+    }
+}

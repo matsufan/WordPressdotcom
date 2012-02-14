@@ -139,46 +139,6 @@ section[role=main] {
     background-image: url('/images/reblog-dark.svg');
 }
 
-@media (-ms-high-contrast) {
-    .win-commandicon {
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 32px, 32px;
-        font-family: "Segoe UI Symbol";
-    }
-    #follow .win-commandicon {
-        background-image: url('/images/follow-hc.svg');
-    }
-
-    #follow:hover:active .win-commandicon {
-        background-image: url('/images/follow-dark.svg');
-    }
-
-    #follow.selected .win-commandicon {
-        background-image: url('/images/following-dark.svg');
-    }
-
-    #follow.selected:hover .win-commandicon {
-        background-image: url('/images/unfollow-dark.svg');
-    }
-
-    #reblog .win-commandicon {
-        background-image: url('/images/reblog-hc.svg');
-    }
-
-    #reblog.selected .win-commandicon,
-    #reblog:hover:active .win-commandicon {
-        background-image: url('/images/reblog-dark.svg');
-    }
-    #viewblog .win-commandicon {
-        background-image: url('/images/viewblog-hc.svg');
-    }
-
-    #viewblog:hover:active .win-commandicon {
-        background-image: url('/images/viewblog-dark.svg');
-    }
-}
-
 #like .win-commandimage::before {
     content: "\e0b4";
 }
@@ -248,5 +208,51 @@ section[role=main] {
 
     header[role=banner] #tabs {
         margin-left: 100px;
+    }
+}
+
+@media (-ms-high-contrast) {
+    .win-commandicon {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 32px, 32px;
+        font-family: "Segoe UI Symbol";
+    }
+    .selected .win-commandicon {
+        background-color: #fff;
+    }
+    .selected .win-commandimage::before {
+        color: #000;
+    }
+    #follow .win-commandicon {
+        background-image: url('/images/follow.svg');
+    }
+
+    #follow:hover:active .win-commandicon {
+        background-image: url('/images/follow-hc.svg');
+    }
+
+    #follow.selected .win-commandicon {
+        background-image: url('/images/following-hc.svg');
+    }
+
+    #follow.selected:hover .win-commandicon {
+        background-image: url('/images/unfollow-hc.svg');
+    }
+
+    #reblog .win-commandicon {
+        background-image: url('/images/reblog.svg');
+    }
+
+    #reblog.selected .win-commandicon,
+    #reblog:hover:active .win-commandicon {
+        background-image: url('/images/reblog-hc.svg');
+    }
+    #viewblog .win-commandicon {
+        background-image: url('/images/viewblog.svg');
+    }
+
+    #viewblog:hover:active .win-commandicon {
+        background-image: url('/images/viewblog-hc.svg');
     }
 }
