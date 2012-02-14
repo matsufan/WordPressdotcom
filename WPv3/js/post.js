@@ -28,7 +28,7 @@
         document.getElementById("like").addEventListener("click", socialPostClick, false);
         document.getElementById("reblog").addEventListener("click", socialPostClick, false);
         document.getElementById("publish-reblog").addEventListener("click", socialPostClick, false);
-        document.getElementById('viewblog').addEventListener("click", function () { top.location.href = item.permalink; }, false);
+        document.getElementById('viewblog').addEventListener("click", function () { WPCom.viewBlog(item); }, false );
 
         // Catch link clicks and iframe them.
         WPCom.iframePostLinks();
