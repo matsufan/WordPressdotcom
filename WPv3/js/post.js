@@ -113,9 +113,10 @@
                 reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblogged";
                 WinJS.Utilities.addClass(reblogButton, "selected");
             }
-            else
+            else {
                 WinJS.Utilities.removeClass(reblogButton, "selected");
                 reblogButton.getElementsByClassName('win-label').item(0).innerText = "Reblog";
+        }
         }, function (result) {
             //error
             window.console.log(result);
