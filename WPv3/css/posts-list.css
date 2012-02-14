@@ -193,70 +193,34 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
-    .fragment.freshlypressed {
-        margin: 0;
-        display: block;
-        overflow-x: hidden;
-    }
-
-    header[role=banner] ul#tabs {
-        font-size: 20pt;
-        line-height: 0pt;
-    }
-
-    .posts-list {
-        margin-top: -10px;
+    .reader-filter header[role=banner] .titlearea .titlelogo {
+        margin-bottom: 9px;
+        margin-left: 2px;
     }
     
-    .posts-list .win-surface {
-        margin-left: 30px;
-    }
-    
-    /* This is a hack for vertical win-container. Does the API support vertical gridlayout yet? */
-
-    .win-container {
-        position: relative !important;
-        top: 0 !important;
-        left: 0 !important;
-        margin-bottom: 10px !important;
-    }
-
-    .win-listview > .win-horizontal.win-viewport {
-        overflow-y: scroll;
-        overflow-x: hidden;
-        margin-top: 120px;
-        height: calc(100% - 120px);
-    } 
-
-    .freshlypressed header[role=banner] {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .freshlypressed header[role=banner] .win-backbutton {
+    .reader-filter header[role=banner] .win-backbutton {
         display: none;
     }
 
-    .freshlypressed header[role=banner] .titlearea {
-        max-width: 260px;
-        display: block;
-        -ms-grid-column: 0;
-        height: 35px;
-        margin: 30px 0 0 32px;
+    .reader-filter header[role=banner] .titlearea {
+        -ms-grid-column: 1;
+        margin-top: 37px;
+        margin-left: 30px;
+        height: 38px;
+    }
+    
+    .reader-filter header[role=banner] ul#tabs {
+        font-size: 20pt;
+        line-height: 0pt;
+        margin: 0 0 0 30px;
+    }
+    
+    .reader-filter .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
+       margin-left: -40px;
     }
 
-    .freshlypressed section[role=main] .posts-list {
-        margin-top: 0;
-        margin-bottom: 0;
-        overflow-x: hidden;
-    }
-
-    .freshlypressed header[role=banner] #tabs {
-        margin: 0 0 0 32px;
-        padding: 34px 0 0 0;
+    .reader-filter .win-semanticzoom .win-listview > .win-horizontal .win-surface {
+       margin-left: 30px;
     }
 }
     

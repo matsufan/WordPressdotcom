@@ -250,10 +250,3 @@ section[role=main] {
         margin-left: 100px;
     }
 }
-
-@media screen and (-ms-view-state: snapped) {
-    header[role=banner] .titlearea .titlelogo {
-        margin-bottom: 9px;
-        margin-left: 2px;
-    }
-}

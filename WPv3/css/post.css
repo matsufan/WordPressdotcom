@@ -216,8 +216,8 @@ div#backbar button.win-backbutton {
     background: rgba(209, 211, 212, 1);
 }
 
-@media screen and (-ms-view-state: snapped) {
-    .fragment.post {
+@media screen and (-ms-view-state: snapped) {    
+    .post {
         overflow: auto;
         display: block;
     }
@@ -253,7 +253,7 @@ div#backbar button.win-backbutton {
     }
 
     .post header[role=banner] h1 {
-        margin: 60px 0 30px 12px;
+        margin: 30px 0 30px 12px;
         font-size: 20pt;
         line-height: 1.2; /* 32px when font-size is 20pt */
         white-space: normal;
@@ -263,7 +263,7 @@ div#backbar button.win-backbutton {
     }
 
     .post header[role=banner] .win-backbutton {
-        margin-top: 65px;
+        margin-top: 34px;
         margin-left: 18px;
         float: left;
     }
@@ -276,6 +276,18 @@ div#backbar button.win-backbutton {
         height: auto;
     }
     
+    #reblogUI {
+	    width: 276px;
+	    height: 190px;
+	    padding: 12px 15px 10px;
+    }
+
+    #reblogUI textarea {
+	    height: 125px;
+	    width: 263px;
+        padding: 4px 6px;
+    }
+    
     .alignleft,
     .alignright,
     .aligncenter {
@@ -284,22 +296,6 @@ div#backbar button.win-backbutton {
         float: none;
         margin-left: auto;
         margin-right: auto;
-    }
-    
-    .post header[role=banner] .postActions .reblogUI {
-	    position: absolute;
-	    top: 46px;
-	    right: 0;
-	    width: 290px;
-	    height: 190px;
-        display: none;
-	    background-color: #1E8CBE;
-	    padding: 12px 15px 10px;
-    }
-
-    .post header[role=banner] .postActions .reblogUI textarea {
-	    height: 125px;
-	    width: 277px;
     }
 }
 
@@ -317,20 +313,7 @@ div#backbar button.win-backbutton {
         margin-top: 94px;
     }
 
-    .post header[role=banner] .postActions {
-        position: absolute;
-        top: 30px;
-        right: auto;
-        left: 88px;
-    }
-
     .post section[role=main] article {
         padding-top: 30px;
-    }
-
-    .post header[role=banner] .postActions .reblogUI {
-        top: 100%;
-        right: auto;
-        left: 0;
     }
 }

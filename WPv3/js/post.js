@@ -204,6 +204,7 @@
                         if (reblogData.is_reblogged == true) {
                             //mission accomplished
                             label.innerText = "Reblogged";
+                            WinJS.Utilities.addClass(reblogButton, "selected");
                             var reblogFlyOut = document.getElementById('reblogUI').winControl;
                             reblogFlyOut.hide();
                         }
