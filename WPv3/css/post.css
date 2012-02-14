@@ -157,7 +157,10 @@
     padding: 0;
 }
 
-object, embed, video, iframe {
+.content object, 
+.content embed, 
+.content video, 
+.content iframe {
     max-width: 100%;
 }
 
@@ -315,5 +318,11 @@ div#backbar button.win-backbutton {
 
     .post section[role=main] article {
         padding-top: 30px;
+    }
+}
+
+@media (-ms-high-contrast) {
+    div#backbar {
+        background: ButtonFace;
     }
 }
