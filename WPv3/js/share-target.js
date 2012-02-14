@@ -167,7 +167,7 @@ function publishPost(m) {
             content = "<a href=\"" + linkURL + "\">" + linkURL + "</a>";
 
         if (linkComment)
-            content = linkComment + "\n\n" + content + "\n\n";
+            content = content + "\n\n" + linkComment + "\n\n";
 
         data.append("format", "link");
         data.append("content", content);
