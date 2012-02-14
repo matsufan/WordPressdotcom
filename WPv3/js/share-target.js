@@ -150,8 +150,12 @@ function publishPost(m) {
         var quoteText = document.getElementById("shareQuoteText").value;
         var quoteURL = document.getElementById("shareQuoteURL").value;
         content = quoteText;
-        if (quoteURL)
+
+        if (quoteURL) {
             content += "\n\n<cite>" + "<a href=\"" + quoteURL + "\">" + quoteURL + "</a>"; + "</cite>\n\n";
+        }
+
+        data.append("title", quoteText.substring(0, 25) + "...");
         data.append("format", "quote");
         data.append("content", content);
 
