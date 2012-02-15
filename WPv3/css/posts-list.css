@@ -220,8 +220,18 @@
        margin-left: -40px;
     }
 
-    .reader-filter .win-semanticzoom .win-listview > .win-horizontal .win-surface {
-       margin-left: 30px;
+    .reader-filter .posts-list.win-listview .win-vertical .win-surface,
+    .reader-filter .zoomout-list.win-listview .win-vertical .win-surface {
+        margin: 0 28px;
+        width: calc(100% - 56px);
+    }
+
+    .reader-filter .posts-list.win-listview .win-vertical .win-container {
+        width:  250px !important;
+    }
+
+    .reader-filter .zoomout-list.win-listview .win-vertical .win-container {
+        width:  176px !important;
     }
 }
     
