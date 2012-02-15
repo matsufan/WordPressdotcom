@@ -205,15 +205,15 @@
 
     .reader-filter header[role=banner] .titlearea {
         -ms-grid-column: 1;
-        margin-top: 37px;
-        margin-left: 30px;
+        margin-top: 24px;
+        margin-left: 34px;
         height: 38px;
     }
     
     .reader-filter header[role=banner] ul#tabs {
         font-size: 20pt;
-        line-height: 0pt;
-        margin: 0 0 0 30px;
+        line-height: 30pt;
+        margin: 0 0 0 34px;
     }
     
     .reader-filter .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {

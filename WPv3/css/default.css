@@ -265,6 +265,6 @@ section[role=main] {
 	.fragment {
 		display: -ms-grid;
 		-ms-grid-columns: 1fr;
-		-ms-grid-rows: 140px 1fr 0px;
+		-ms-grid-rows: 120px 1fr 0px;
 	}
 }
