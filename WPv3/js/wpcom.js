@@ -393,11 +393,20 @@
         backbar.appendChild(backlink);
         backlink.setAttribute('class', 'win-backbutton');
 
+        document.getElementById("follow").setAttribute('style', 'display:none');
+        document.getElementById("like").setAttribute('style', 'display:none');
+        document.getElementById("reblog").setAttribute('style', 'display:none');
+        document.querySelector("button#viewblog span.win-label").innerHTML = 'Open in Browser';
+
         backlink.addEventListener('click', function (e) {
             e.preventDefault();
             iframe.removeNode();
             backbar.removeNode();
             loader.removeNode();
+            document.getElementById("follow").setAttribute('style', '');
+            document.getElementById("like").setAttribute('style', '');
+            document.getElementById("reblog").setAttribute('style', '');
+            document.querySelector("button#viewblog span.win-label").innerHTML = 'View Blog';
         });
 
         iframe.addEventListener('load', function () {
