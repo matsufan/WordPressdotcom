@@ -11,7 +11,6 @@
 
 	newDataSource: function (filter) {
 		if (filter && undefined == WPCom.dataSources[filter]) {
-
 			WPCom.dataSources[filter] = new wpcomDataSource(filter);
 			WPCom.dataSources[filter].getData();
 		} else {
@@ -602,13 +601,16 @@ wpcomDataSource.prototype.setDateRange = function (date_range) {
 	this.newest_in_date_range = date_range.newest;
 }
 
-wpcomDataSource.prototype.reset = function (skipData) {
-	this.newest_in_date_range = null;
-	this.oldest_in_date_range = null;
+wpcomDataSource.prototype.reset = function (skipData, onlyResetLists) {
+	if (true != onlyResetLists) {
+		this.newest_in_date_range = null;
+		this.oldest_in_date_range = null;
+		this.fetching = false;
+		this.scrollPosition = 0;
+	}
+	console.log('reset');
 	this.list = new WinJS.Binding.List();
 	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
-	this.fetching = false;
-	this.scrollPosition = 0;
 	if (true != skipData)
 		this.getData();
 }
