@@ -260,3 +260,11 @@ section[role=main] {
         background-image: url('/images/viewblog-hc.svg');
     }
 }
+
+@media screen and (-ms-view-state: snapped) {
+	.fragment {
+		display: -ms-grid;
+		-ms-grid-columns: 1fr;
+		-ms-grid-rows: 140px 1fr 0px;
+	}
+}
