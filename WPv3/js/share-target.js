@@ -129,6 +129,12 @@ function publishPost(m) {
                     if (imageCaption)
                         content = '[caption id="" caption="' + imageCaption + '"]' + content + '[/caption]';
 
+                    if (imageTitle.length > 25) {
+                        data.append("title", imageTitle.substring(0, 25) + "...");
+                    } else {
+                        data.append("title", imageTitle);
+                    }
+
                     data.append("format", "image");
                     data.append("content", content);
 
@@ -157,7 +163,12 @@ function publishPost(m) {
             content += "\n\n<cite>" + "<a href=\"" + quoteURL + "\">" + quoteURL + "</a>"; + "</cite>\n\n";
         }
 
-        data.append("title", quoteText.substring(0, 25) + "...");
+        if (quoteText.length > 25) {
+            data.append("title", quoteText.substring(0, 25) + "...");
+        } else {
+            data.append("title", quoteText);
+        }
+
         data.append("format", "quote");
         data.append("content", content);
 
