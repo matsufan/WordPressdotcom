@@ -1,33 +1,6 @@
 ﻿(function () {
 	"use strict";
 
-	function ready(element, options) {
-		WinJS.UI.Animation.enterPage(document.querySelector('header'), { top: '0px', left: '200px' });
-
-		WPCom.populateTabs();
-		WPCom.newDataSource('freshlypressed');
-		var listview = document.getElementById('freshlypressed-list').winControl;
-		listview.itemDataSource = WPCom.dataSources.freshlypressed.groupedList.dataSource;
-		listview.itemTemplate = document.getElementById('freshlypressedTemplate');
-		listview.groupDataSource = WPCom.dataSources.freshlypressed.groupedList.groups.dataSource;
-		listview.groupHeaderTemplate = document.getElementById('headerTemplate');
-
-		var listviewZoomout = document.getElementById('freshlypressed-zoomout-list').winControl;
-		listviewZoomout.itemDataSource = WPCom.dataSources.freshlypressed.groupedList.groups.dataSource;
-		listviewZoomout.itemTemplate = document.getElementById('freshlypressedZoomoutTemplate');
-
-		if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
-    		listview.addEventListener('loadingstatechanged', scrollToPosition);
-    		WPCom.toggleLoader('show');
-    		WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
-		}
-    	listview.addEventListener('loadingstatechanged', getOlderFP);
-
-		// Update the tile if needed.
-    	if ( null == WPComTile.data )
-    	    WPComTile.init();
-	}
-
 	function getOlderFP(e) {
 		if ( document.getElementById('freshlypressed-list') ) {
 			var listview = document.getElementById('freshlypressed-list').winControl;
@@ -52,28 +25,58 @@
     }
 
     WinJS.UI.Pages.define("/html/freshly-pressed.html", {
-        ready: ready,
+        ready: function (element, options) {
+            WinJS.UI.Animation.enterPage(document.querySelector('header'), { top: '0px', left: '200px' });
+
+            WPCom.populateTabs();
+            WPCom.newDataSource('freshlypressed');
+
+            this.updateLayout(element, Windows.UI.ViewManagement.ApplicationView.value);
+
+            // Update the tile if needed.
+            if (null == WPComTile.data)
+                WPComTile.init();
+        },
 
         // This function updates the page layout in response to viewState changes.
         updateLayout: function (element, viewState) {
             var listView = element.querySelector('#freshlypressed-list').winControl;
             var zoomoutView = element.querySelector('#freshlypressed-zoomout-list').winControl;
+            var listViewLayout, zoomoutViewLayout
+
             if (viewState === Windows.UI.ViewManagement.ApplicationViewState.snapped) {
-                // If the page is snapped, display a list of groups.
-                WinJS.UI.setOptions(listView, {
-                    layout: new WinJS.UI.ListLayout()
-                });
-                WinJS.UI.setOptions(zoomoutView, {
-                    layout: new WinJS.UI.ListLayout()
-                });
+                listViewLayout = new WinJS.UI.ListLayout();
+                zoomoutViewLayout = new WinJS.UI.ListLayout();
             } else {
-                WinJS.UI.setOptions(listView, {
-                    layout: new WinJS.UI.GridLayout()
-                });
-                WinJS.UI.setOptions(zoomoutView, {
-                    layout: new WinJS.UI.GridLayout()
-                });
+                listViewLayout = new WinJS.UI.GridLayout();
+                zoomoutViewLayout = new WinJS.UI.GridLayout({ maxRows: 1 });
             }
+
+            WinJS.UI.setOptions(listView, {
+                layout: listViewLayout,
+                itemDataSource: WPCom.dataSources.freshlypressed.groupedList.dataSource,
+                itemTemplate: document.getElementById('freshlypressedTemplate'),
+                groupDataSource: WPCom.dataSources.freshlypressed.groupedList.groups.dataSource,
+                groupHeaderTemplate: document.getElementById('headerTemplate'),
+                selectionMode: 'none',
+                swipeBehavior: 'none',
+                oniteminvoked: WPCom.showPost
+			});
+            WinJS.UI.setOptions(zoomoutView, {
+                layout: zoomoutViewLayout,
+                itemDataSource: WPCom.dataSources.freshlypressed.groupedList.groups.dataSource,
+                itemTemplate: document.getElementById('freshlypressedZoomoutTemplate'),
+                selectionMode: 'none',
+                swipeBehavior: 'none',
+                tapBehavior: 'invoke'
+            });
+
+            if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
+                listView.addEventListener('loadingstatechanged', scrollToPosition);
+                WPCom.toggleLoader('show');
+                WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
+            }
+            listView.addEventListener('loadingstatechanged', getOlderFP);
         }
 	});
 })();

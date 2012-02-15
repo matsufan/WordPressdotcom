@@ -59,24 +59,8 @@
         </header>
          <section aria-label="Main content" role="main">
             <div id="semanticZoomDiv" data-win-control="WinJS.UI.SemanticZoom" data-win-options="{ zoomedOut: false, zoomFactor: 0.8 }">
-    			<div id="freshlypressed-list" class="posts-list"
-				   data-win-control="WinJS.UI.ListView"
-				   data-win-options="{
-					selectionMode: 'none',
-					swipeBehavior: 'none',
-					layout: {type: WinJS.UI.GridLayout },
-					oniteminvoked: WPCom.showPost
-					}">
-				</div>
-    			<div id="freshlypressed-zoomout-list" class="zoomout-list"
-				   data-win-control="WinJS.UI.ListView"
-				   data-win-options="{
-					selectionMode: 'none',
-					swipeBehavior: 'none',
-					tapBehavior: 'invoke',
-					layout: {type: WinJS.UI.GridLayout, maxRows: 1 }
-					}">
-				</div>
+    			<div id="freshlypressed-list" class="posts-list" data-win-control="WinJS.UI.ListView"></div>
+    			<div id="freshlypressed-zoomout-list" class="zoomout-list" data-win-control="WinJS.UI.ListView"></div>
 			</div>
             <progress id="loader" class="show win-ring"></progress>
             <div class="error hide"></div>
