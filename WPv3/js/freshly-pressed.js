@@ -42,7 +42,7 @@
         updateLayout: function (element, viewState) {
             var listView = element.querySelector('#freshlypressed-list').winControl;
             var zoomoutView = element.querySelector('#freshlypressed-zoomout-list').winControl;
-            var listViewLayout, zoomoutViewLayout
+            var listViewLayout, zoomoutViewLayout;
 
             if (viewState === Windows.UI.ViewManagement.ApplicationViewState.snapped) {
                 listViewLayout = new WinJS.UI.ListLayout();
