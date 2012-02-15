@@ -1,7 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    var item;
+    var item
+
 
     function ready(element, options) {
     	WinJS.UI.Animation.enterPage(document.querySelector('.fragment.post'), { top: '0px', left: '200px' });

@@ -193,14 +193,12 @@ iframe#external-link {
     position: absolute;
     top: 0;
     left: 120px;
-    height: calc(100% - 50px);
+    height: 100%;
     width: calc(100% - 120px);
     border: none;
-    background: #eee;
+    background: #fff;
 }
-iframe#external-link.loaded {
-    height: 100%;
-}
+
 div#backbar {
     position: absolute;
     top: 0;
@@ -218,11 +216,11 @@ div#backbar button.win-backbutton {
 
 #iframe-loader {
     color: rgb(30, 140, 190);
-    width: calc(50% - 120px);
-    height: 25px;
+    width: 40px;
+    height: 40px;
     position: absolute;
-    bottom: 10px;
-    left: calc(40% - 120px);
+    bottom: 60px;
+    left: 39px;
     z-index: 999;
 }
 /* --- */
@@ -345,6 +343,14 @@ div#backbar button.win-backbutton {
         border-color: rgb(30, 140, 190);
         color: rgb(30, 140, 190);
         margin: 24px 0 0 18px;
+    }
+    #iframe-loader {
+        width: 30px;
+        height: 30px;
+        top: 22px;
+        left: auto;
+        right:  18px;
+        z-index: 999;
     }
 }
 

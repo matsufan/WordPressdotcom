@@ -383,6 +383,7 @@
         iframe.setAttribute('id', 'external-link');
 
         loader.setAttribute('id', 'iframe-loader');
+        loader.setAttribute('class', 'win-ring');
 
         document.body.appendChild(loader);
         document.body.appendChild(backbar);
