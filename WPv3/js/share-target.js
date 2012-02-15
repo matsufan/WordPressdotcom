@@ -123,26 +123,30 @@ function publishPost(m) {
                     var imageLink = document.getElementById("shareImageURL").value;
                     var imageCaption = document.getElementById("shareImageCaption").value;
 
-                    var tempImage = new Image();
-                    tempImage.src = imageURL;
-                    var imageWidth = tempImage.width + 10;
+                    var tempImage = new Image(),
+                        imageWidth = 0;
 
-                    content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
-                    if (imageLink)
-                        content = '<a href="' + imageLink + '">' + content + '</a>';
-                    if (imageCaption)
-                        content = '[caption id="" width="' + imageWidth + '" caption="' + imageCaption + '"]' + content + '[/caption]';
+                    tempImage.onload = function () {
+                        imageWidth = tempImage.naturalWidth + 10;
 
-                    if (imageTitle.length > 25) {
-                        data.append("title", imageTitle.substring(0, 25) + "...");
-                    } else {
-                        data.append("title", imageTitle);
+                        content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
+                        if (imageLink)
+                            content = '<a href="' + imageLink + '">' + content + '</a>';
+                        if (imageCaption)
+                            content = '[caption id="" width="' + imageWidth + '" caption="' + imageCaption + '"]' + content + '[/caption]';
+
+                        if (imageTitle.length > 25) {
+                            data.append("title", imageTitle.substring(0, 25) + "...");
+                        } else {
+                            data.append("title", imageTitle);
+                        }
+
+                        data.append("format", "image");
+                        data.append("content", content);
+
+                        createNewPost(data, button);
                     }
-
-                    data.append("format", "image");
-                    data.append("content", content);
-
-                    createNewPost(data, button);
+                    tempImage.src = imageURL;
                 }
                 else {
                     document.getElementById("errorMessage").innerText = "Sorry, a network error occurred. Please try again later.";
