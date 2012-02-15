@@ -149,7 +149,9 @@ function publishPost(m) {
     else if (button.id == "publish-quote") {
         var quoteText = document.getElementById("shareQuoteText").value;
         var quoteURL = document.getElementById("shareQuoteURL").value;
-        content = quoteText;
+        if (quoteText) {
+            content = "<blockquote>" + quoteText + "</blockquote>";
+        }
 
         if (quoteURL) {
             content += "\n\n<cite>" + "<a href=\"" + quoteURL + "\">" + quoteURL + "</a>"; + "</cite>\n\n";
