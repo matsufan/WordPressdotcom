@@ -52,6 +52,28 @@
     }
 
     WinJS.UI.Pages.define("/html/freshly-pressed.html", {
-        ready: ready
+        ready: ready,
+
+        // This function updates the page layout in response to viewState changes.
+        updateLayout: function (element, viewState) {
+            var listView = element.querySelector('#freshlypressed-list').winControl;
+            var zoomoutView = element.querySelector('#freshlypressed-zoomout-list').winControl;
+            if (viewState === Windows.UI.ViewManagement.ApplicationViewState.snapped) {
+                // If the page is snapped, display a list of groups.
+                WinJS.UI.setOptions(listView, {
+                    layout: new WinJS.UI.ListLayout()
+                });
+                WinJS.UI.setOptions(zoomoutView, {
+                    layout: new WinJS.UI.ListLayout()
+                });
+            } else {
+                WinJS.UI.setOptions(listView, {
+                    layout: new WinJS.UI.GridLayout()
+                });
+                WinJS.UI.setOptions(zoomoutView, {
+                    layout: new WinJS.UI.GridLayout()
+                });
+            }
+        }
 	});
 })();
