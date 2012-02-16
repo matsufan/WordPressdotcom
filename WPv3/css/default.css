@@ -160,6 +160,13 @@ section[role=main] {
     content:  "\e0f8";
 }
 
+.win-appbar #viewblog.open-in-browser .win-commandimage {
+    margin-top: -4px;
+    margin-left:  -1px;
+    margin-right:  -1px;
+    font-size:  13pt;
+}
+
 #viewblog.open-in-browser .win-commandicon {
     background: none;
 }
