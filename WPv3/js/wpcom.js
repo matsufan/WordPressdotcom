@@ -586,7 +586,7 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 			blog_id: jsonPosts[key].editorial.blog_id,
 			site_id: jsonPosts[key].editorial.site_id,
 			ts: jsonPosts[key].editorial.picked_on,
-            permalink: jsonPosts[key].URL,
+			permalink: jsonPosts[key].URL.replace(/^https:/, 'http:'),
             post_date: jsonPosts[key].date,
 			post_author: jsonPosts[key].author.ID,
 			author_name: jsonPosts[key].author.name,
