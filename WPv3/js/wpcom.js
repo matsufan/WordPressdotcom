@@ -414,6 +414,7 @@
         document.getElementById("like").setAttribute('style', 'display:none');
         document.getElementById("reblog").setAttribute('style', 'display:none');
         document.querySelector("button#viewblog span.win-label").innerHTML = 'Open in Browser';
+        WinJS.Utilities.addClass(document.querySelector("button#viewblog"), 'open-in-browser');
 
         backlink.addEventListener('click', function (e) {
             e.preventDefault();
@@ -424,6 +425,7 @@
             document.getElementById("like").setAttribute('style', '');
             document.getElementById("reblog").setAttribute('style', '');
             document.querySelector("button#viewblog span.win-label").innerHTML = 'View Blog';
+            WinJS.Utilities.removeClass(document.querySelector("button#viewblog"), 'open-in-browser');
         });
 
         iframe.addEventListener('load', function () {
