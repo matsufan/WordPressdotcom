@@ -4,7 +4,7 @@
 
 body {
     overflow: hidden;
-    background-image: none;
+    background-position: -60px 0;
 }
 
 .targetContent textarea, .targetContent input[type=text] {
@@ -63,7 +63,8 @@ body {
 
 .targetContent progress {
     color: #fff;
-    width: 100%;
+    width: calc(100% + 86px);
+    margin: 0 -50px 0 -36px;
 }
 
 .targetContent h3 {

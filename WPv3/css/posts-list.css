@@ -58,7 +58,7 @@
 
 .posts-list .win-container:hover {
 	background-color: rgba( 0, 86, 132, 0.8 );
-    outline-color: rgba( 120, 200, 230, 0.9 );
+    outline-color: rgb( 120, 200, 230 );
 }
 
 .posts-list .win-selected, .posts-list .win-item:focus, .posts-list .win-item:focus {
@@ -94,7 +94,7 @@
 
 .zoomout-list .win-container:hover {
 	background-color: rgba( 0, 86, 132, 0.8 );
-    outline-color: rgba( 120, 200, 230, 0.9 );
+    outline-color: rgb( 120, 200, 230 );
 }
 
 .zoomout-list .win-selected, .zoomout-list .win-item:focus, .zoomout-list .win-item:focus {
