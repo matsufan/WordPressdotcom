@@ -13,6 +13,10 @@
     color: #fff;
 }
 
+.post header[role=banner] .titlearea {
+    line-height: 42pt;
+}
+
 #reblogUI {
 	width: 320px;
 	height: 190px;
@@ -274,13 +278,20 @@ div#backbar button.win-backbutton {
     }
 
     .post header[role=banner] h1 {
-        margin: 20px 0 30px 12px;
+        margin: 0 0 30px 12px;
         font-size: 20pt;
         line-height: 1.2; /* 32px when font-size is 20pt */
         white-space: normal;
         overflow: visible;
         width: 244px;
         float: left;
+    }
+
+    .post header[role=banner] .titlearea {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height:  auto;
+        line-height: 1.2;
     }
 
     .post header[role=banner] .win-backbutton {
