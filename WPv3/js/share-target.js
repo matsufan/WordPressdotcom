@@ -70,6 +70,8 @@ function activatedHandler(eventArgs) {
             }
         }
 
+        console.log(shareOperation.data);
+
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.uri)) {
             shareOperation.data.getUriAsync().then(function (uri) {
                 if (shareType == TYPE_QUOTE) {
@@ -126,17 +128,14 @@ function publishPost(m) {
                     var imageLink = document.getElementById("shareImageURL").value;
                     var imageCaption = document.getElementById("shareImageCaption").value;
 
-                    var tempImage = new Image(),
-                        imageWidth = 0;
+                    var tempImage = new Image();
 
                     tempImage.onload = function () {
-                        imageWidth = tempImage.naturalWidth + 10;
-
                         content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
                         if (imageLink)
                             content = '<a href="' + imageLink + '">' + content + '</a>';
                         if (imageCaption)
-                            content = '[caption id="" width="' + imageWidth + '" caption="' + imageCaption + '"]' + content + '[/caption]';
+                            content = '[caption id="" caption="' + imageCaption + '"]' + content + '[/caption]';
 
                         if (imageTitle.length > 25) {
                             data.append("title", imageTitle.substring(0, 25) + "...");
