@@ -390,7 +390,10 @@
         }
     },
 
-    renderIframeView: function(href) {
+    renderIframeView: function (href) {
+        // TODO: swap this for slideout animation call.
+        document.querySelector("#appbar").setAttribute('style', 'top: auto; bottom: 0; visibility: hidden; opacity: 1;' );
+
         var iframe = document.createElement("iframe");
         var backbar = document.createElement("div");
         var loader = document.createElement('progress');
