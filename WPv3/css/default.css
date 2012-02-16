@@ -60,6 +60,7 @@ header[role=banner] .titlearea {
     -ms-grid-column: 2;
     margin-top: 37px;
     margin-right: 37px;
+    margin-left:  -4px;
 }
 
 .reader-filter header[role=banner] .titlearea {
@@ -67,10 +68,8 @@ header[role=banner] .titlearea {
 }
 
 header[role=banner] .titlearea .titlelogo {
-    width: auto;
-    height: 95%;
-    vertical-align: middle;
-    margin-bottom: 14px;
+    width:  auto;
+    height:  100%;
 }
 
 header[role=banner] .titlearea .pagetitle {

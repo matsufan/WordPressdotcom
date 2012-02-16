@@ -78,6 +78,7 @@
     <Content Include="images\widelogo.png" />
     <Content Include="images\wpbg.png" />
     <Content Include="images\wpicon.svg" />
+    <Content Include="images\wptitle.svg" />
     <Content Include="js\default.js" />
     <Content Include="js\freshly-pressed.js" />
     <Content Include="js\navigator.js" />

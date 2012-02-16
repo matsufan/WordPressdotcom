@@ -365,7 +365,7 @@ div#backbar button.win-backbutton {
     }
 
     .post header[role=banner] .win-backbutton {
-        margin-top: 59px;
+        margin-top: 60px;
     }
 
     .post section[role=main] article {
@@ -375,6 +375,10 @@ div#backbar button.win-backbutton {
 
 @media (-ms-high-contrast) {
     div#backbar {
+        background: ButtonFace;
+    }
+
+    iframe#external-link {
         background: ButtonFace;
     }
 }

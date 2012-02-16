@@ -196,8 +196,9 @@
 
 @media screen and (-ms-view-state: snapped) {
     .reader-filter header[role=banner] .titlearea .titlelogo {
-        margin-bottom: 9px;
-        margin-left: 2px;
+        width: 254px;
+        height:  44px;
+        margin-left:  34px;
     }
     
     .reader-filter header[role=banner] .win-backbutton {
@@ -206,9 +207,8 @@
 
     .reader-filter header[role=banner] .titlearea {
         -ms-grid-column: 1;
-        margin-top: 24px;
-        margin-left: 34px;
-        height: 38px;
+        margin-top: 20px;
+        height: 44px;
     }
     
     .reader-filter header[role=banner] ul#tabs {
@@ -245,5 +245,12 @@
 @media (-ms-high-contrast) {
     .posts-list.win-listview .win-groupheader .headerTemplateText {
         background-color: ButtonFace;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .zoomout-list .win-surface {
+	    margin-top: 0;
+	    height: 100%;
     }
 }
