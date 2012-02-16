@@ -1,5 +1,5 @@
 ﻿var WPCom = {
-    localStorageSchemaVersion: '20120209-3',
+	localStorageSchemaVersion: '20120209-3',
 
     dataSources: [],
 
@@ -170,6 +170,24 @@
         e.innerHTML = input;
         return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     },
+
+	addslashes: function (str) {
+		str = str.replace(/\\/g, '\\\\');
+		str = str.replace(/\'/g, '\\\'');
+		str = str.replace(/\"/g, '\\"');
+		str = str.replace(/\0/g, '\\0');
+	
+		return str;
+	},
+
+	stripslashes: function (str) {
+		str = str.replace(/\\'/g, '\'');
+		str = str.replace(/\\"/g, '"');
+		str = str.replace(/\\0/g, '\0');
+		str = str.replace(/\\\\/g, '\\');
+
+		return str;
+	},
 
     showPost: function (eventObject) {
         var eId = eventObject.target.querySelector('.post').id;
@@ -556,8 +574,8 @@ wpcomDataSource.prototype.addItemsToList = function (jsonPosts, startOrEnd) {
 	var arrayItems = [];
 	for (var key in jsonPosts) {
 	    arrayItems.push({
-	        post_title: (jsonPosts[key].editorial.custom_headline.length) ? WPCom.unescapeHTML(jsonPosts[key].editorial.custom_headline) : WPCom.unescapeHTML(jsonPosts[key].title),
-			blog_name: WPCom.unescapeHTML(jsonPosts[key].editorial.blog_name),
+	    	post_title: (jsonPosts[key].editorial.custom_headline.length) ? WPCom.unescapeHTML(WPCom.stripslashes(jsonPosts[key].editorial.custom_headline)) : WPCom.unescapeHTML(jsonPosts[key].title),
+	    	blog_name: WPCom.unescapeHTML(jsonPosts[key].editorial.blog_name),
 			post_image: jsonPosts[key].editorial.image.replace(/https:\/\/([^\.]+).wordpress.com/, 'http://s.wordpress.com'),
 			post_id: jsonPosts[key].ID,
 			blog_id: jsonPosts[key].editorial.blog_id,
@@ -608,7 +626,6 @@ wpcomDataSource.prototype.reset = function (skipData, onlyResetLists) {
 		this.fetching = false;
 		this.scrollPosition = 0;
 	}
-	console.log('reset');
 	this.list = new WinJS.Binding.List();
 	this.groupedList = this.list.createGrouped(this.getGroupKey, this.getGroupData, this.compareGroups);
 	if (true != skipData)
