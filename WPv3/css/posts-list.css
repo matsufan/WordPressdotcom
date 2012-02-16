@@ -20,7 +20,7 @@
 }
 
 .posts-list.win-listview .win-groupheader .headerTemplateText {
-	background-color: #005684;
+	background-color: rgba( 0, 86, 132, 0.9 );
 	height: 52px;
 	width: 52px;
 	border-radius: 25px;
@@ -48,7 +48,7 @@
 .posts-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 0, 116, 162, 0.6 );
+	background-color: rgba( 0, 86, 132, 0.5 );
 }
 
 .posts-list .win-item {
@@ -57,8 +57,8 @@
 }
 
 .posts-list .win-container:hover {
-    background-color: rgba( 0, 86, 132, 0.6 );
-    outline-color: rgba( 120, 200, 230, 0.6 );
+	background-color: rgba( 0, 86, 132, 0.8 );
+    outline-color: rgba( 120, 200, 230, 0.9 );
 }
 
 .posts-list .win-selected, .posts-list .win-item:focus, .posts-list .win-item:focus {
@@ -76,14 +76,15 @@
 }  
 
 .zoomout-list .win-surface {
-	margin-top: 10%;
-	height: 90%;
+	margin-top: 8%;
+	height: 92%;
+    padding-right:  120px;
 }
 
 .zoomout-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 0, 86, 132, 1.0 );
+	background-color: rgba( 0, 86, 132, 0.5 );
 }
 
 .zoomout-list .win-item {
@@ -92,8 +93,8 @@
 }
 
 .zoomout-list .win-container:hover {
-    background-color: rgba( 0, 116, 162, 1.0 );
-    outline-color: rgba( 120, 200, 230, 0.6 );
+	background-color: rgba( 0, 86, 132, 0.8 );
+    outline-color: rgba( 120, 200, 230, 0.9 );
 }
 
 .zoomout-list .win-selected, .zoomout-list .win-item:focus, .zoomout-list .win-item:focus {
@@ -139,7 +140,7 @@
 }
 
 .win-semanticzoom .win-groups.win-listview > .win-horizontal .win-surface {
-   margin-left: 46px;
+    margin-left: 46px;
 }
 
 .win-semanticzoom .win-listview > .win-horizontal .win-surface {

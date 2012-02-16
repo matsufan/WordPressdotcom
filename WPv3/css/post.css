@@ -35,7 +35,7 @@
 }
 
 #reblogUI input[type=button]:hover:active {
-    background-color: #2EA2CC;
+    background-color: #f1831e;
     outline: none;
 }
 
@@ -234,7 +234,8 @@ div#backbar button.win-backbutton {
 
 @media screen and (-ms-view-state: snapped) {    
     .post {
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x:  hidden;
         display: block;
     }
     

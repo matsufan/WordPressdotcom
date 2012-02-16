@@ -10,37 +10,43 @@ body {
 .targetContent textarea, .targetContent input[type=text] {
     font-family: "Calibri";
     color: #000;
-    border: 2px solid #78c8e6;
     font-size: 13pt;
     padding: 6px;
-    width: calc(100% - 16px);
+    width: calc(100% - 12px);
+    background:  rgba(255,255,255,0.8);
+    border: none;
+}
+
+.targetContent textarea:hover, .targetContent input[type=text]:hover {
+    background:  rgba(255,255,255,0.9);
+} 
+
+.targetContent textarea:focus, .targetContent input[type=text]:focus {
+    background:  rgba(255,255,255,1);
 }
 
 .targetContent input[type=button] {
     background: #005684;
     color: #fff;
-    border: 2px solid #fff;
-    padding: 6px 15px;
+    border: 2px solid #005684;
+    outline:  2px solid #fff;
+    padding: 4px 13px;
     float: right;
-    margin: 16px 0 0 0 !important;
+    margin: 16px 2px 0 0 !important;
     font-family: "Segoe UI";
     font-size: 11pt;
 }
 
 .targetContent input[type=button]:hover,
 .targetContent input[type=button]:focus {
-    border-color: #fff;
+    border-color: #23a2cc;
     background-color: #23a2cc;
 }
 
 .targetContent input[type=button]:hover:active {
     background-color: #f1831e;
-    border-color: #f1831e;
-    outline: 2px solid #fff;
-}
-
-.targetContent textarea:focus, .targetContent input:focus {
-    border-color: #005684;
+    border-color: #fff;
+    outline: none;
 }
 
 .targetContent textarea {

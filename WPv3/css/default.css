@@ -59,6 +59,7 @@ header[role=banner] .win-backbutton {
 header[role=banner] .titlearea {
     -ms-grid-column: 2;
     margin-top: 37px;
+    margin-right: 37px;
 }
 
 .reader-filter header[role=banner] .titlearea {
