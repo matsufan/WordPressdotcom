@@ -65,8 +65,11 @@ function activatedHandler(eventArgs) {
                 document.getElementById("quoteBlogName").innerHTML = "Publishing to " + WPCom.getCurrentBlogURL();
                 document.getElementById("shareQuote").style.display = "block";
                 shareOperation.data.getTextAsync().then(function (text) { document.getElementById("shareQuoteText").value = text; });
+
+                document.getElementById("shareQuoteURL").value = shareOperation.data.properties.description;
             }
         }
+
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.uri)) {
             shareOperation.data.getUriAsync().then(function (uri) {
                 if (shareType == TYPE_QUOTE) {
