@@ -144,10 +144,6 @@ section[role=main] {
     content: "\e0b4";
 }
 
-#openinbrowser .win-commandimage::before {
-    content:  "\e128";
-}
-
 #viewblog {
     float: right;
 }
@@ -160,11 +156,23 @@ section[role=main] {
     background-image: url('/images/viewblog-dark.svg');
 }
 
+#viewblog.open-in-browser .win-commandimage::before {
+    content:  "\e0f8";
+}
+
+#viewblog.open-in-browser .win-commandicon {
+    background: none;
+}
+
 .win-commandicon {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 32px, 32px;
     font-family: "Segoe UI Symbol";
+}
+
+.win-command {
+    white-space: nowrap;
 }
 
 .win-command.selected .win-commandicon,
