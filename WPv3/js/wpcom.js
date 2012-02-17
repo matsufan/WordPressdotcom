@@ -645,7 +645,7 @@ wpcomDataSource.prototype.reset = function (skipData, onlyResetLists) {
 
 wpcomDataSource.prototype.cleanupLocalStorage = function () {
 	var localStorageObject = JSON.parse(localStorage[this.filter]);
-	var cleanupCount = 2 * WPCom.getDefaultPostCount();
+	var cleanupCount = 3 * WPCom.getDefaultPostCount();
 
 	if (localStorageObject.post_count > cleanupCount) {
 	    var i = 0, posts = {}, oldest_in_date_range = null, newest_in_date_range = null;

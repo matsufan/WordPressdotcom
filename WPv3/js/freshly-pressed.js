@@ -4,7 +4,7 @@
 	function getOlderFP(e) {
 		if ( document.getElementById('freshlypressed-list') ) {
 			var listview = document.getElementById('freshlypressed-list').winControl;
-			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + WPCom.getDefaultPostCount()) >= WPCom.dataSources.freshlypressed.groupedList.length && !WPCom.dataSources.freshlypressed.fetching)
+			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + (2 * WPCom.getDefaultPostCount())) >= WPCom.dataSources.freshlypressed.groupedList.length && !WPCom.dataSources.freshlypressed.fetching)
 				WPCom.dataSources.freshlypressed.getData('older');
 			else if ('complete' == listview.loadingState)
 				WPCom.dataSources.freshlypressed.scrollPosition = listview.scrollPosition;
