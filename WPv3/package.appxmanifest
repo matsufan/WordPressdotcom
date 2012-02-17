@@ -3,7 +3,7 @@
   <Identity Name="9c161643-20f1-433c-aaf6-6b4f87e12c42" Version="1.0.0.0" Publisher="CN=ste.000" />
   <Properties>
     <DisplayName>WordPress.com</DisplayName>
-    <Description>WPv3</Description>
+    <Description>WordPressdotcom</Description>
     <PublisherDisplayName>Automattic Inc</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
