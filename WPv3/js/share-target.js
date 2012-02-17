@@ -54,7 +54,11 @@ function activatedHandler(eventArgs) {
                        }, function (result) {
                           // error
                        });
-                    }
+
+                       var fullimageBlob = MSApp.createBlobFromRandomAccessStream(imageStream.contentType, imageStream);
+                       var fullimagelUrl = URL.createObjectURL(fullimageBlob, false);
+                       document.getElementById("fullimageImage").src = fullimagelUrl;
+                   }
                 });
             });
         }
@@ -125,12 +129,13 @@ function publishPost(m) {
                     var imageTitle = document.getElementById("shareImageTitle").value;
                     var imageLink = document.getElementById("shareImageURL").value;
                     var imageCaption = document.getElementById("shareImageCaption").value;
+                    var imageWidth = document.getElementById("fullimageImage").naturalWidth;
 
                     content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
                     if (imageLink)
                         content = '<a href="' + imageLink + '">' + content + '</a>';
                     if (imageCaption)
-                        content = '[caption id="" caption="' + imageCaption + '"]' + content + '[/caption]';
+                        content = '[caption id="" width="' + imageWidth + '" caption="' + imageCaption + '"]' + content + '[/caption]';
 
                     if (imageTitle.length > 25) {
                         data.append("title", imageTitle.substring(0, 25) + "...");
