@@ -128,27 +128,22 @@ function publishPost(m) {
                     var imageLink = document.getElementById("shareImageURL").value;
                     var imageCaption = document.getElementById("shareImageCaption").value;
 
-                    var tempImage = new Image();
+                    content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
+                    if (imageLink)
+                        content = '<a href="' + imageLink + '">' + content + '</a>';
+                    if (imageCaption)
+                        content = '[caption id="" caption="' + imageCaption + '"]' + content + '[/caption]';
 
-                    tempImage.onload = function () {
-                        content = '<img src="' + imageURL + '" title="' + imageTitle + '" alt="" />';
-                        if (imageLink)
-                            content = '<a href="' + imageLink + '">' + content + '</a>';
-                        if (imageCaption)
-                            content = '[caption id="" caption="' + imageCaption + '"]' + content + '[/caption]';
-
-                        if (imageTitle.length > 25) {
-                            data.append("title", imageTitle.substring(0, 25) + "...");
-                        } else {
-                            data.append("title", imageTitle);
-                        }
-
-                        data.append("format", "image");
-                        data.append("content", content);
-
-                        createNewPost(data, button);
+                    if (imageTitle.length > 25) {
+                        data.append("title", imageTitle.substring(0, 25) + "...");
+                    } else {
+                        data.append("title", imageTitle);
                     }
-                    tempImage.src = imageURL;
+
+                    data.append("format", "image");
+                    data.append("content", content);
+
+                    createNewPost(data, button);
                 }
                 else {
                     document.getElementById("errorMessage").innerText = "Sorry, a network error occurred. Please try again later.";
