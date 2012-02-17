@@ -218,14 +218,20 @@
     	document.getElementById('appbar').winControl.hide();
     	WPCom.toggleError('hide');
     	WPCom.toggleLoader('show');
-    	filter = WPCom.getCurrentFilter();
-    	delete localStorage[filter];
+    	var filter = WPCom.getCurrentFilter();
 
-    	WPCom.dataSources[filter].reset();
-        document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
-        document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
-        document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
-       	document.getElementById(filter + "-list").winControl.scrollPosition = 0;
+    	if (false !== WPCom.dataSources[filter].fetching) {
+    		WPCom.dataSources[filter].fetching.cancel();
+    		WPCom.dataSources[filter].fetching = false;
+		}
+
+		delete localStorage[filter];
+		WPCom.dataSources[filter].reset();
+
+		document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
+		document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
+		document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
+		document.getElementById(filter + "-list").winControl.scrollPosition = 0;
     },
 
     getDefaultPostCount: function () {
@@ -429,7 +435,7 @@ function wpcomDataSource(filter) {
 
 // olderOrNewer: 'older', 'newer', or empty
 wpcomDataSource.prototype.getData = function (olderOrNewer) {
-	if (this.fetching)
+	if (false !== this.fetching)
 		return;
 	else
 	    this.fetching = true;
@@ -472,7 +478,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
     if (WPCom.isLoggedIn())
         headers['Authorization'] = 'Bearer ' + WPCom.getCurrentAccessToken();
 
-    WinJS.xhr({ type: 'GET', url: full_url, headers: headers }).then(function (r) {
+    this.fetching = WinJS.xhr({ type: 'GET', url: full_url, headers: headers }).then(function (r) {
     	var data = JSON.parse(r.responseText);
 		var posts = {};
 		var date_range = {};
