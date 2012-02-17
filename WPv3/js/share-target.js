@@ -70,8 +70,6 @@ function activatedHandler(eventArgs) {
             }
         }
 
-        console.log(shareOperation.data);
-
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.uri)) {
             shareOperation.data.getUriAsync().then(function (uri) {
                 if (shareType == TYPE_QUOTE) {

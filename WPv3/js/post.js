@@ -3,11 +3,11 @@
 
     var item
 
-
     function ready(element, options) {
     	WinJS.UI.Animation.enterPage(document.querySelector('.fragment.post'), { top: '0px', left: '200px' });
 
     	item = options.item; // needs to be a global
+
     	var lsPost = WPCom.getLSPost(item.local_storage_key);
 
     	document.title = item.post_title;
@@ -29,12 +29,21 @@
         document.getElementById("like").addEventListener("click", socialPostClick, false);
         document.getElementById("reblog").addEventListener("click", socialPostClick, false);
         document.getElementById("publish-reblog").addEventListener("click", socialPostClick, false);
-        document.getElementById('viewblog').addEventListener("click", function () { WPCom.viewBlog(item); }, false );
+
+        document.getElementById('viewblog').removeEventListener("click", viewBlog );
+        document.getElementById('viewblog').addEventListener("click", viewBlog, false );
 
         // Catch link clicks and iframe them.
         WPCom.iframePostLinks();
 
         return; // convenient to set breakpoint :)
+    }
+
+    function viewBlog() {
+        if (WinJS.Utilities.hasClass(document.querySelector("button#viewblog"), 'open-in-browser'))
+            top.location.href = item.permalink;
+        else
+            WPCom.renderIframeView(item.permalink);
     }
 
     function updateLayout(element, viewState) {
@@ -70,7 +79,7 @@
             }
             }, function (result) {
             //error
-            window.console.log(result);
+
         });
 
         var followButton = document.getElementById('follow');
@@ -99,7 +108,6 @@
             }
         }, function (result) {
             //error
-            window.console.log(result);
         });
 
         var reblogButton = document.getElementById('reblog');
@@ -120,7 +128,7 @@
         }
         }, function (result) {
             //error
-            window.console.log(result);
+
         });
 
     }

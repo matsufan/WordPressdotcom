@@ -122,7 +122,6 @@
                     WPCom.resetDataSources();
                 }, function (result) {
                     //handle error
-                    window.console.log(result);
                 });
             }
         }
@@ -316,7 +315,6 @@
                 localStorage.currentUser = result.responseText;
             }, function (result) {
                 localStorage.currentUser = null;
-                console.log('Failed to ajax-get user info.');
             });
         }
     },
@@ -360,13 +358,6 @@
         if (null == post || null == post.ID)
             return; // couldn't find the post
         return post;
-    },
-
-    viewBlog: function (item) {
-        if (null != document.getElementById('external-link'))
-            top.location.href = item.permalink;
-        else
-            WPCom.renderIframeView(item.permalink);
     },
 
     iframePostLinks: function () {
