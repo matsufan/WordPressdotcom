@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="9c161643-20f1-433c-aaf6-6b4f87e12c42" Version="1.0.0.0" Publisher="CN=ste.000" />
+  <Identity Name="AutomatticInc.WordPress.com" Version="1.0.0.0" Publisher="CN=E483B142-B0AB-4578-9A03-9D6F1AC7333F" />
   <Properties>
     <DisplayName>WordPress.com</DisplayName>
     <Description>WPv3</Description>
-    <PublisherDisplayName>Automattic</PublisherDisplayName>
+    <PublisherDisplayName>Automattic Inc</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -17,6 +17,7 @@
   <Applications>
     <Application Id="App" StartPage="default.html">
       <VisualElements DisplayName="WordPress.com" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="WordPress.com" ForegroundText="light" BackgroundColor="#1E8CBE" ToastCapable="true">
+        <LockScreen Notification="badgeAndTileText" BadgeLogo="images\badgelogo.png" />
         <DefaultTile WideLogo="images\widelogo.png" ShowName="noLogos" />
         <SplashScreen Image="images\splashscreen.png" BackgroundColor="#1E8CBE" />
         <InitialRotationPreference>

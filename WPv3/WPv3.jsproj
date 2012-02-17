@@ -44,6 +44,9 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <PackageCertificateThumbprint>4E4DED41C1108D10F9E70FAED4EA18A2F4ACAB77</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>WPv3_StoreKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -56,6 +59,7 @@
     <Content Include="default.html" />
     <Content Include="html\freshly-pressed.html" />
     <Content Include="html\post.html" />
+    <Content Include="images\badgelogo.png" />
     <Content Include="images\facebook.svg" />
     <Content Include="images\follow-dark.svg" />
     <Content Include="images\follow-hc.svg" />
@@ -87,6 +91,8 @@
     <Content Include="js\share-target.js" />
     <Content Include="js\tile.js" />
     <Content Include="js\wpcom.js" />
+    <None Include="WPv3_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="share-target.html" />
   </ItemGroup>
   <ItemGroup>
