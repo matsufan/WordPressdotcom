@@ -216,6 +216,7 @@
     },
 
     refresh: function () {
+    	document.getElementById('appbar').winControl.hide();
     	WPCom.toggleError('hide');
     	WPCom.toggleLoader('show');
     	filter = WPCom.getCurrentFilter();
@@ -379,8 +380,7 @@
     },
 
     renderIframeView: function (href) {
-        // TODO: swap this for slideout animation call.
-        document.querySelector("#appbar").setAttribute('style', 'top: auto; bottom: 0; visibility: hidden; opacity: 1;' );
+    	document.getElementById('appbar').winControl.hide();
 
         var iframe = document.createElement("iframe");
         var backbar = document.createElement("div");
