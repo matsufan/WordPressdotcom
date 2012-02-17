@@ -13,8 +13,6 @@
 		if (filter && undefined == WPCom.dataSources[filter]) {
 			WPCom.dataSources[filter] = new wpcomDataSource(filter);
 			WPCom.dataSources[filter].getData();
-		} else {
-			WPCom.toggleLoader('hide');
 		}
 	},
 
@@ -149,12 +147,7 @@
     },
 
     toggleLoader: function (status) {
-    	var timeout = 0;
-    	if ('hide' == status)
-    		timeout = 1000;
-    	setTimeout(function () {
-    		WPCom.toggleElement(document.getElementById('loader'), status);
-    	}, timeout);
+   		WPCom.toggleElement(document.getElementById('loader'), status);
     },
 
     toggleError: function (status) {
@@ -224,6 +217,7 @@
 
     refresh: function () {
     	WPCom.toggleError('hide');
+    	WPCom.toggleLoader('show');
     	filter = WPCom.getCurrentFilter();
     	delete localStorage[filter];
 
@@ -231,13 +225,7 @@
         document.getElementById(filter + "-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.dataSource;
         document.getElementById(filter + "-list").winControl.groupDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
         document.getElementById(filter + "-zoomout-list").winControl.itemDataSource = WPCom.dataSources[filter].groupedList.groups.dataSource;
-        WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
-        WPCom.toggleLoader('show');
-        setTimeout(function () {
-        	document.getElementById(filter + "-list").winControl.scrollPosition = 0;
-        	WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
-        	WPCom.toggleLoader('hide');
-        }, 1500);
+       	document.getElementById(filter + "-list").winControl.scrollPosition = 0;
     },
 
     getDefaultPostCount: function () {
@@ -518,7 +506,6 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = data.date_range.newest;
 				post_count = data.number;
-				WPCom.toggleLoader('hide');
 
 				if ('newer' == olderOrNewer) {
 					self.addItemsToList(localStorageObject.posts, 'end');
@@ -575,7 +562,6 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
         		}
 			}
         	self.fetching = false;
-            WPCom.toggleLoader('hide');
         }
 	);
 }

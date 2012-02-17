@@ -1,31 +1,31 @@
 ﻿(function () {
 	"use strict";
 
+	function hideLoader(e) {
+		var postsList = document.querySelector('.win-surface');
+		if (postsList && !WinJS.Utilities.hasClass(postsList, 'hide') && WPCom.dataSources.freshlypressed.groupedList.length)
+			WPCom.toggleLoader('hide');
+	}
+
 	function getOlderFP(e) {
-		if ( document.getElementById('freshlypressed-list') ) {
+		if (document.getElementById('freshlypressed-list')) {
 			var listview = document.getElementById('freshlypressed-list').winControl;
 			if ('itemsLoaded' == listview.loadingState && (listview.indexOfLastVisible + 1 + (2 * WPCom.getDefaultPostCount())) >= WPCom.dataSources.freshlypressed.groupedList.length && !WPCom.dataSources.freshlypressed.fetching)
 				WPCom.dataSources.freshlypressed.getData('older');
 			else if ('complete' == listview.loadingState)
 				WPCom.dataSources.freshlypressed.scrollPosition = listview.scrollPosition;
 		}
-    }
+	}
 
     function scrollToPosition(e) {
     	var listview = document.getElementById("freshlypressed-list").winControl;
     	var pos = WPCom.dataSources.freshlypressed.scrollPosition;
 
     	if ('complete' == listview.loadingState) {
-    		WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
-    		WPCom.toggleLoader('show');
-    		setTimeout(function () {
-    			var listview = document.getElementById("freshlypressed-list").winControl;
-    			WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
-    			WPCom.toggleLoader('hide');
-    			if (pos > 0)
-    				listview.scrollPosition = pos;
-    			listview.removeEventListener('loadingstatechanged', scrollToPosition);
-    		}, 1000);
+   			WPCom.toggleElement(document.querySelector('.win-surface'), 'show');
+   			if (pos > 0)
+   				listview.scrollPosition = pos;
+   			listview.removeEventListener('loadingstatechanged', scrollToPosition);
     	}
     }
 
@@ -40,7 +40,9 @@
 
             // Update the tile if needed.
             if (null == WPComTile.data)
-                WPComTile.init();
+            	WPComTile.init();
+
+            document.getElementById('freshlypressed-list').winControl.addEventListener('loadingstatechanged', hideLoader);
         },
 
         // This function updates the page layout in response to viewState changes.
@@ -80,11 +82,10 @@
 			});
 
             if (WPCom.dataSources.freshlypressed.scrollPosition > 0) {
-                listView.addEventListener('loadingstatechanged', scrollToPosition);
-                WPCom.toggleLoader('show');
-                WPCom.toggleElement(element.querySelector('.win-surface'), 'hide');
+            	WPCom.toggleElement(document.querySelector('.win-surface'), 'hide');
+            	listView.addEventListener('loadingstatechanged', scrollToPosition);
             }
-            listView.addEventListener('loadingstatechanged', getOlderFP);
+           	listView.addEventListener('loadingstatechanged', getOlderFP);
         }
 	});
 })();
