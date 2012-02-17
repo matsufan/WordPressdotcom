@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="AutomatticInc.WordPress.com" Version="1.0.0.0" Publisher="CN=E483B142-B0AB-4578-9A03-9D6F1AC7333F" />
+  <Identity Name="9c161643-20f1-433c-aaf6-6b4f87e12c42" Version="1.0.0.0" Publisher="CN=ste.000" />
   <Properties>
     <DisplayName>WordPress.com</DisplayName>
     <Description>WPv3</Description>
