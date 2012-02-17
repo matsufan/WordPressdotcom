@@ -458,6 +458,7 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	var self = this;
 	var url = WPCom.apiURL;
 	var query_string = '?content_width=480&number=' + WPCom.getDefaultPostCount();
+	var localStorageObject;
 
 	switch (this.filter) {
         /*
@@ -470,8 +471,11 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 	        query_string += '&thumb_width=252&thumb_height=148';
     }
 
-    if (null != localStorage[this.filter]) {
-		var localStorageObject = JSON.parse(localStorage[this.filter]);
+	if (null != localStorage[this.filter]) {
+		if (0 == this.groupedList.length)
+			this.cleanupLocalStorage();
+
+		localStorageObject = JSON.parse(localStorage[this.filter]);
 
 		// If we aren't getting older always attempt to get newer posts than we already have as an auto refresh, since we already have posts in localStorage
 		// We only want to grab older or newer since we already have posts in localStorage, otherwise we should always grab current posts
@@ -479,20 +483,9 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 			olderOrNewer = 'newer';
 			query_string += '&after=' + escape(new Date(localStorageObject.date_range.newest).toUTCString());
 		} else if ('older' == olderOrNewer) {
-		    query_string += '&before=' + escape(new Date(localStorageObject.date_range.oldest).toUTCString());
-        }
-
-		// initialize from localStorage since the listview is empty
-		if (0 == this.groupedList.length) {
-			this.cleanupLocalStorage();
-			localStorageObject = JSON.parse(localStorage[this.filter]);
-
-			this.addItemsToList(localStorageObject.posts, 'end');
-			this.setDateRange(localStorageObject.date_range);
-
-			WPCom.toggleLoader('hide');
+			query_string += '&before=' + escape(new Date(localStorageObject.date_range.oldest).toUTCString());
 		}
-    }
+	}
 
     var full_url = url + query_string;
 
@@ -501,74 +494,87 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
         headers['Authorization'] = 'Bearer ' + WPCom.getCurrentAccessToken();
 
     WinJS.xhr({ type: 'GET', url: full_url, headers: headers }).then(function (r) {
-		var data = JSON.parse(r.responseText);
+    	var data = JSON.parse(r.responseText);
 		var posts = {};
 		var date_range = {};
 		var post_count = 0;
 
 		if (data.number > 0) {
-		    var updated = false;
+			var keyed_posts = {};
+			var post_key = null;
 
-		    var keyed_posts = {};
-		    var post_key = null;
-
-		    for (var p = 0; p < data.posts.length; p++) {
-		        if (data.posts[p].editorial.blog_id) {
-		            post_key = data.posts[p].editorial.blog_id + '_' + data.posts[p].ID;
-		        }  else {
-		            post_key = data.posts[p].ID;
-		        }
-		        keyed_posts[post_key] = data.posts[p];
-		    }
+			for (var p = 0; p < data.posts.length; p++) {
+				if (data.posts[p].editorial.blog_id) {
+					post_key = data.posts[p].editorial.blog_id + '_' + data.posts[p].ID;
+				} else {
+					post_key = data.posts[p].ID;
+				}
+				keyed_posts[post_key] = data.posts[p];
+			}
 
 			if (0 == self.groupedList.length) {
-			    posts = keyed_posts;
-			    self.addItemsToList(keyed_posts, 'end');
+				posts = keyed_posts;
+				self.addItemsToList(keyed_posts, 'end');
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = data.date_range.newest;
 				post_count = data.number;
-				updated = true;
 				WPCom.toggleLoader('hide');
+
+				if ('newer' == olderOrNewer) {
+					self.addItemsToList(localStorageObject.posts, 'end');
+					for (var attrname in localStorageObject.posts) {
+						posts[attrname] = localStorageObject.posts[attrname];
+					}
+					date_range.oldest = localStorageObject.date_range.oldest;
+					post_count += localStorageObject.post_count;
+				}
+
+				localStorage[self.filter] = JSON.stringify({ 'post_count': post_count, 'date_range': date_range, 'posts': posts });
+				self.setDateRange(date_range);
 			} else if ('older' == olderOrNewer) {
 				posts = localStorageObject.posts;
 				self.addItemsToList(keyed_posts, 'end');
 				for (var attrname in keyed_posts) {
-				    posts[attrname] = keyed_posts[attrname];
+					posts[attrname] = keyed_posts[attrname];
 				}
 				date_range.oldest = data.date_range.oldest;
 				date_range.newest = localStorageObject.date_range.newest;
-				post_count = localStorageObject.post_count + data.number;
-				updated = true;
-			} else if ('newer' == olderOrNewer) {
-			    posts = keyed_posts;
-			    self.addItemsToList(keyed_posts, 'start');
-				for (var attrname in localStorageObject.posts) {
-					posts[attrname] = localStorageObject.posts[attrname];
-				}
-				date_range.oldest = localStorageObject.date_range.oldest;
-				date_range.newest = data.date_range.newest;
-				post_count = localStorageObject.post_count + data.number;
-				updated = true;
-            }
 
-			if (updated) {
-				localStorage[self.filter] = JSON.stringify({ 'post_count': post_count, 'date_range': date_range, 'posts': posts });
+				localStorage[self.filter] = JSON.stringify({ 'post_count': localStorageObject.post_count + data.number, 'date_range': date_range, 'posts': posts });
 				self.setDateRange(date_range);
+			} else if ('newer' == olderOrNewer) {
+				// We should never get here. The case is handled when the list is empty and localStorage has some posts.
 			}
+		} else if (localStorageObject.post_count && 0 == self.groupedList.length) {
+			self.addItemsToList(localStorageObject.posts, 'end');
+			for (var attrname in localStorageObject.posts) {
+				posts[attrname] = localStorageObject.posts[attrname];
+			}
+			localStorage[self.filter] = JSON.stringify({ 'post_count': localStorageObject.post_count, 'date_range': localStorageObject.date_range, 'posts': localStorageObject.posts });
+			self.setDateRange(localStorageObject.date_range);
 		}
 
 		self.fetching = false;
-		if (self.groupedList.length < WPCom.getDefaultPostCount())
-			self.getData('older');
+    	if (self.groupedList.length < WPCom.getDefaultPostCount())
+    		self.getData('older');
 	},
         function (r) {
-            self.fetching = false;
-            var errorDiv =  document.querySelector('div.error');
-            if (null != errorDiv && 0 == self.groupedList.length) {
-                // if we have an error div in this template, and if we had no offline content
-                errorDiv.innerHTML = '<p><strong>Sorry, but we could not connect to WordPress.com.</strong></p><p>Please try again later.</p>';
-                WPCom.toggleError('show');
-            }
+        	if (localStorageObject && localStorageObject.post_count && 0 == self.groupedList.length) {
+        		self.addItemsToList(localStorageObject.posts, 'end');
+        		for (var attrname in localStorageObject.posts) {
+        			posts[attrname] = localStorageObject.posts[attrname];
+        		}
+        		localStorage[self.filter] = JSON.stringify({ 'post_count': localStorageObject.post_count, 'date_range': localStorageObject.date_range, 'posts': localStorageObject.posts });
+        		self.setDateRange(localStorageObject.date_range);
+        	} else {
+        		var errorDiv =  document.querySelector('div.error');
+        		if (null != errorDiv && 0 == self.groupedList.length) {
+        			// if we have an error div in this template, and if we had no offline content
+        			errorDiv.innerHTML = '<p><strong>Sorry, but we could not connect to WordPress.com.</strong></p><p>Please try again later.</p>';
+        			WPCom.toggleError('show');
+        		}
+			}
+        	self.fetching = false;
             WPCom.toggleLoader('hide');
         }
 	);
