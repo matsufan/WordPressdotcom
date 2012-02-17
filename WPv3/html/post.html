@@ -33,7 +33,7 @@
             </article>
         </section>
         <div id="reblogUI" data-win-control="WinJS.UI.Flyout">
-			<textarea class="note-text" id="note" placeholder="Your comments (optional)"></textarea>
+			<textarea class="note-text" id="note" placeholder="Your comments (optional)" onfocus="if (this.value == 'Your comments (optional)') {this.value = '';}"></textarea>
 			<input id="publish-reblog" type="button" value="Publish">
 		</div>
     </div>
