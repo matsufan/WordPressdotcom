@@ -223,8 +223,8 @@
 
     .reader-filter .posts-list.win-listview .win-vertical .win-surface,
     .reader-filter .zoomout-list.win-listview .win-vertical .win-surface {
-        margin: 0 28px;
-        width: calc(100% - 56px);
+        margin: 0 29px;
+        width: calc(100% - 58px);
     }
 
     .reader-filter .posts-list.win-listview .win-vertical .win-container {

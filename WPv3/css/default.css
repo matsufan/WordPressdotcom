@@ -29,8 +29,8 @@ body {
     width: 100px;
     height: 100px;
     position: absolute;
-    left: 45%;
-    top: 45%;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
     color: #fff;
 }
 
