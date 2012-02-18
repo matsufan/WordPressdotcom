@@ -70,7 +70,26 @@ function activatedHandler(eventArgs) {
                 document.getElementById("shareQuote").style.display = "block";
                 shareOperation.data.getTextAsync().then(function (text) { document.getElementById("shareQuoteText").value = text; });
 
-                document.getElementById("shareQuoteURL").value = shareOperation.data.properties.description;
+                var pageUrl = shareOperation.data.properties.description;
+                var pageTitle;
+
+                WinJS.xhr({
+                    type: "GET",
+                    url: pageUrl
+                }).then(function (result) {
+                    pageTitle = result.responseText.match(/.*<title.*>(.*)<\/title>.*/)[1];
+                    
+                    if (!pageTitle) {
+                        pageTitle = pageUrl;
+                    }
+
+                    document.getElementById("shareQuoteURL").value = '<cite><a href="' + pageUrl + '">' + pageTitle + '</a></cite>';
+                }, function (result) {
+                    pageTitle = pageUrl;
+
+                    document.getElementById("shareQuoteURL").value = '<cite><a href="' + pageUrl + '">' + pageTitle + '</a></cite>';
+                });
+
             }
         }
 
@@ -168,7 +187,7 @@ function publishPost(m) {
         }
 
         if (quoteURL) {
-            content += "\n\n<cite>" + "<a href=\"" + quoteURL + "\">" + quoteURL + "</a>"; + "</cite>\n\n";
+            content += "\n\n" + quoteURL + "\n\n";
         }
 
         if (quoteText.length > 25) {
