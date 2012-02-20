@@ -38,10 +38,6 @@
 
             this.updateLayout(element, Windows.UI.ViewManagement.ApplicationView.value);
 
-            // Update the tile if needed.
-            if (null == WPComTile.data)
-            	WPComTile.init();
-
             document.getElementById('freshlypressed-list').winControl.addEventListener('loadingstatechanged', hideLoader);
         },
 

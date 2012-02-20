@@ -541,6 +541,10 @@ wpcomDataSource.prototype.getData = function (olderOrNewer) {
 		self.fetching = false;
     	if (self.groupedList.length < WPCom.getDefaultPostCount())
     		self.getData('older');
+
+    	// Update the tile if needed.
+    	if (null == WPComTile.data)
+    		WPComTile.init();
 	},
         function (r) {
         	if (localStorageObject && localStorageObject.post_count && 0 == self.groupedList.length) {
