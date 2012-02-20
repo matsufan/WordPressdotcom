@@ -188,6 +188,7 @@
 .posts-list .post .post-meta {
     font-size: 9pt;
     line-height: 16pt;
+    margin-top: 1px;
     color: #78C8E6;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
