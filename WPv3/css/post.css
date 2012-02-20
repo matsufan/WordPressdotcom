@@ -143,7 +143,6 @@
     max-width: 97%;
     break-inside: avoid;
     max-height: 100%;
-    font-size: 9pt;
 }
 
 .content .wp-caption p {
@@ -174,20 +173,31 @@
 
 /* Typography */
 
-.win-body p,
-.win-body li {
+.content p,
+.content li,
+.content span {
     line-height: 20pt;
-    text-align: left !important;
+    text-align: left !important; /* These styles must be important to override inline CSS in articles */
+    font-family:  "Segoe UI" !important;
+    font-size:  11pt !important;
 }
 
-.win-body p,
-.win-body ul,
-.win-body ol {
+.content p {
+    padding: 0 !important;
+}
+
+.content .wp-caption p {
+    font-size: 9pt !important;
+}
+
+.content p,
+.content ul,
+.content ol {
     margin-bottom: 20pt;
 }
 
-.win-body ul, 
-.win-body ol {
+.content ul, 
+.content ol {
     padding-left:  16px;
 }
 
