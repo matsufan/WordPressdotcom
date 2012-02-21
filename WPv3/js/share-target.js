@@ -276,7 +276,7 @@ function updateForPublishing(e) {
 			document.getElementById("quoteBlogName").innerHTML = message;
 		}
 	} else {
-		message = 'Please <a href="#" class="signinout">Sign In</a> to continue publishing';
+		message = '<a href="#" class="signinout">Sign in to WordPress.com</a> to publish this post.';
 		if (WinJS.Utilities.hasClass(document.getElementById('shareImage'), 'show')) {
 			WPCom.toggleElement(document.getElementById('publish-image'), 'hide');
 			setInnerHTMLUnsafe(document.getElementById('imageBlogName'), message);

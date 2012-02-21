@@ -80,3 +80,8 @@ body {
     max-height: 260px;
     max-width: 100%;
 }
+
+a.signinout {
+    color: #78c8e6;
+    font-weight: bold;
+}
