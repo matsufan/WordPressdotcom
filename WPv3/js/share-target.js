@@ -9,8 +9,9 @@ var shareType;
 var imageBase64;
 
 function activatedHandler(eventArgs) {
-	// In this sample we only do something if it was activated with the Share contract
-    if (!WPCom.isLoggedIn())
+	Windows.Storage.ApplicationData.current.addEventListener('datachanged', updateForPublishing);
+
+	if (!WPCom.isLoggedIn())
         WPCom.signInOut();
 
     document.getElementById("publish-quote").addEventListener("click", publishPost, false);
@@ -260,7 +261,6 @@ function reportCompleted() {
 // Initialize the activation handler
 Windows.UI.WebUI.WebUIApplication.addEventListener("activated", activatedHandler);
 
-Windows.Storage.ApplicationData.current.addEventListener('datachanged', updateForPublishing);
 function updateForPublishing(e) {
 	var message;
 	if (WPCom.isLoggedIn()) {

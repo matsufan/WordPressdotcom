@@ -79,11 +79,12 @@
     },
 
     isLoggedIn: function () {
-    	if (!Windows.Storage.ApplicationData.current.localSettings.values["wpcomAccessToken"]) {
-            return false;
-        } else {
-            return true;
-        }
+		var applicationData = Windows.Storage.ApplicationData.current;
+		var localSettings = applicationData.localSettings;
+		if (localSettings.values["wpcomAccessToken"])
+			return true;
+		else
+			return false;
     },
 
     callbackWebAuth: function (result) {
