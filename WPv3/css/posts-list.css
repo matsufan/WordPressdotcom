@@ -48,7 +48,7 @@
 .posts-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 0, 86, 132, 0.5 );
+	background-color: rgba( 0, 86, 132, 0.4 );
 }
 
 .posts-list .win-item {
@@ -84,7 +84,7 @@
 .zoomout-list .win-container {
 	margin-right: 8px;
 	margin-bottom: 8px;
-	background-color: rgba( 0, 86, 132, 0.5 );
+	background-color: rgba( 0, 86, 132, 0.4 );
 }
 
 .zoomout-list .win-item {
