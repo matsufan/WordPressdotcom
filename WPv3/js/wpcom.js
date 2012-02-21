@@ -63,32 +63,27 @@
 
         var wpcomURL = "https://public-api.wordpress.com/oauth2/authorize?client_id=";
         var clientID = "41";
-        var callbackURL = "https://www.wordpress.com";
+        var callbackURL = "https://wordpress.com";
         wpcomURL += clientID + "&redirect_uri=" + encodeURIComponent(callbackURL) + "&response_type=code";
 
-        try {
+    	try {
             var startURI = new Windows.Foundation.Uri(wpcomURL);
             var endURI = new Windows.Foundation.Uri(callbackURL);
-            Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
-			Windows.Security.Authentication.Web.WebAuthenticationOptions.default, startURI, endURI).then(WPCom.callbackWebAuth, WPCom.callbackWebAuthError);
+        	Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
+				Windows.Security.Authentication.Web.WebAuthenticationOptions.default, startURI, endURI).then(WPCom.callbackWebAuth, WPCom.callbackWebAuthError);
         }
         catch (err) {
-            //error
+        	//error
             return;
         }
     },
 
     isLoggedIn: function () {
-        var applicationData = Windows.Storage.ApplicationData.current;
-        var localSettings = applicationData.localSettings;
-        var accessToken = localSettings.values["wpcomAccessToken"];
-        if (!accessToken) {
+    	if (!Windows.Storage.ApplicationData.current.localSettings.values["wpcomAccessToken"]) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
-
     },
 
     callbackWebAuth: function (result) {
@@ -100,7 +95,7 @@
                 //we have the code, let's get the full token
                 var data = new FormData();
                 data.append('client_id', 41);
-                data.append('redirect_uri', 'https://www.wordpress.com');
+                data.append('redirect_uri', 'https://wordpress.com');
                 data.append('code', code);
                 data.append('grant_type', 'authorization_code');
 
@@ -120,8 +115,8 @@
                     localSettings.values["wpcomBlogURL"] = blog_url;
                     applicationData.signalDataChanged();
                     WPCom.resetDataSources();
-                }, function (result) {
-                    //handle error
+				}, function (result) {
+					//handle error
                 });
             }
         }
@@ -287,7 +282,7 @@
     		WPCom.dataSources[filter].reset(true);
 		}
 
-    	if (!WPCom.isLoggedIn() && 'freshlypressed' != WPCom.getCurrentFilter())
+    	if (!WPCom.isLoggedIn() && 'freshlypressed' != WPCom.getCurrentFilter() && !document.querySelector('.targetContent'))
 	    	WinJS.Navigation.navigate("/html/freshly-pressed.html");
     },
 

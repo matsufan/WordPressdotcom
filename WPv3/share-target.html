@@ -14,33 +14,33 @@
 <body id="appBody"> 
 <div class="targetContent">
     <div id="errorMessage"></div>
-    <div id="shareImage" style="display: none">
+    <div id="shareImage" class="hide">
         <h3>Share a Photo</h3>
         <div id="thumbnailArea" style="display: none"><img class="thumbnail" alt="(Thumbnail)" id="thumbnailImage" /></div><br />
         <input id="shareImageTitle" type="text" placeholder="Title (optional)" /><br />
         <input id="shareImageURL" type="text" placeholder="Click-Through Link URL (optional)" /><br />
         <textarea id="shareImageCaption" placeholder="Caption (optional)" ></textarea>
         <span id="imageBlogName" class="win-contentcaption"></span>
-        <input id="publish-image" type="button" value="Publish" />
+        <input id="publish-image" type="button" value="Publish" class="hide" />
 
         <div id="fullimageArea" style="display: none"><img class="fullimage" alt="(Full Image)" id="fullimageImage" /></div>
     </div>
     
-    <div id="shareLink" style="display: none">
+    <div id="shareLink" class="hide">
         <h3>Share a Link</h3>
         <input id="shareLinkURL" type="text" placeholder="Link URL)" /><br />
         <input id="shareLinkDescription" type="text" placeholder="Link Description (optional)" /><br />
         <textarea id="shareLinkComment" placeholder="Comments (optional)" ></textarea>
         <span id="linkBlogName" class="win-contentcaption"></span>
-        <input id="publish-link" type="button" value="Publish" />
+        <input id="publish-link" type="button" value="Publish" class="hide" />
     </div>
 
-    <div id="shareQuote" style="display: none">
+    <div id="shareQuote" class="hide">
         <h3>Share a Quote</h3>
         <textarea id="shareQuoteText" placeholder="Quote Text" ></textarea><br /><br />
         <textarea id="shareQuoteURL" placeholder="Quote Source URL" ></textarea>
         <span id="quoteBlogName" class="win-contentcaption"></span>
-        <input id="publish-quote" type="button" value="Publish" />
+        <input id="publish-quote" type="button" value="Publish" class="hide" />
     </div>
     <progress id="publish-progress" style="display: none"></progress>
 </div>

@@ -9,11 +9,9 @@ var shareType;
 var imageBase64;
 
 function activatedHandler(eventArgs) {
-    // In this sample we only do something if it was activated with the Share contract
-    if (!WPCom.isLoggedIn()) {
+	// In this sample we only do something if it was activated with the Share contract
+    if (!WPCom.isLoggedIn())
         WPCom.signInOut();
-        return;
-    }
 
     document.getElementById("publish-quote").addEventListener("click", publishPost, false);
     document.getElementById("publish-link").addEventListener("click", publishPost, false);
@@ -37,8 +35,8 @@ function activatedHandler(eventArgs) {
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.bitmap)) {
             //Let's share an image!
             shareType = TYPE_IMAGE;
-            document.getElementById("imageBlogName").innerHTML = "Publishing to " + WPCom.getCurrentBlogURL();
-            document.getElementById("shareImage").style.display = "block";
+            WPCom.toggleElement(document.getElementById("shareImage"), 'show');
+            updateForPublishing();
             if (shareOperation.data.properties.title)
                 document.getElementById("shareImageTitle").value = shareOperation.data.properties.title;
             if (shareOperation.data.properties.description)
@@ -66,8 +64,8 @@ function activatedHandler(eventArgs) {
             // Let's share a quote!
             if (shareType != TYPE_IMAGE) {
                 shareType = TYPE_QUOTE;
-                document.getElementById("quoteBlogName").innerHTML = "Publishing to " + WPCom.getCurrentBlogURL();
-                document.getElementById("shareQuote").style.display = "block";
+                WPCom.toggleElement(document.getElementById("shareQuote"), 'show');
+                updateForPublishing();
                 shareOperation.data.getTextAsync().then(function (text) { document.getElementById("shareQuoteText").value = text; });
 
                 var pageUrl = shareOperation.data.properties.description;
@@ -99,10 +97,10 @@ function activatedHandler(eventArgs) {
                     document.getElementById("shareQuoteURL").value = uri.absoluteUri;
                 }
                 else if (shareType != TYPE_IMAGE) {
-                    //let's share a link!
-                    document.getElementById("linkBlogName").innerHTML = "Publishing to " + WPCom.getCurrentBlogURL();
-                    document.getElementById("shareLink").style.display = "block";
-                    document.getElementById("shareLinkURL").value = uri.absoluteUri;
+                	//let's share a link!
+                	WPCom.toggleElement(document.getElementById("shareLink"), 'show');
+                	updateForPublishing();
+                	document.getElementById("shareLinkURL").value = uri.absoluteUri;
                     if (shareOperation.data.properties.title)
                         document.getElementById("shareLinkDescription").value = shareOperation.data.properties.title;
                 }
@@ -261,3 +259,33 @@ function reportCompleted() {
 
 // Initialize the activation handler
 Windows.UI.WebUI.WebUIApplication.addEventListener("activated", activatedHandler);
+
+Windows.Storage.ApplicationData.current.addEventListener('datachanged', updateForPublishing);
+function updateForPublishing(e) {
+	var message;
+	if (WPCom.isLoggedIn()) {
+		message = "Publishing to " + WPCom.getCurrentBlogURL();
+		if (WinJS.Utilities.hasClass(document.getElementById('shareImage'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-image'), 'show');
+			document.getElementById("imageBlogName").innerHTML = message;
+		} else if (WinJS.Utilities.hasClass(document.getElementById('shareLink'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-link'), 'show');
+			document.getElementById("linkBlogName").innerHTML = message;
+		} else if (WinJS.Utilities.hasClass(document.getElementById('shareQuote'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-quote'), 'show');
+			document.getElementById("quoteBlogName").innerHTML = message;
+		}
+	} else {
+		message = 'Please <a href="#" class="signinout">Sign In</a> to continue publishing';
+		if (WinJS.Utilities.hasClass(document.getElementById('shareImage'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-image'), 'hide');
+			setInnerHTMLUnsafe(document.getElementById('imageBlogName'), message);
+		} else if (WinJS.Utilities.hasClass(document.getElementById('shareLink'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-link'), 'hide');
+			setInnerHTMLUnsafe(document.getElementById('linkBlogName'), message);
+		} else if (WinJS.Utilities.hasClass(document.getElementById('shareQuote'), 'show')) {
+			WPCom.toggleElement(document.getElementById('publish-quote'), 'hide');
+			setInnerHTMLUnsafe(document.getElementById('quoteBlogName'), message);
+		}
+	}
+}
