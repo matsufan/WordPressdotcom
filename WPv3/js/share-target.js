@@ -287,5 +287,6 @@ function updateForPublishing(e) {
 			WPCom.toggleElement(document.getElementById('publish-quote'), 'hide');
 			setInnerHTMLUnsafe(document.getElementById('quoteBlogName'), message);
 		}
+		document.querySelector('.signinout').addEventListener('click', WPCom.signInOut);
 	}
 }
